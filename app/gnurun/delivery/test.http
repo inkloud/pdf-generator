@@ -1,0 +1,25 @@
+POST http://localhost:3000/gnurun/delivery
+content-type: application/json
+
+{
+    "delivery": {
+        "id": 428,
+        "creation_date": "2025-01-16T08:12:40.000Z",
+        "boxes": [
+            {
+                "id": 453,
+                "box_height_cm": "10",
+                "box_length_cm": "0",
+                "box_width_cm": "0",
+                "box_qty": 0,
+                "products": [{
+                    "quantity": 60,
+                    "p_code": "TEST"
+                }]
+            }
+        ]
+    },
+    "company_name": "Life365 Italy",
+    "courier_name": "BRT",
+    "courier_tracking": "123456789"
+}
