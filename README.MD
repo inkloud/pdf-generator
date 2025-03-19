@@ -2,6 +2,8 @@
 
 PDF generator using React-PDF
 
+[DockerHub](https://hub.docker.com/repository/docker/bacchilu/pdf-generator)
+
 ## Docker
 
 ```bash
