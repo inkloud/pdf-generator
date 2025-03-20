@@ -3,6 +3,7 @@ export default function Page() {
         <>
             <h1>Hello PDF Generator</h1>
             <p>POST /gnurun/delivery</p>
+            <p>POST /gnurun/delivery-label</p>
         </>
     );
 }

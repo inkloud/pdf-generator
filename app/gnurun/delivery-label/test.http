@@ -1,0 +1,18 @@
+POST http://localhost:3000/gnurun/delivery-label
+content-type: application/json
+
+{
+    "id": 4,
+    "customer_id": 1,
+    "boxes": [
+        {"products": [{"code": "HW415NN", "qty": 36}]},
+        {"products": [{"code": "HW415NN", "qty": 36}]},
+        {"products": [{"code": "HW415NN", "qty": 36}]},
+        {
+            "products": [
+                {"code": "HP301", "qty": 20},
+                {"code": "HP302", "qty": 30}
+            ]
+        }
+    ]
+}
