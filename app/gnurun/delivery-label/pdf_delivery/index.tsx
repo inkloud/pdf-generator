@@ -52,7 +52,8 @@ const Header: React.FC<{id: number; customer_id: number; index: number; length: 
 const Footer = function () {
     return (
         <View style={styles.footer}>
-            <Text>DON'T COVER THIS PAGE</Text>
+            <Text>DON&apos;T COVER THIS PAGE</Text>
+            <Text style={{fontSize: 6, textAlign: 'right', color: 'black', margin: 10}}>Weight: 3,14Kg</Text>
         </View>
     );
 };

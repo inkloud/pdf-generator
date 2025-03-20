@@ -10,14 +10,15 @@ export async function GET() {
             id: 4,
             customer_id: 1,
             boxes: [
-                {products: [{code: 'HW415NN', qty: 36}]},
-                {products: [{code: 'HW415NN', qty: 36}]},
-                {products: [{code: 'HW415NN', qty: 36}]},
+                {products: [{code: 'HW415NN', qty: 36}], weight: '3.14'},
+                {products: [{code: 'HW415NN', qty: 36}], weight: '3.14'},
+                {products: [{code: 'HW415NN', qty: 36}], weight: '3.14'},
                 {
                     products: [
                         {code: 'HP301', qty: 20},
                         {code: 'HP302', qty: 30}
-                    ]
+                    ],
+                    weight: '6.28'
                 }
             ]
         }
