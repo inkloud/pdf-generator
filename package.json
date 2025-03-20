@@ -1,6 +1,6 @@
 {
   "name": "pdf-generator",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@types/node": "22.13.10",
-    "@types/react": "19.0.11",
+    "@types/react": "19.0.12",
     "eslint": "9.22.0",
     "eslint-config-next": "15.2.3",
     "npm-check-updates": "^17.1.15",
