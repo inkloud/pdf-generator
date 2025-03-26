@@ -1,3 +1,5 @@
+import fs from 'fs';
+
 import {Document, Image, Page, StyleSheet, Text, View} from '@react-pdf/renderer';
 import {Canvas} from 'canvas';
 import JsBarcode from 'jsbarcode';
@@ -61,13 +63,14 @@ const Header: React.FC<{id: number; customer_id: number; index: number; length: 
 };
 
 const Footer = function () {
+    const imageBuffer = fs.readFileSync('./app/gnurun/delivery-label/gnurun-hd.png');
+    const base64 = imageBuffer.toString('base64');
+    const imgSource = `data:image/png;base64,${base64}`;
+
     return (
         <View style={styles.footer}>
             <Text>DON&apos;T COVER THIS PAGE</Text>
-            <Image
-                src="https://gnurun.com/wp-content/uploads/2021/03/logo-gnurun-payoff-1-e1616770815674.png"
-                style={{width: 30, position: 'absolute', left: 5, bottom: 5}}
-            />
+            <Image src={imgSource} style={{width: 75, position: 'absolute', left: 5, bottom: 5}} />
             <Text style={{fontSize: 6, textAlign: 'right', color: 'black', margin: 10}}>Weight: 3,14Kg</Text>
         </View>
     );
