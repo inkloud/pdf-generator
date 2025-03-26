@@ -1,6 +1,7 @@
 import {renderToStream} from '@react-pdf/renderer';
 import {NextResponse} from 'next/server';
 
+import Decimal from 'decimal.js';
 import {DeliveryPDF} from './pdf_delivery';
 
 export async function GET() {
@@ -29,7 +30,13 @@ export async function POST(req: Request) {
     const {id, customer_id, boxes} = await req.json();
 
     try {
-        const nodeStream = await renderToStream(<DeliveryPDF id={id} customer_id={customer_id} boxes={boxes} />);
+        const nodeStream = await renderToStream(
+            <DeliveryPDF
+                id={id}
+                customer_id={customer_id}
+                boxes={boxes.map((b: {weight: string}) => ({...b, weight: new Decimal(b.weight)}))}
+            />
+        );
         const webStream = new ReadableStream({
             start(controller) {
                 nodeStream.on('data', (chunk) => controller.enqueue(chunk));

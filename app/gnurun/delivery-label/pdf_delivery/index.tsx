@@ -2,6 +2,7 @@ import fs from 'fs';
 
 import {Document, Image, Page, StyleSheet, Text, View} from '@react-pdf/renderer';
 import {Canvas} from 'canvas';
+import Decimal from 'decimal.js';
 import JsBarcode from 'jsbarcode';
 import React from 'react';
 
@@ -12,6 +13,7 @@ interface Product {
 
 interface Box {
     products: Product[];
+    weight: Decimal;
 }
 
 const styles = StyleSheet.create({
@@ -62,16 +64,23 @@ const Header: React.FC<{id: number; customer_id: number; index: number; length: 
     );
 };
 
-const Footer = function () {
+const Footer: React.FC<{weight: Decimal}> = function ({weight}) {
     const imageBuffer = fs.readFileSync('./app/gnurun/delivery-label/gnurun-hd.png');
     const base64 = imageBuffer.toString('base64');
     const imgSource = `data:image/png;base64,${base64}`;
+
+    const formattedKg = new Intl.NumberFormat('en-US', {
+        style: 'unit',
+        unit: 'kilogram',
+        unitDisplay: 'short',
+        maximumFractionDigits: 2
+    }).format(weight.toNumber());
 
     return (
         <View style={styles.footer}>
             <Text>DON&apos;T COVER THIS PAGE</Text>
             <Image src={imgSource} style={{width: 75, position: 'absolute', left: 5, bottom: 5}} />
-            <Text style={{fontSize: 6, textAlign: 'right', color: 'black', margin: 10}}>Weight: 3,14Kg</Text>
+            <Text style={{fontSize: 6, textAlign: 'right', color: 'black', margin: 10}}>Weight: {formattedKg}</Text>
         </View>
     );
 };
@@ -104,7 +113,7 @@ const SinglePage: React.FC<{id: number; customer_id: number; box: Box; index: nu
         <>
             <Header id={id} customer_id={customer_id} index={index} length={length} />
             <Body products={box.products} />
-            <Footer />
+            <Footer weight={box.weight} />
         </>
     );
 };

@@ -5,8 +5,8 @@ content-type: application/json
     "id": 4,
     "customer_id": 1,
     "boxes": [
-        {"products": [{"code": "HW415NN", "qty": 36}], "weight": "3.14"},
-        {"products": [{"code": "HW415NN", "qty": 36}], "weight": "3.14"},
+        {"products": [{"code": "HW415NN", "qty": 36}], "weight": "3.16"},
+        {"products": [{"code": "HW415NN", "qty": 36}], "weight": "3.15"},
         {"products": [{"code": "HW415NN", "qty": 36}], "weight": "3.14"},
         {
             "products": [
