@@ -1,4 +1,7 @@
-import {Document, Page, StyleSheet, Text, View} from '@react-pdf/renderer';
+import {Document, Image, Page, StyleSheet, Text, View} from '@react-pdf/renderer';
+import {Canvas} from 'canvas';
+import JsBarcode from 'jsbarcode';
+import React from 'react';
 
 interface Product {
     code: string;
@@ -35,6 +38,14 @@ const styles = StyleSheet.create({
     tableCell: {margin: 8, fontSize: 10}
 });
 
+const Barcode: React.FC<{label: string}> = function ({label}) {
+    const canvas = new Canvas(0, 0);
+    JsBarcode(canvas, label, {width: 4});
+    const dataUrl = canvas.toDataURL('image/png');
+
+    return <Image src={dataUrl} />;
+};
+
 const Header: React.FC<{id: number; customer_id: number; index: number; length: number}> = function ({
     id,
     customer_id,
@@ -44,7 +55,7 @@ const Header: React.FC<{id: number; customer_id: number; index: number; length: 
     const label = `A${customer_id}-D${id}-${index + 1}/${length}`;
     return (
         <View style={styles.header}>
-            <Text>{label}</Text>
+            <Barcode label={label} />
         </View>
     );
 };
@@ -53,6 +64,10 @@ const Footer = function () {
     return (
         <View style={styles.footer}>
             <Text>DON&apos;T COVER THIS PAGE</Text>
+            <Image
+                src="https://gnurun.com/wp-content/uploads/2021/03/logo-gnurun-payoff-1-e1616770815674.png"
+                style={{width: 30, position: 'absolute', left: 5, bottom: 5}}
+            />
             <Text style={{fontSize: 6, textAlign: 'right', color: 'black', margin: 10}}>Weight: 3,14Kg</Text>
         </View>
     );
@@ -68,7 +83,7 @@ const Body: React.FC<{products: Product[]}> = function ({products}) {
                 <Text style={styles.tableCell}>{product.qty}</Text>
             </View>
             <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>{product.code}</Text>
+                <Barcode label={product.code} />
             </View>
         </View>
     ));
