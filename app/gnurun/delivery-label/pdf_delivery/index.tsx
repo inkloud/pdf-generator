@@ -65,7 +65,7 @@ const Header: React.FC<{id: number; customer_id: number; index: number; length: 
 };
 
 const Footer: React.FC<{weight: Decimal}> = function ({weight}) {
-    const imageBuffer = fs.readFileSync('./app/gnurun/delivery-label/gnurun-hd.png');
+    const imageBuffer = fs.readFileSync('./pdf-generator/gnurun/delivery-label/gnurun-hd.png');
     const base64 = imageBuffer.toString('base64');
     const imgSource = `data:image/png;base64,${base64}`;
 

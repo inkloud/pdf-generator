@@ -11,7 +11,26 @@ export const styles = StyleSheet.create({
         textAlign: 'center',
         color: 'grey'
     },
-    headerContainer: {flexDirection: 'row', justifyContent: 'space-between', marginBottom: 24},
-    addressBox: {width: '60%'},
-    rightBox: {width: '40%', textAlign: 'right'}
+    headerTitle: {textAlign: 'center', marginBottom: 24},
+    headerContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginBottom: 24
+    },
+    headerValueContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        textAlign: 'left',
+        alignItems: 'flex-start',
+        marginBottom: 6
+    },
+    headerValueText: {
+        textAlign: 'left',
+        marginLeft: 10
+    },
+    headerValueTitle: {
+        fontWeight: 'bold',
+    },
+    addressBox: {width: '40%', textAlign: 'left'},
+    rightBox: {width: '40%', textAlign: 'left'}
 });

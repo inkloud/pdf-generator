@@ -1,28 +1,60 @@
-import {Document, Page, Text, View} from '@react-pdf/renderer';
+import React from "react";
 
+import {Document, Page, Text, View} from '@react-pdf/renderer';
 import {styles} from './style';
 import {Table} from './table';
-import {Box as BoxType, Delivery} from './type';
+import {Order} from './type';
 
-const Header: React.FC<{
-    id: number;
-    date: Date;
-    company_name: string;
-    courier_name: string;
-    courier_tracking: string;
-}> = function ({id, date, company_name, courier_name, courier_tracking}) {
+const Header: React.FC<{order: Order;}> = function ({order}) {
     return (
-        <View style={styles.headerContainer}>
-            <View style={styles.addressBox}>
-                <Text>{company_name}</Text>
-                <Text>{courier_name}</Text>
-                <Text>{courier_tracking}</Text>
+        <>
+            <Text style={styles.headerTitle}>Picking List</Text>
+            <View style={styles.headerContainer}>
+                <View style={styles.addressBox}>
+
+                </View>
+                <View style={styles.rightBox}>
+                    <Text>Fulfillment order id: {order.id}</Text>
+                </View>
             </View>
-            <View style={styles.rightBox}>
-                <Text>Shipping #{id}</Text>
-                <Text>Date: {date.toLocaleDateString()}</Text>
+            <View style={styles.headerContainer}>
+                <View style={styles.addressBox}>
+                    <div style={styles.headerValueContainer}>
+                        <Text style={styles.headerValueTitle}>Sender: </Text>
+                        <Text style={styles.headerValueText}>{order.customer.company_name}</Text>
+                    </div>
+                    <div style={styles.headerValueContainer}>
+                        <Text style={styles.headerValueTitle}>Warehouse: </Text>
+                        <Text style={styles.headerValueText}>{order.current_wh}</Text>
+                    </div>
+                    <div style={styles.headerValueContainer}>
+                        <Text style={styles.headerValueTitle}>FBA: </Text>
+                        <Text style={styles.headerValueText}>{order.address.country + "," + order.address.province + "," + order.address.city + "," + order.address.address + "," + order.address.zip_code}</Text>
+                    </div>
+                </View>
+                <View style={styles.rightBox}>
+                    <div style={styles.headerValueContainer}>
+                        <Text style={styles.headerValueTitle}>Date: </Text>
+                        <Text style={styles.headerValueText}>{order.created_at}</Text>
+                    </div>
+                    <div style={styles.headerValueContainer}>
+                        <Text style={styles.headerValueTitle}>Doc. number: </Text>
+                        <Text style={styles.headerValueText}>{order.id}</Text>
+                    </div>
+                    <div style={styles.headerValueContainer}>
+                        <Text style={styles.headerValueTitle}>Courier name: </Text>
+                        <Text
+                            style={styles.headerValueText}>{order.extra_data.courier_data.courier_name}</Text>
+                    </div>
+                    <div style={styles.headerValueContainer}>
+                        <Text style={styles.headerValueTitle}>Customer reference: </Text>
+                        <Text
+                            style={styles.headerValueText}>{order.extra_data.customer_reference}</Text>
+                    </div>
+                </View>
             </View>
-        </View>
+        </>
+
     );
 };
 
@@ -36,65 +68,19 @@ const Footer = function () {
     );
 };
 
-const BoxTitle: React.FC<{box: BoxType; idx_box: number; total_boxes: number}> = function ({
-    box,
-    idx_box,
-    total_boxes
-}) {
-    const isDummyBox = box.box_qty === 0;
-    const box_index = box.box_qty === 1 ? `${idx_box + 1}` : `${idx_box + 1}..${idx_box + box.box_qty}`;
-    return (isDummyBox && 'Dummy Box') || `Box ${box_index}/${total_boxes}`;
+const BoxTitle: React.FC<{}> = function ({}) {
+    return <Text>Products</Text>;
 };
 
-const Box: React.FC<{data: BoxType; total_boxes: number; idx_box: number}> = function ({data, total_boxes, idx_box}) {
-    const columns = ['Code', 'Quantity'];
-    const rows = data.products.map((p) => ({Code: p.p_code, Quantity: `${p.quantity}`}));
-
-    return (
-        <>
-            <Text style={{fontSize: 20, margin: 12}}>
-                <BoxTitle box={data} idx_box={idx_box} total_boxes={total_boxes} />{' '}
-                <Text
-                    style={{fontSize: 10, margin: 12}}
-                >{`${data.box_width_cm.toString()}cm x ${data.box_length_cm.toString()}cm x ${data.box_height_cm.toString()}cm`}</Text>
-            </Text>
-            <View style={{flexDirection: 'row'}}>
-                <View style={{width: '50%'}}>
-                    <Table columns={columns} rows={rows} />
-                </View>
-                <View style={{width: '50%'}}>
-                    <Table columns={[' ']} rows={rows.map(() => ({' ': ' '}))} />
-                </View>
-            </View>
-        </>
-    );
-};
-
-export const DeliveryPDF: React.FC<{
-    delivery: Delivery;
-    company_name: string;
-    courier_name: string;
-    courier_tracking: string;
-}> = function ({delivery, company_name, courier_name, courier_tracking}) {
-    const total_boxes = delivery.boxes.map((b) => b.box_qty).reduce((acc, item) => acc + item, 0);
-    let current_index = 0;
-    const boxes = delivery.boxes!.map((box) => {
-        const res = <Box key={box.id} data={box} total_boxes={total_boxes} idx_box={current_index} />;
-        current_index += box.box_qty;
-        return res;
-    });
-
+export const DeliveryPDF: React.FC<{order: Order;}> = function ({order}) {
     return (
         <Document>
             <Page size="A4" orientation="landscape" style={styles.page}>
-                <Header
-                    id={delivery.id}
-                    date={delivery.creation_date}
-                    company_name={company_name}
-                    courier_name={courier_name}
-                    courier_tracking={courier_tracking}
-                />
-                {boxes}
+                <Header order={order}/>
+                <Text style={{fontSize: 20, margin: 12}}>
+                    <BoxTitle/>
+                </Text>
+                <Table products={order.products} />
                 <Footer />
             </Page>
         </Document>
