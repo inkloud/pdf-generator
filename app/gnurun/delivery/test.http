@@ -1,4 +1,4 @@
-POST http://localhost:3000/gnurun/delivery
+POST http://localhost:3000/gnurun/print/delivery
 content-type: application/json
 
 {

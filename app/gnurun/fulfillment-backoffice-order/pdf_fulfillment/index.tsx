@@ -3,7 +3,7 @@ import React from "react";
 import {Document, Page, Text, View} from '@react-pdf/renderer';
 import {styles} from './style';
 import {Table} from './table';
-import {Order} from './type';
+import {Order} from "../../../types/fulfillment";
 
 const Header: React.FC<{order: Order;}> = function ({order}) {
     return (

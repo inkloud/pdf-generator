@@ -1,0 +1,44 @@
+POST http://localhost:3000/gnurun/delivery-backoffice
+content-type: application/json
+
+{
+  "delivery": {
+    "id": 431,
+    "company_id": 1,
+    "customer_id": 1,
+    "warehouse_id": 1,
+    "d_state": "CONFIRMED",
+    "creation_date": "2025-01-16T12:33:09+00:00",
+    "wh_note": null,
+    "invoice_n": null,
+    "courier_name": null,
+    "courier_tracking": null,
+    "boxes": [
+      {
+        "id": 459,
+        "delivery_id": 431,
+        "box_height_cm": "43.0",
+        "box_length_cm": "40.0",
+        "box_width_cm": "30.0",
+        "box_weight_kg": "15.000",
+        "box_qty": 1,
+        "products": [
+          {
+            "wh_delivery_box_id": 459,
+            "product_id": 2180,
+            "product_sku": "test2025",
+            "product_name": "Pannelli da 415",
+            "position": "CC.00.00.04",
+            "quantity": 15,
+            "p_weight_kg": 0.674,
+            "p_height_cm": 3.5,
+            "p_length_cm": 17,
+            "p_width_cm": 12
+          }
+        ]
+      }
+    ],
+    "cost": null,
+    "billing_cicle": null
+  }
+}

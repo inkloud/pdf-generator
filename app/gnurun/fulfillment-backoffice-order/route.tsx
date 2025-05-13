@@ -1,8 +1,8 @@
 import {renderToStream} from '@react-pdf/renderer';
 import {NextResponse} from 'next/server';
 
-import {DeliveryPDF} from './pdf_delivery';
-import {Order} from "./pdf_delivery/type";
+import {Order} from "../../types/fulfillment";
+import {FulfillmentPDF} from "../fulfillment-order/pdf_fulfillment";
 
 export async function GET() {
     return NextResponse.json({
@@ -75,7 +75,7 @@ export async function POST(req: Request) {
 
     try {
         const nodeStream = await renderToStream(
-            <DeliveryPDF
+            <FulfillmentPDF
                 order={order}
             />
         );

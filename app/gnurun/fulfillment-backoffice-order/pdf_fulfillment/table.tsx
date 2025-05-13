@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { StyleSheet, Text, View } from '@react-pdf/renderer';
-import {Product} from "./type";
+import {Product} from "../../../types/fulfillment";
 
 const styles = StyleSheet.create({
     table: {
@@ -64,7 +64,7 @@ export const Table: React.FC<{ products: Product[] }> = ({ products }) => {
                         <Text style={styles.tableCell}>{product.product_name}</Text>
                     </View>
                     <View style={styles.tableCol}>
-                        <Text style={styles.tableCell}>{product.position}</Text>
+                        <Text style={styles.tableCell}>{product.product_position}</Text>
                     </View>
                     <View style={styles.tableCol}>
                         <Text style={styles.tableCell}>{product.stock}</Text>
