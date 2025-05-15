@@ -11,6 +11,14 @@ export const styles = StyleSheet.create({
         textAlign: 'center',
         color: 'grey'
     },
+    totals: {
+        position: 'absolute',
+        fontSize: 10,
+        bottom: 32,
+        left: 64,
+        textAlign: 'left',
+        color: 'black'
+    },
     headerTitle: {textAlign: 'center', marginBottom: 24},
     headerContainer: {
         flexDirection: 'row',

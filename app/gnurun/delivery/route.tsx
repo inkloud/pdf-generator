@@ -2,6 +2,7 @@ import {renderToStream} from '@react-pdf/renderer';
 import {NextResponse} from 'next/server';
 
 import {DeliveryPDF} from './pdf_delivery';
+import {Delivery} from "../../types/delivery";
 
 export async function GET() {
     return NextResponse.json({
@@ -29,17 +30,23 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
-    const {delivery, company_name, courier_name, courier_tracking} = await req.json();
+    const formData = await req.formData();
+    const jsonData = formData.get('json') as string;
 
-    delivery.creation_date = new Date(delivery.creation_date);
+    if (!jsonData) {
+        return new Response('Missing JSON data', { status: 400 });
+    }
+
+    const delivery = Delivery.create(JSON.parse(jsonData));
+
 
     try {
         const nodeStream = await renderToStream(
             <DeliveryPDF
                 delivery={delivery}
-                company_name={company_name}
-                courier_name={courier_name}
-                courier_tracking={courier_tracking}
+                company_name={delivery.company_name}
+                courier_name={delivery.courier_name}
+                courier_tracking={delivery.courier_tracking}
             />
         );
         const webStream = new ReadableStream({

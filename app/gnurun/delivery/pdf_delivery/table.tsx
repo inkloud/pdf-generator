@@ -1,5 +1,6 @@
 import {StyleSheet, Text, View} from '@react-pdf/renderer';
 import React from 'react';
+import {DeliveryBoxProduct} from "../../../types/delivery";
 
 const styles = StyleSheet.create({
     table: {
@@ -18,32 +19,40 @@ const styles = StyleSheet.create({
     tableHeaderCell: {margin: 8, fontSize: 10, fontWeight: 'bold'}
 });
 
-export const Table: React.FC<{columns: string[]; rows: {[k: string]: string}[]}> = function ({columns, rows}) {
-    const width = `${100 / columns.length}%`;
+export const Table: React.FC<{products: DeliveryBoxProduct[]}> = function ({products}) {
+    const headers = ['No.', 'Product', 'Name', 'Location', 'Quantity'];
 
-    const header = columns.map((c, index) => (
-        <View key={index} style={[styles.tableCol, {width}]}>
-            <Text style={styles.tableHeaderCell}>{c}</Text>
-        </View>
-    ));
-    const pdfRows = rows.map((r, index) => {
-        const cols = columns.map((c, index) => (
-            <View key={index} style={[styles.tableCol, {width}]}>
-                <Text style={styles.tableCell}>{r[c]}</Text>
-            </View>
-        ));
-        return (
-            <View key={index} style={styles.tableRow} wrap={false}>
-                {cols}
-            </View>
-        );
-    });
     return (
         <View style={styles.table}>
+            {/* Header row */}
             <View style={[styles.tableRow, styles.tableHeaderRow]} wrap={false}>
-                {header}
+                {headers.map((header, i) => (
+                    <View key={i} style={styles.tableCol}>
+                        <Text style={styles.tableHeaderCell}>{header}</Text>
+                    </View>
+                ))}
             </View>
-            {pdfRows}
+
+            {/* Data rows */}
+            {products.map((product, rowIndex) => (
+                <View key={rowIndex} style={styles.tableRow} wrap={false}>
+                    <View style={styles.tableCol}>
+                        <Text style={styles.tableCell}>{rowIndex + 1}</Text>
+                    </View>
+                    <View style={styles.tableCol}>
+                        <Text style={styles.tableCell}>{product.p_code}</Text>
+                    </View>
+                    <View style={styles.tableCol}>
+                        <Text style={styles.tableCell}>{product.p_title}</Text>
+                    </View>
+                    <View style={styles.tableCol}>
+                        <Text style={styles.tableCell}>{product.p_position}</Text>
+                    </View>
+                    <View style={styles.tableCol}>
+                        <Text style={styles.tableCell}>{product.quantity}</Text>
+                    </View>
+                </View>
+            ))}
         </View>
     );
 };
