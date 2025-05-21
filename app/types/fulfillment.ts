@@ -52,7 +52,7 @@ interface MainOrder {
     created_at: string;
     customer: Customer;
     customer_id: number;
-    current_wh: number;
+    warehouse: string;
     address: Address;
     status: string;
     extra_data: ExtraData;
@@ -70,7 +70,7 @@ export class Order implements MainOrder {
     created_at: string;
     customer: Customer;
     customer_id: number;
-    current_wh: number;
+    warehouse: string;
     address: Address;
     status: string;
     extra_data: ExtraData;
@@ -96,7 +96,7 @@ export class Order implements MainOrder {
                 company_name: "",
             },
             customer_id: data.customer_id ?? 0,
-            current_wh: data.current_wh ?? 0,
+            warehouse: data.warehouse ?? 0,
             address: data.address ?? {
                 business_name: "",
                 reference_name: "",

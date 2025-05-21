@@ -25,7 +25,7 @@ const Header: React.FC<{order: Order;}> = function ({order}) {
                     </div>
                     <div style={styles.headerValueContainer}>
                         <Text style={styles.headerValueTitle}>Warehouse: </Text>
-                        <Text style={styles.headerValueText}>{order.current_wh}</Text>
+                        <Text style={styles.headerValueText}>{order.warehouse}</Text>
                     </div>
                     <div style={styles.headerValueContainer}>
                         <Text style={styles.headerValueTitle}>FBA: </Text>
