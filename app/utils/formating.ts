@@ -1,6 +1,6 @@
 import {Order} from "../types/fulfillment";
-import path from "path";
 import fs from "fs";
+import path from 'path';
 
 export function formatAddress(addressObj: Order["address"]) {
     const { address, street, city, province, zip_code, country } = addressObj;
@@ -12,7 +12,10 @@ export function formatAddress(addressObj: Order["address"]) {
         province,
         zip_code,
         country
-    ].filter(part => part && part.trim() !== '');
+    ].filter(part => {
+        if (typeof part === 'string') return part.trim() !== '';
+        return part !== undefined && part !== null;
+    });
 
     return parts.join(', ');
 }

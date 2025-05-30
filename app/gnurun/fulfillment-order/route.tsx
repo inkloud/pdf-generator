@@ -89,14 +89,13 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
-    const formData = await req.formData();
-    const jsonData = formData.get('json') as string;
+    const jsonData = await req.json();
 
     if (!jsonData) {
         return new Response('Missing JSON data', { status: 400 });
     }
 
-    const order = Order.create(JSON.parse(jsonData));
+    const order = Order.create(jsonData);
 
     try {
         const nodeStream = await renderToStream(
