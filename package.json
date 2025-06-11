@@ -1,6 +1,6 @@
 {
   "name": "pdf-generator",
-  "version": "2.2.1",
+  "version": "3.0.0",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -15,15 +15,15 @@
     "@react-pdf/renderer": "^4.3.0",
     "canvas": "^3.1.0",
     "decimal.js": "^10.5.0",
-    "jsbarcode": "^3.11.6",
+    "jsbarcode": "^3.12.1",
     "next": "^15.3.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
   "devDependencies": {
-    "@types/node": "22.15.27",
-    "@types/react": "19.1.6",
-    "eslint": "9.27.0",
+    "@types/node": "24.0.0",
+    "@types/react": "19.1.7",
+    "eslint": "9.28.0",
     "eslint-config-next": "15.3.3",
     "npm-check-updates": "^18.0.1",
     "typescript": "5.8.3"
