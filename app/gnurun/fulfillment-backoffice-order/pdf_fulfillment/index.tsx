@@ -68,7 +68,7 @@ const Footer = function () {
     );
 };
 
-const BoxTitle: React.FC<{}> = function ({}) {
+const BoxTitle: React.FC = function () {
     return <Text>Products</Text>;
 };
 

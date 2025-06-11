@@ -43,52 +43,52 @@ export type GroupedProduct = {
     orders: ProductOrderEntry[];
 };
 
-export class Orders implements GroupedProduct {
-    product: Product;
-    orders: ProductOrderEntry[];
-
-    private constructor(params: { product: Product; orders: ProductOrderEntry[] }) {
-        this.product = params.product;
-        this.orders = params.orders;
-    }
-
-    static create(data: any): Orders {
-        return new Orders({
-            product: {
-                product_id: data.product?.product_id ?? 0,
-                product_sku: data.product?.product_sku ?? "",
-                product_name: data.product?.product_name ?? "",
-                product_position: data.product?.product_position ?? "",
-                height: data.product?.height ?? 0,
-                width: data.product?.width ?? 0,
-                length: data.product?.length ?? 0,
-                weight: data.product?.weight ?? 0,
-                note: data.product?.note ?? "",
-                stock: data.product?.stock ?? 0,
-            },
-            orders: (data.orders ?? []).map((entry: any) => ({
-                order_id: entry.order_id ?? 0,
-                customer_name: entry.customer_name ?? "",
-                quantity: entry.quantity ?? 0,
-                position: entry.position ?? "",
-                warehouse: entry.warehouse ?? "",
-                address: {
-                    business_name: entry.address?.business_name ?? "",
-                    reference_name: entry.address?.reference_name ?? "",
-                    address: entry.address?.address ?? "",
-                    city: entry.address?.city ?? "",
-                    street: entry.address?.street ?? "",
-                    province: entry.address?.province ?? "",
-                    country: entry.address?.country ?? "",
-                    zip_code: entry.address?.zip_code ?? "",
-                    email: entry.address?.email ?? "",
-                    tel: entry.address?.tel ?? "",
-                },
-                barcode: entry.barcode ?? ""
-            })),
-        });
-    }
-}
+// export class Orders implements GroupedProduct {
+//     product: Product;
+//     orders: ProductOrderEntry[];
+//
+//     private constructor(params: { product: Product; orders: ProductOrderEntry[] }) {
+//         this.product = params.product;
+//         this.orders = params.orders;
+//     }
+//
+//     static create(data: any): Orders {
+//         return new Orders({
+//             product: {
+//                 product_id: data.product?.product_id ?? 0,
+//                 product_sku: data.product?.product_sku ?? "",
+//                 product_name: data.product?.product_name ?? "",
+//                 product_position: data.product?.product_position ?? "",
+//                 height: data.product?.height ?? 0,
+//                 width: data.product?.width ?? 0,
+//                 length: data.product?.length ?? 0,
+//                 weight: data.product?.weight ?? 0,
+//                 note: data.product?.note ?? "",
+//                 stock: data.product?.stock ?? 0,
+//             },
+//             orders: (data.orders ?? []).map((entry: any) => ({
+//                 order_id: entry.order_id ?? 0,
+//                 customer_name: entry.customer_name ?? "",
+//                 quantity: entry.quantity ?? 0,
+//                 position: entry.position ?? "",
+//                 warehouse: entry.warehouse ?? "",
+//                 address: {
+//                     business_name: entry.address?.business_name ?? "",
+//                     reference_name: entry.address?.reference_name ?? "",
+//                     address: entry.address?.address ?? "",
+//                     city: entry.address?.city ?? "",
+//                     street: entry.address?.street ?? "",
+//                     province: entry.address?.province ?? "",
+//                     country: entry.address?.country ?? "",
+//                     zip_code: entry.address?.zip_code ?? "",
+//                     email: entry.address?.email ?? "",
+//                     tel: entry.address?.tel ?? "",
+//                 },
+//                 barcode: entry.barcode ?? ""
+//             })),
+//         });
+//     }
+// }
 
 export interface Product {
     product_id: number;

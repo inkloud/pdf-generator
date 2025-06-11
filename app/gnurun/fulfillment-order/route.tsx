@@ -6,86 +6,61 @@ import {Order} from "../../types/fulfillment";
 
 export async function GET() {
     return NextResponse.json({
-            "id": 1674,
-            "created_at": "2025-04-01T10:19:34",
-            "customer": {
-                "customer_id": 1,
-                "company_id": 1,
-                "company_name": "Life365 Italy TEST"
-            },
+        "id": 1674,
+        "created_at": "2025-04-01T10:19:34",
+        "customer": {
             "customer_id": 1,
-            "warehouse": "Gnu000 Test",
-            "address": {
-                "business_name": "",
-                "reference_name": "Javid Test Test",
-                "address": "via nomentana 1111",
-                "city": "Roma",
-                "street": "",
-                "province": "Roma",
-                "country": "Italy",
-                "zip_code": "00137",
-                "email": "",
-                "tel": ""
+            "company_id": 1,
+            "company_name": "Life365 Italy TEST"
+        },
+        "customer_id": 1,
+        "current_wh": 1,
+        "address": {
+            "business_name": "",
+            "reference_name": "Javid Test Test",
+            "address": "via nomentana 1111",
+            "city": "Roma",
+            "street": "",
+            "province": "Roma",
+            "country": "Italy",
+            "zip_code": "00137",
+            "email": "",
+            "tel": ""
+        },
+        "status": "CONFIRMED",
+        "extra_data": {
+            "courier_data": {
+                "courier_name": "",
+                "courier_tracking": ""
             },
-            "status": "CONFIRMED",
-            "extra_data": {
-                "courier_data": {
-                    "courier_name": "Mario",
-                    "courier_tracking": ""
-                },
-                "customer_reference": "Javid Test Test",
-                "reference_name": "",
-                "provider": "GNURUN console"
-            },
-            "cost": {
-                "shipping_cost": "0.00",
-                "inner_cost": []
-            },
-            "note": "",
-            "warehouse_note": null,
-            "products": [
-                {
-                    "product_id": 3,
-                    "product_sku": "HW415NN",
-                    "product_name": "Pannelli da 415",
-                    "product_position": "CC.00.00.04",
-                    "height": 3,
-                    "width": 114,
-                    "length": 175,
-                    "weight": 21,
-                    "note": "",
-                    "stock": 1
-                },
-                {
-                    "product_id": 3,
-                    "product_sku": "HW415NN",
-                    "product_name": "Pannelli da 415",
-                    "product_position": "CC.00.00.04",
-                    "height": 3,
-                    "width": 114,
-                    "length": 175,
-                    "weight": 21,
-                    "note": "",
-                    "stock": 1
-                },
-                {
-                    "product_id": 3,
-                    "product_sku": "HW415NN",
-                    "product_name": "Pannelli da 415",
-                    "product_position": "CC.00.00.04",
-                    "height": 3,
-                    "width": 114,
-                    "length": 175,
-                    "weight": 21,
-                    "note": "",
-                    "stock": 1
-                }
-            ],
-            "files": [],
-            "invoice_n": null,
-            "billing_cycle": null
-        }
-    );
+            "customer_reference": "Javid Test Test",
+            "reference_name": "",
+            "provider": "GNURUN console"
+        },
+        "cost": {
+            "shipping_cost": "0.00",
+            "inner_cost": []
+        },
+        "note": "",
+        "warehouse_note": null,
+        "products": [
+            {
+                "product_id": 3,
+                "product_sku": "HW415NN",
+                "product_name": "Pannelli da 415",
+                "product_position": "CC.00.00.04",
+                "height": 3,
+                "width": 114,
+                "length": 175,
+                "weight": 21,
+                "note": "",
+                "stock": 1
+            }
+        ],
+        "files": [],
+        "invoice_n": null,
+        "billing_cycle": null
+    });
 }
 
 export async function POST(req: Request) {

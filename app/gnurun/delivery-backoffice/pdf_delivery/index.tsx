@@ -2,7 +2,7 @@ import {Document, Page, Text, View} from '@react-pdf/renderer';
 
 import {styles} from './style';
 import {Table} from './table';
-import {Delivery, Box as BoxType} from "../../../types/delivery";
+import {Delivery, DeliveryBox as BoxType} from "../../../types/delivery";
 
 const Header: React.FC<{
     id: number;
@@ -89,7 +89,7 @@ export const DeliveryPDF: React.FC<{
             <Page size="A4" orientation="landscape" style={styles.page}>
                 <Header
                     id={delivery.id}
-                    date={delivery.creation_date}
+                    date={new Date(delivery.creation_date)}
                     company_name={company_name}
                     courier_name={courier_name}
                     courier_tracking={courier_tracking}

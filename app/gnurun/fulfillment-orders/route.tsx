@@ -6,236 +6,62 @@ import {GroupedProduct, Order} from "../../types/fulfillment";
 import {groupOrdersByProduct} from "../../utils/sorting";
 
 export async function GET() {
-    return NextResponse.json([
-        {
-            "id": 1674,
-            "created_at": "2025-04-01T10:19:34",
-            "customer": {
-                "customer_id": 1,
-                "company_id": 1,
-                "company_name": "Life365 Italy TEST"
-            },
+    return NextResponse.json([{
+        "id": 1674,
+        "created_at": "2025-04-01T10:19:34",
+        "customer": {
             "customer_id": 1,
-            "current_wh": 1,
-            "warehouse": "Test 1",
-            "address": {
-                "business_name": "",
-                "reference_name": "Javid Test Test",
-                "address": "via nomentana 1111",
-                "city": "Roma",
-                "street": "",
-                "province": "Roma",
-                "country": "Italy",
-                "zip_code": "00137",
-                "email": "",
-                "tel": ""
-            },
-            "status": "CONFIRMED",
-            "extra_data": {
-                "courier_data": {
-                    "courier_name": "",
-                    "courier_tracking": ""
-                },
-                "customer_reference": "Javid Test Test",
-                "reference_name": "",
-                "provider": "GNURUN console"
-            },
-            "cost": {
-                "shipping_cost": "0.00",
-                "inner_cost": []
-            },
-            "note": "",
-            "warehouse_note": null,
-            "products": [
-                {
-                    "product_id": 3,
-                    "product_sku": "HW415NN",
-                    "product_name": "Pannelli da 415",
-                    "product_position": "CC.00.00.04",
-                    "height": 3,
-                    "width": 114,
-                    "length": 175,
-                    "weight": 21,
-                    "note": "",
-                    "stock": 6
-                }
-            ],
-            "files": [],
-            "invoice_n": null,
-            "billing_cycle": null
+            "company_id": 1,
+            "company_name": "Life365 Italy TEST"
         },
-        {
-            "id": 1946,
-            "created_at": "2025-04-01T10:19:34",
-            "customer": {
-                "customer_id": 1,
-                "company_id": 1,
-                "company_name": "Life365 Italy TEST"
-            },
-            "customer_id": 1,
-            "current_wh": 1,
-            "warehouse": "Test 1",
-            "address": {
-                "business_name": "",
-                "reference_name": "Javid Test Test",
-                "address": "via nomentana 1111",
-                "city": "Roma",
-                "street": "",
-                "province": "Roma",
-                "country": "Italy",
-                "zip_code": "00137",
-                "email": "",
-                "tel": ""
-            },
-            "status": "CONFIRMED",
-            "extra_data": {
-                "courier_data": {
-                    "courier_name": "",
-                    "courier_tracking": ""
-                },
-                "customer_reference": "Javid Test Test",
-                "reference_name": "",
-                "provider": "GNURUN console"
-            },
-            "cost": {
-                "shipping_cost": "0.00",
-                "inner_cost": []
-            },
-            "note": "",
-            "warehouse_note": null,
-            "products": [
-                {
-                    "product_id": 3,
-                    "product_sku": "HW415NN",
-                    "product_name": "Pannelli da 415",
-                    "product_position": "CC.00.00.04",
-                    "height": 3,
-                    "width": 114,
-                    "length": 175,
-                    "weight": 21,
-                    "note": "",
-                    "stock": 6
-                }
-            ],
-            "files": [],
-            "invoice_n": null,
-            "billing_cycle": null
+        "customer_id": 1,
+        "current_wh": 1,
+        "address": {
+            "business_name": "",
+            "reference_name": "Javid Test Test",
+            "address": "via nomentana 1111",
+            "city": "Roma",
+            "street": "",
+            "province": "Roma",
+            "country": "Italy",
+            "zip_code": "00137",
+            "email": "",
+            "tel": ""
         },
-        {
-            "id": 1855,
-            "created_at": "2025-04-01T10:19:34",
-            "customer": {
-                "customer_id": 1,
-                "company_id": 1,
-                "company_name": "Life365 Italy TEST"
+        "status": "CONFIRMED",
+        "extra_data": {
+            "courier_data": {
+                "courier_name": "",
+                "courier_tracking": ""
             },
-            "customer_id": 1,
-            "current_wh": 1,
-            "warehouse": "Test 1",
-            "address": {
-                "business_name": "",
-                "reference_name": "Javid Test Test",
-                "address": "via nomentana 1111",
-                "city": "Roma",
-                "street": "",
-                "province": "Roma",
-                "country": "Italy",
-                "zip_code": "00137",
-                "email": "",
-                "tel": ""
-            },
-            "status": "CONFIRMED",
-            "extra_data": {
-                "courier_data": {
-                    "courier_name": "",
-                    "courier_tracking": ""
-                },
-                "customer_reference": "Javid Test Test",
-                "reference_name": "",
-                "provider": "GNURUN console"
-            },
-            "cost": {
-                "shipping_cost": "0.00",
-                "inner_cost": []
-            },
-            "note": "",
-            "warehouse_note": null,
-            "products": [
-                {
-                    "product_id": 3,
-                    "product_sku": "HW415NN",
-                    "product_name": "Pannelli da 415",
-                    "product_position": "CC.00.00.04",
-                    "height": 3,
-                    "width": 114,
-                    "length": 175,
-                    "weight": 21,
-                    "note": "",
-                    "stock": 6
-                }
-            ],
-            "files": [],
-            "invoice_n": null,
-            "billing_cycle": null
+            "customer_reference": "Javid Test Test",
+            "reference_name": "",
+            "provider": "GNURUN console"
         },
-        {
-            "id": 1922,
-            "created_at": "2025-04-01T10:19:34",
-            "customer": {
-                "customer_id": 1,
-                "company_id": 1,
-                "company_name": "Life365 Italy TEST"
-            },
-            "customer_id": 1,
-            "current_wh": 1,
-            "warehouse": "Test 1",
-            "address": {
-                "business_name": "",
-                "reference_name": "Javid Test Test",
-                "address": "via nomentana 1111",
-                "city": "Roma",
-                "street": "",
-                "province": "Roma",
-                "country": "Italy",
-                "zip_code": "00137",
-                "email": "",
-                "tel": ""
-            },
-            "status": "CONFIRMED",
-            "extra_data": {
-                "courier_data": {
-                    "courier_name": "",
-                    "courier_tracking": ""
-                },
-                "customer_reference": "Javid Test Test",
-                "reference_name": "",
-                "provider": "GNURUN console"
-            },
-            "cost": {
-                "shipping_cost": "0.00",
-                "inner_cost": []
-            },
-            "note": "",
-            "warehouse_note": null,
-            "products": [
-                {
-                    "product_id": 4,
-                    "product_sku": "FG415N1",
-                    "product_name": "Pannelli da 415",
-                    "product_position": "CC.00.00.04",
-                    "height": 3,
-                    "width": 114,
-                    "length": 175,
-                    "weight": 21,
-                    "note": "",
-                    "stock": 2
-                }
-            ],
-            "files": [],
-            "invoice_n": null,
-            "billing_cycle": null
-        }
-    ]);
+        "cost": {
+            "shipping_cost": "0.00",
+            "inner_cost": []
+        },
+        "note": "",
+        "warehouse_note": null,
+        "products": [
+            {
+                "product_id": 3,
+                "product_sku": "HW415NN",
+                "product_name": "Pannelli da 415",
+                "product_position": "CC.00.00.04",
+                "height": 3,
+                "width": 114,
+                "length": 175,
+                "weight": 21,
+                "note": "",
+                "stock": 1
+            }
+        ],
+        "files": [],
+        "invoice_n": null,
+        "billing_cycle": null
+    }]);
 }
 
 export async function POST(req: Request) {
