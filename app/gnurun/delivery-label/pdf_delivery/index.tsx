@@ -1,4 +1,5 @@
 import fs from 'fs';
+import path from 'path';
 
 import {Document, Image, Page, StyleSheet, Text, View} from '@react-pdf/renderer';
 import {Canvas} from 'canvas';
@@ -65,7 +66,8 @@ const Header: React.FC<{id: number; customer_id: number; index: number; length: 
 };
 
 const Footer: React.FC<{weight: Decimal}> = function ({weight}) {
-    const imageBuffer = fs.readFileSync('./pdf-generator/gnurun/delivery-label/gnurun-hd.png');
+    const imgPath = path.join(process.cwd(), 'app', 'gnurun', 'delivery-label', 'gnurun-hd.png');
+    const imageBuffer = fs.readFileSync(imgPath);
     const base64 = imageBuffer.toString('base64');
     const imgSource = `data:image/png;base64,${base64}`;
 

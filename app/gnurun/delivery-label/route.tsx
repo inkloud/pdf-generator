@@ -1,7 +1,7 @@
 import {renderToStream} from '@react-pdf/renderer';
+import Decimal from 'decimal.js';
 import {NextResponse} from 'next/server';
 
-import Decimal from 'decimal.js';
 import {DeliveryPDF} from './pdf_delivery';
 
 export async function GET() {
