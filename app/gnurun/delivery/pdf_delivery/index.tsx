@@ -1,38 +1,35 @@
 import {Document, Page, Text, View} from '@react-pdf/renderer';
 
+import React from 'react';
+import {DeliveryBox as BoxType, Delivery, DeliveryBox, DeliveryBoxProduct} from '../../../types/delivery';
 import {styles} from './style';
 import {Table} from './table';
-import {Delivery, DeliveryBox, DeliveryBox as BoxType, DeliveryBoxProduct} from "../../../types/delivery";
-import React from "react";
 
-const checkTotals = function(delivery: Delivery){
-
-    function getVolume(product: DeliveryBoxProduct){
-        return (product.p_height_cm * product.p_width_cm * product.p_length_cm)*product.quantity;
+const checkTotals = function (delivery: Delivery) {
+    function getVolume(product: DeliveryBoxProduct) {
+        return product.p_height_cm * product.p_width_cm * product.p_length_cm * product.quantity;
     }
 
-    let totals = {weight: 0, quantity: 0, volume: 0};
-    if (delivery.boxes.length > 0){
+    const totals = {weight: 0, quantity: 0, volume: 0};
+    if (delivery.boxes.length > 0) {
         delivery.boxes.forEach((box: DeliveryBox) => {
-            box.products.forEach(product => {
-                totals.volume+=getVolume(product)
-                totals.quantity+=product.quantity
-                totals.weight+=product.p_weight_kg
-            })
-        })
-        return totals
-    }else {
+            box.products.forEach((product) => {
+                totals.volume += getVolume(product);
+                totals.quantity += product.quantity;
+                totals.weight += product.p_weight_kg;
+            });
+        });
+        return totals;
+    } else {
         return totals;
     }
-}
+};
 const Header: React.FC<{delivery: Delivery}> = function ({delivery}) {
     return (
         <>
             <Text style={styles.headerTitle}>Picking List</Text>
             <View style={styles.headerContainer}>
-                <View style={styles.addressBox}>
-
-                </View>
+                <View style={styles.addressBox}></View>
                 <View style={styles.rightBox}>
                     <Text>Shipping id: {delivery.id}</Text>
                 </View>
@@ -47,7 +44,6 @@ const Header: React.FC<{delivery: Delivery}> = function ({delivery}) {
                         <Text style={styles.headerValueTitle}>Warehouse: </Text>
                         <Text style={styles.headerValueText}>{delivery.warehouse_id}</Text>
                     </div>
-
                 </View>
                 <View style={styles.rightBox}>
                     <div style={styles.headerValueContainer}>
@@ -60,13 +56,11 @@ const Header: React.FC<{delivery: Delivery}> = function ({delivery}) {
                     </div>
                     <div style={styles.headerValueContainer}>
                         <Text style={styles.headerValueTitle}>Courier name: </Text>
-                        <Text
-                            style={styles.headerValueText}>{delivery.courier_name}</Text>
+                        <Text style={styles.headerValueText}>{delivery.courier_name}</Text>
                     </div>
                     <div style={styles.headerValueContainer}>
                         <Text style={styles.headerValueTitle}>Customer reference: </Text>
-                        <Text
-                            style={styles.headerValueText}>{delivery.customer_id}</Text>
+                        <Text style={styles.headerValueText}>{delivery.customer_id}</Text>
                     </div>
                 </View>
             </View>
@@ -85,12 +79,13 @@ const Header: React.FC<{delivery: Delivery}> = function ({delivery}) {
     );
 };
 
-const Footer: React.FC<{delivery: Delivery}> = function ({delivery}){
-    let totals = checkTotals(delivery)
+const Footer: React.FC<{delivery: Delivery}> = function ({delivery}) {
+    const totals = checkTotals(delivery);
     return (
         <>
             <Text style={styles.totals} fixed>
-                Total weight: {totals.weight} kg; Total net volume: {totals.volume} cm3; Total quantity {totals.quantity};
+                Total weight: {totals.weight} kg; Total net volume: {totals.volume} cm3; Total quantity{' '}
+                {totals.quantity};
             </Text>
             <Text
                 style={styles.footer}
@@ -98,16 +93,14 @@ const Footer: React.FC<{delivery: Delivery}> = function ({delivery}){
                 render={({pageNumber, totalPages}) => `Page ${pageNumber} of ${totalPages}`}
             />
         </>
-
     );
 };
 
 const BoxTitle: React.FC<{
     box: BoxType;
     idx_box: number;
-    total_boxes: number
+    total_boxes: number;
 }> = function ({box, idx_box, total_boxes}) {
-
     const box_index = box.box_qty === 1 ? `${idx_box + 1}` : `${idx_box + 1}..${idx_box + box.box_qty}`;
     return `Box ${box_index}/${total_boxes}`;
 };
@@ -150,9 +143,9 @@ export const DeliveryPDF: React.FC<{
     return (
         <Document>
             <Page size="A4" orientation="landscape" style={styles.page}>
-                <Header delivery={delivery}/>
+                <Header delivery={delivery} />
                 {boxes}
-                <Footer delivery={delivery}/>
+                <Footer delivery={delivery} />
             </Page>
         </Document>
     );
