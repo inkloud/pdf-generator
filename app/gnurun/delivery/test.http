@@ -1,4 +1,4 @@
-POST http://localhost:3000/gnurun/print/delivery
+POST http://localhost:3000/gnurun/delivery
 content-type: application/json
 
 {
@@ -38,7 +38,7 @@ content-type: application/json
       ]
     },
     {
-      "id": 452,
+      "id": 453,
       "delivery_id": 425,
       "box_height_cm": "6.2",
       "box_length_cm": "2.6",

@@ -1,8 +1,8 @@
 import {renderToStream} from '@react-pdf/renderer';
 import {NextResponse} from 'next/server';
 
+import {Delivery} from '../../types/delivery';
 import {DeliveryPDF} from './pdf_delivery';
-import {Delivery} from "../../types/delivery";
 
 export async function GET() {
     return NextResponse.json({
@@ -30,15 +30,8 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
-    const formData = await req.formData();
-    const jsonData = formData.get('json') as string;
-
-    if (!jsonData) {
-        return new Response('Missing JSON data', { status: 400 });
-    }
-
-    const delivery = Delivery.create(JSON.parse(jsonData));
-
+    const data = await req.json();
+    const delivery = Delivery.create(data);
 
     try {
         const nodeStream = await renderToStream(
