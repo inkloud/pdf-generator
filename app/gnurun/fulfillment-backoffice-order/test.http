@@ -1,4 +1,4 @@
-POST http://localhost:3000/gnurun/fulfillment
+POST http://localhost:3000/gnurun/fulfillment-backoffice-order
 content-type: application/json
 
 {
