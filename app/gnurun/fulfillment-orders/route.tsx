@@ -73,7 +73,7 @@ export async function POST(req: Request) {
         return new Response('Missing JSON data', {status: 400});
     }
 
-    const rawOrders = jsonData.map((orders: any) => Order.create(orders));
+    const rawOrders = jsonData.map((orders: unknown) => Order.create(orders));
     const grouped: GroupedProduct[] = groupOrdersByProduct(rawOrders);
 
     try {

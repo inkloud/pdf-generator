@@ -130,38 +130,38 @@ export class Order implements MainOrder {
         Object.assign(this, params);
     }
 
-    static create(data): Order {
+    static create(data: unknown): Order {
         return new Order({
             id: data.id ?? 0,
             created_at: data.created_at ?? new Date().toISOString(),
             customer: data.customer ?? {
                 customer_id: 0,
                 company_id: 0,
-                company_name: "",
+                company_name: ''
             },
-            warehouse: data.warehouse ?? "",
+            warehouse: data.warehouse ?? '',
             address: data.address ?? {
-                business_name: "",
-                reference_name: "",
-                address: "",
-                city: "",
-                street: "",
-                province: "",
-                country: "",
-                zip_code: "",
-                email: "",
-                tel: "",
+                business_name: '',
+                reference_name: '',
+                address: '',
+                city: '',
+                street: '',
+                province: '',
+                country: '',
+                zip_code: '',
+                email: '',
+                tel: ''
             },
             extra_data: data.extra_data ?? {
                 courier_data: {
-                    courier_name: "",
-                    courier_tracking: ""
+                    courier_name: '',
+                    courier_tracking: ''
                 },
-                customer_reference: "",
-                reference_name: "",
-                provider: ""
+                customer_reference: '',
+                reference_name: '',
+                provider: ''
             },
-            note: data.note ?? "",
+            note: data.note ?? '',
             warehouse_note: data.warehouse_note ?? null,
             products: data.products ?? []
         });
