@@ -103,7 +103,7 @@ export interface Product {
     stock: number;
 }
 
-interface MainOrder {
+export interface MainOrder {
     id: number;
     created_at: string;
     customer: Customer;
@@ -116,21 +116,21 @@ interface MainOrder {
 }
 
 export class Order implements MainOrder {
-    id: number;
-    created_at: string;
-    customer: Customer;
-    warehouse: string;
-    address: Address;
-    extra_data: ExtraData;
-    note: string;
-    warehouse_note: string | null;
-    products: Product[];
+    id!: number;
+    created_at!: string;
+    customer!: Customer;
+    warehouse!: string;
+    address!: Address;
+    extra_data!: ExtraData;
+    note!: string;
+    warehouse_note!: string | null;
+    products!: Product[];
 
     private constructor(params: MainOrder) {
         Object.assign(this, params);
     }
 
-    static create(data: unknown): Order {
+    static create(data: Partial<MainOrder>): Order {
         return new Order({
             id: data.id ?? 0,
             created_at: data.created_at ?? new Date().toISOString(),

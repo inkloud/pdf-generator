@@ -54,20 +54,20 @@ export interface DeliveryType {
 }
 
 export class Delivery implements DeliveryType {
-    id: number;
-    company_id: number;
-    customer_id: number;
-    company_name: string;
-    warehouse_id: number;
-    d_state: string;
-    creation_date: string;
-    wh_note: string;
-    invoice_n: number;
-    courier_name: string;
-    courier_tracking: string;
-    boxes: DeliveryBox[];
-    cost: DeliveryCost;
-    billing_cicle: string | null;
+    id!: number;
+    company_id!: number;
+    customer_id!: number;
+    company_name!: string;
+    warehouse_id!: number;
+    d_state!: string;
+    creation_date!: string;
+    wh_note!: string;
+    invoice_n!: number;
+    courier_name!: string;
+    courier_tracking!: string;
+    boxes!: DeliveryBox[];
+    cost!: DeliveryCost;
+    billing_cicle!: string | null;
 
     private constructor(params: DeliveryType) {
         Object.assign(this, params);

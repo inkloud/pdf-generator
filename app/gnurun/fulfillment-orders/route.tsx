@@ -1,7 +1,7 @@
 import {renderToStream} from '@react-pdf/renderer';
 import {NextResponse} from 'next/server';
 
-import {GroupedProduct, Order} from '../../types/fulfillment';
+import {GroupedProduct, MainOrder, Order} from '../../types/fulfillment';
 import {groupOrdersByProduct} from '../../utils/sorting';
 import {GroupedProductPDF} from './pdf_fulfillment';
 
@@ -73,7 +73,7 @@ export async function POST(req: Request) {
         return new Response('Missing JSON data', {status: 400});
     }
 
-    const rawOrders = jsonData.map((orders: unknown) => Order.create(orders));
+    const rawOrders = jsonData.map((orders: unknown) => Order.create(orders as Partial<MainOrder>));
     const grouped: GroupedProduct[] = groupOrdersByProduct(rawOrders);
 
     try {
