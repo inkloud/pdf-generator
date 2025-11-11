@@ -76,8 +76,10 @@ export async function POST(req: Request) {
     const rawOrders = jsonData.map((orders: unknown) => Order.create(orders as Partial<MainOrder>));
     const grouped: GroupedProduct[] = groupOrdersByProduct(rawOrders);
 
+    const pdfNode = <GroupedProductPDF orders={grouped} />;
+
     try {
-        const nodeStream = await renderToStream(<GroupedProductPDF orders={grouped} />);
+        const nodeStream = await renderToStream(pdfNode);
         const webStream = new ReadableStream({
             start(controller) {
                 nodeStream.on('data', (chunk) => controller.enqueue(chunk));

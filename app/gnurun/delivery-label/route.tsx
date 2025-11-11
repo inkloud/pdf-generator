@@ -29,14 +29,16 @@ export async function GET() {
 export async function POST(req: Request) {
     const {id, customer_id, boxes} = await req.json();
 
+    const pdfNode = (
+        <DeliveryPDF
+            id={id}
+            customer_id={customer_id}
+            boxes={boxes.map((b: {weight: string}) => ({...b, weight: new Decimal(b.weight)}))}
+        />
+    );
+
     try {
-        const nodeStream = await renderToStream(
-            <DeliveryPDF
-                id={id}
-                customer_id={customer_id}
-                boxes={boxes.map((b: {weight: string}) => ({...b, weight: new Decimal(b.weight)}))}
-            />
-        );
+        const nodeStream = await renderToStream(pdfNode);
         const webStream = new ReadableStream({
             start(controller) {
                 nodeStream.on('data', (chunk) => controller.enqueue(chunk));

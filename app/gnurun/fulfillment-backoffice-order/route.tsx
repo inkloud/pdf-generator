@@ -100,8 +100,10 @@ export async function POST(req: Request) {
     const data = await req.json();
     const order = Order.create(data);
 
+    const pdfNode = <FulfillmentPDF order={order} />;
+
     try {
-        const nodeStream = await renderToStream(<FulfillmentPDF order={order} />);
+        const nodeStream = await renderToStream(pdfNode);
         const webStream = new ReadableStream({
             start(controller) {
                 nodeStream.on('data', (chunk) => controller.enqueue(chunk));

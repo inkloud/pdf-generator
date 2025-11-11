@@ -33,15 +33,17 @@ export async function POST(req: Request) {
     const data = await req.json();
     const delivery = Delivery.create(data);
 
+    const pdfNode = (
+        <DeliveryPDF
+            delivery={delivery}
+            company_name={delivery.company_name}
+            courier_name={delivery.courier_name}
+            courier_tracking={delivery.courier_tracking}
+        />
+    );
+
     try {
-        const nodeStream = await renderToStream(
-            <DeliveryPDF
-                delivery={delivery}
-                company_name={delivery.company_name}
-                courier_name={delivery.courier_name}
-                courier_tracking={delivery.courier_tracking}
-            />
-        );
+        const nodeStream = await renderToStream(pdfNode);
         const webStream = new ReadableStream({
             start(controller) {
                 nodeStream.on('data', (chunk) => controller.enqueue(chunk));

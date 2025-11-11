@@ -133,12 +133,17 @@ export const DeliveryPDF: React.FC<{
     courier_tracking: string;
 }> = function ({delivery, company_name, courier_name, courier_tracking}) {
     const total_boxes = delivery.boxes.map((b) => b.box_qty).reduce((acc, item) => acc + item, 0);
-    let current_index = 0;
-    const boxes = delivery.boxes!.map((box) => {
-        const res = <Box key={box.id} data={box} total_boxes={total_boxes} idx_box={current_index} />;
-        current_index += box.box_qty;
-        return res;
-    });
+    const {offsets: boxOffsets} = delivery.boxes.reduce(
+        (acc, box) => {
+            acc.offsets.push(acc.runningIndex);
+            acc.runningIndex += box.box_qty;
+            return acc;
+        },
+        {offsets: [] as number[], runningIndex: 0}
+    );
+    const boxes = delivery.boxes.map((box, idx) => (
+        <Box key={box.id} data={box} total_boxes={total_boxes} idx_box={boxOffsets[idx]} />
+    ));
 
     return (
         <Document>
