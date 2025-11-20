@@ -15,6 +15,7 @@ interface Product {
 interface Box {
     products: Product[];
     weight: Decimal;
+    box_qty: number;
 }
 
 const styles = StyleSheet.create({
@@ -51,13 +52,14 @@ const Barcode: React.FC<{label: string}> = function ({label}) {
     return <Image src={dataUrl} />;
 };
 
-const Header: React.FC<{id: number; customer_id: number; index: number; length: number}> = function ({
+const Header: React.FC<{id: number; customer_id: number; index: number; length: number; qty: number;}> = function ({
     id,
     customer_id,
     index,
-    length
+    length,
+    qty
 }) {
-    const label = `A${customer_id}-D${id}-${index + 1}/${length}`;
+    const label = `A${customer_id}-D${id}-${qty}/${length}`;
     return (
         <View style={styles.header}>
             <Barcode label={label} />
@@ -111,9 +113,14 @@ const SinglePage: React.FC<{id: number; customer_id: number; box: Box; index: nu
     index,
     length
 }) {
+    console.log(id,
+        customer_id,
+        box,
+        index,
+        length)
     return (
         <>
-            <Header id={id} customer_id={customer_id} index={index} length={length} />
+            <Header id={id} customer_id={customer_id} index={index} length={length} qty={box.box_qty}/>
             <Body products={box.products} />
             <Footer weight={box.weight} />
         </>
@@ -125,9 +132,10 @@ export const DeliveryPDF: React.FC<{id: number; customer_id: number; boxes: Box[
     customer_id,
     boxes
 }) {
+    const totalBoxAmount = boxes.reduce((a, b) => a + b.box_qty, 0);
     const pages = boxes.map((box, index) => (
         <Page key={index} size={{width: '3.93in', height: '5.51in'}} style={styles.page}>
-            <SinglePage id={id} customer_id={customer_id} box={box} index={index} length={boxes.length} />
+            <SinglePage id={id} customer_id={customer_id} box={box} index={index} length={totalBoxAmount} />
         </Page>
     ));
 
