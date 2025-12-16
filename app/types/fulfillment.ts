@@ -29,19 +29,19 @@ interface ExtraData {
     provider: string;
 }
 
-// export type ProductOrderEntry = {
-//     order_id: number;
-//     customer_name: string;
-//     quantity: number;
-//     warehouse: string;
-//     position: string;
-//     address: Address;
-// };
+export type ProductOrderEntry = {
+    order_id: number;
+    customer_name: string;
+    quantity: number;
+    warehouse: string;
+    position: string;
+    address: Address;
+};
 
-// export type GroupedProduct = {
-//     product: Product;
-//     orders: ProductOrderEntry[];
-// };
+export type GroupedProduct = {
+    product: Product;
+    orders: ProductOrderEntry[];
+};
 
 // export class Orders implements GroupedProduct {
 //     product: Product;
@@ -90,11 +90,11 @@ interface ExtraData {
 //     }
 // }
 export interface ProductPosition {
-    product_id: number,
-    wh_id: number,
-    delivery_id: number,
-    wh_position: string,
-    stock: number
+    product_id: number;
+    wh_id: number;
+    delivery_id: number;
+    wh_position: string;
+    stock: number;
 }
 
 export interface Product {
@@ -112,23 +112,23 @@ export interface Product {
 }
 
 function _addProducts(products: Product[] | undefined): any {
-    if(!products) return [];
+    if (!products) return [];
 
-    return products.map(product => {
+    return products.map((product) => {
         return {
             product_id: product.product_id,
-            product_sku: product.product_sku || "",
-            product_name: product.product_name || "",
-            product_position: product.product_position || "",
+            product_sku: product.product_sku || '',
+            product_name: product.product_name || '',
+            product_position: product.product_position || '',
             height: product.height || 0,
             width: product.width || 0,
             length: product.length || 0,
             weight: product.weight || 0,
-            note: product.note || "",
+            note: product.note || '',
             stock: product.stock || 0,
-            positions: product.positions as ProductPosition[] || []
-        }
-    })
+            positions: (product.positions as ProductPosition[]) || []
+        };
+    });
 }
 
 export interface MainOrder {
@@ -159,7 +159,7 @@ export class Order implements MainOrder {
     }
 
     static create(data: Partial<MainOrder>): Order {
-        const products = _addProducts(data.products)
+        const products = _addProducts(data.products);
         return new Order({
             id: data.id ?? 0,
             created_at: data.created_at ?? new Date().toISOString(),
