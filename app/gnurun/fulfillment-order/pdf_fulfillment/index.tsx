@@ -15,6 +15,14 @@ const checkTotals = (order: Order) => {
     return totals;
 };
 
+type FlatRow = {
+    key: string
+    product_sku: string
+    product_name: string
+    wh_position: string
+    stock: number
+}
+
 export const FulfillmentPDF: React.FC<{ order: Order }> = ({ order }) => {
 
     return (
@@ -81,25 +89,49 @@ const Header: React.FC<{ order: Order }> = ({order}) => {
     )
 }
 
+function buildProductPositionRows(products: Product[]): FlatRow[] {
+    const rows: FlatRow[] = []
+
+    for (const p of products) {
+        const map: Record<string, number> = {}
+
+        for (const pos of p.positions ?? []) {
+            map[pos.wh_position] = (map[pos.wh_position] || 0) + pos.stock
+        }
+
+        for (const [wh_position, stock] of Object.entries(map)) {
+            rows.push({
+                key: `${p.product_id}-${wh_position}`, // stable key
+                product_sku: p.product_sku,
+                product_name: p.product_name,
+                wh_position,
+                stock,
+            })
+        }
+    }
+
+    return rows
+}
+
 const Products: React.FC<{ products: Product[] }> = ({ products }) => {
+    const rows = buildProductPositionRows(products)
+
     return(
         <>
             {/* Table Header */}
             <View style={styles.tableHeader}>
-                <Text style={[styles.cell, { flex: 1 }]}>No.</Text>
-                <Text style={[styles.cell, { flex: 1 }]}>Barcode</Text>
+                <Text style={[styles.cell, { flex: 1 }]}>SKU</Text>
                 <Text style={[styles.cell, { flex: 2 }]}>Product</Text>
-                <Text style={[styles.cell, { flex: 1 }]}>Position</Text>
                 <Text style={[styles.cell, { flex: 1 }]}>Quantity</Text>
+                <Text style={[styles.cell, { flex: 1 }]}>Position</Text>
             </View>
 
-            {products.map((p, i) => (
-                <View key={i} style={styles.tableRow}>
-                    <Text style={[styles.cell]}>{i+1}</Text>
-                    <Text style={[styles.cell, { flex: 1 }]}>{p.product_sku}</Text>
-                    <Text style={[styles.cell, { flex: 2 }]}>{p.product_name}</Text>
-                    <Text style={[styles.cell, { flex: 1 }]}>{p.product_position}</Text>
-                    <Text style={[styles.cell, { flex: 1 }]}>{p.stock}</Text>
+            {rows.map((r) => (
+                <View key={r.key} style={styles.tableRow}>
+                    <Text style={[styles.cell, { flex: 1 }]}>{r.product_sku}</Text>
+                    <Text style={[styles.cell, { flex: 2 }]}>{r.product_name}</Text>
+                    <Text style={[styles.cell, { flex: 1 }]}>{r.stock}</Text>
+                    <Text style={[styles.cell, { flex: 1 }]}>{r.wh_position}</Text>
                 </View>
             ))}
         </>
