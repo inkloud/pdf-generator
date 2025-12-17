@@ -4,9 +4,9 @@ import path from 'path';
 import {Order} from '../types/fulfillment';
 
 export function formatAddress(addressObj: Order['address']) {
-    const {address, street, city, province, zip_code, country} = addressObj;
+    const {business_name, address, street, city, province, zip_code, country} = addressObj;
 
-    const parts = [address, street, city, province, zip_code, country].filter((part) => {
+    const parts = [business_name, address, street, city, province, zip_code, country].filter((part) => {
         if (typeof part === 'string') return part.trim() !== '';
         return part !== undefined && part !== null;
     });
@@ -23,9 +23,8 @@ export function getLogo() {
     return `data:image/png;base64,${base64}`;
 }
 
-export function getBarcode() {
-    const imagePath = path.resolve(process.cwd(), 'app/static/media/image/barcode-example.png');
-    const imageBuffer = fs.readFileSync(imagePath);
-    const base64 = imageBuffer.toString('base64');
-    return `data:image/png;base64,${base64}`;
+export function getBarcode(value: string) {
+    // Aggiungi asterischi per il formato Code 39 (richiesto dal font)
+    const barcodeValue = `*${value}*`;
+    return barcodeValue;
 }

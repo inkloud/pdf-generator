@@ -57,7 +57,7 @@ export const GroupedProductPDF: React.FC<{ orders: GroupedProduct[] }> = ({ orde
                         {orders.map((o, i) => (
                             <View key={i} style={styles.tableRow} wrap={false}>
                                 <View style={styles.barcodeBlock}>
-                                    <Image style={styles.barcodeImage} src={getBarcode()} />
+                                    <Text style={styles.barcodeText}>{getBarcode(o.order_id.toString())}</Text>
                                     <Text>{o.order_id}</Text>
                                 </View>
                                 <Text style={styles.cell}>{o.customer_name}</Text>
