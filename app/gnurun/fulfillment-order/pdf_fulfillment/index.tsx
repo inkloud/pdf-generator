@@ -52,8 +52,8 @@ const Header: React.FC<{ order: Order }> = ({order}) => {
                     <Image style={styles.logo} src={getLogo()} />
 
                     <View style={styles.barcodeContainer}>
-                        <Image style={styles.barcode} src={getBarcode()} />
-                        <Text style={styles.barcodeId}>ID: {order.id}</Text>
+                        <Text style={styles.barcodeText}>{getBarcode(order.id.toString())}</Text>
+                        <Text style={styles.barcodeId}>{order.id}</Text>
                     </View>
                 </View>
             </View>
@@ -146,16 +146,16 @@ const Footer: React.FC<{ order: Order }> = ({order}) => {
             <View style={styles.summaryTable}>
                 {/* Totals Header */}
                 <View style={styles.tableHeader}>
-                    <Text style={[styles.cell, { flex: 1 }]}>Total Weight</Text>
-                    <Text style={[styles.cell, { flex: 1 }]}>Total Volume</Text>
-                    <Text style={[styles.cell, { flex: 2 }]}>Total Quantity</Text>
+                    <Text style={[styles.cell, { flex: 1 }]}>Total weight</Text>
+                    <Text style={[styles.cell, { flex: 1 }]}>Total volume</Text>
+                    <Text style={[styles.cell, { flex: 2 }]}>Total quantity</Text>
                 </View>
 
                 {/* Totals Values*/}
                 <View style={styles.tableRow}>
                     <Text style={[styles.cell, { flex: 1 }]}>{totals.weight} kg</Text>
-                    <Text style={[styles.cell, { flex: 2 }]}>{totals.volume} cm³</Text>
-                    <Text style={[styles.cell, { flex: 1 }]}>{totals.quantity}</Text>
+                    <Text style={[styles.cell, { flex: 1 }]}>{totals.volume} cm³</Text>
+                    <Text style={[styles.cell, { flex: 2 }]}>{totals.quantity}</Text>
                 </View>
             </View>
 

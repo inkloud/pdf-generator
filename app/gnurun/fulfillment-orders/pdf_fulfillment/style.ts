@@ -1,4 +1,11 @@
-import {StyleSheet} from '@react-pdf/renderer';
+import {Font, StyleSheet} from '@react-pdf/renderer';
+import path from 'path';
+
+// Registra il font barcode
+Font.register({
+    family: 'LibreBarcode39',
+    src: path.resolve(process.cwd(), 'app/static/media/font/LibreBarcode39-Regular.ttf'),
+});
 
 export const styles = StyleSheet.create({
     page: {
@@ -123,6 +130,11 @@ export const styles = StyleSheet.create({
     barcodeImage: {
         width: 50,
         height: 20,
+        marginBottom: 2,
+    },
+    barcodeText: {
+        fontFamily: 'LibreBarcode39',
+        fontSize: 32,
         marginBottom: 2,
     },
     barcodeBlock: {
