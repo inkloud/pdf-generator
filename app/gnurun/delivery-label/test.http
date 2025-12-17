@@ -8,46 +8,22 @@ content-type: application/json
     {
       "products": [
         {
-          "code": "HW415NN",
-          "qty": 36
+          "code": "XLBBS0003",
+          "qty": 40
         }
       ],
-      "weight": "3.16",
-      "box_qty": 15
+      "weight": "17.900",
+      "box_qty": 8
     },
     {
       "products": [
         {
-          "code": "HW415NN",
-          "qty": 36
-        }
-      ],
-      "weight": "3.15",
-      "box_qty": 20
-    },
-    {
-      "products": [
-        {
-          "code": "HW415NN",
-          "qty": 36
-        }
-      ],
-      "weight": "3.14",
-      "box_qty": 25
-    },
-    {
-      "products": [
-        {
-          "code": "HP301",
-          "qty": 20
-        },
-        {
-          "code": "HP302",
+          "code": "FM8005",
           "qty": 30
         }
       ],
-      "weight": "6.28",
-      "box_qty": 35
+      "weight": "15.000",
+      "box_qty": 10
     }
   ]
 }

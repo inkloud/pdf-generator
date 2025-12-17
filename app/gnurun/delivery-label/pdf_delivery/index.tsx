@@ -5,7 +5,7 @@ import {Document, Image, Page, StyleSheet, Text, View} from '@react-pdf/renderer
 import {Canvas} from 'canvas';
 import Decimal from 'decimal.js';
 import JsBarcode from 'jsbarcode';
-import React from 'react';
+import React, {JSX} from 'react';
 
 interface Product {
     code: string;
@@ -56,10 +56,9 @@ const Header: React.FC<{id: number; customer_id: number; index: number; length: 
     id,
     customer_id,
     index,
-    length,
-    qty
+    length
 }) {
-    const label = `A${customer_id}-D${id}-${qty}/${length}`;
+    const label = `A${customer_id}-D${id}-${index}/${length}`;
     return (
         <View style={styles.header}>
             <Barcode label={label} />
@@ -118,6 +117,7 @@ const SinglePage: React.FC<{id: number; customer_id: number; box: Box; index: nu
         box,
         index,
         length)
+
     return (
         <>
             <Header id={id} customer_id={customer_id} index={index} length={length} qty={box.box_qty}/>
@@ -127,17 +127,39 @@ const SinglePage: React.FC<{id: number; customer_id: number; box: Box; index: nu
     );
 };
 
-export const DeliveryPDF: React.FC<{id: number; customer_id: number; boxes: Box[]}> = function ({
-    id,
-    customer_id,
-    boxes
-}) {
-    const totalBoxAmount = boxes.reduce((a, b) => a + b.box_qty, 0);
-    const pages = boxes.map((box, index) => (
-        <Page key={index} size={{width: '3.93in', height: '5.51in'}} style={styles.page}>
-            <SinglePage id={id} customer_id={customer_id} box={box} index={index} length={totalBoxAmount} />
-        </Page>
-    ));
+
+export const DeliveryPDF: React.FC<{ id: number; customer_id: number; boxes: Box[] }> = ({
+                                                                                             id,
+                                                                                             customer_id,
+                                                                                             boxes,
+                                                                                         }) => {
+    const totalPages = boxes.reduce((sum, b) => sum + b.box_qty, 0);
+
+    const pages = boxes.reduce<JSX.Element[]>((acc, box) => {
+        const startIndex = acc.length;
+
+        const boxPages = Array.from({ length: box.box_qty }, (_, i) => {
+            const current = startIndex + i + 1;
+
+            return (
+                <Page
+                    key={`box-${startIndex}-${i}`}
+                    size={{ width: "3.93in", height: "5.51in" }}
+                    style={styles.page}
+                >
+                    <SinglePage
+                        id={id}
+                        customer_id={customer_id}
+                        box={box}
+                        index={current}
+                        length={totalPages}
+                    />
+                </Page>
+            );
+        });
+
+        return acc.concat(boxPages);
+    }, []);
 
     return <Document>{pages}</Document>;
 };
