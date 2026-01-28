@@ -9,7 +9,7 @@ PDF generator using React-PDF
 ```bash
 docker build -t bacchilu/pdf-generator -t bacchilu/pdf-generator:4.1.6 --build-arg USER_ID=`id -u` --build-arg GROUP_ID=`id -g` .
 docker push bacchilu/pdf-generator
-docker push bacchilu/pdf-generator:4.1.6
+docker push bacchilu/pdf-generator:4.1.7
 
 docker run --rm -it -p 8000:3000 bacchilu/pdf-generator
 ```
