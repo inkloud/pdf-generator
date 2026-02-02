@@ -15,7 +15,7 @@ const checkTotals = (orders:  ProductOrderEntry[], product: Product) => {
     return totals;
 };
 
-export const GroupedProductPDF: React.FC<{ orders: GroupedProduct[] }> = ({ orders }) => {
+export const GroupedProductPDFCustomer: React.FC<{ orders: GroupedProduct[] }> = ({ orders }) => {
     return (
         <Document>
             <Page size="A4" style={styles.page}>
@@ -44,6 +44,7 @@ export const GroupedProductPDF: React.FC<{ orders: GroupedProduct[] }> = ({ orde
                             </View>
                         </View>
 
+
                         {/* Table Header */}
                         <View style={styles.tableHeader}>
                             <Text style={[styles.cell, { flex: 1 }]}>Order</Text>
@@ -52,22 +53,25 @@ export const GroupedProductPDF: React.FC<{ orders: GroupedProduct[] }> = ({ orde
                             <Text style={styles.cell}>Address</Text>
                             <Text style={[styles.cell, { flex: 0.5 }]}>Product Qty</Text>
                         </View>
+                        <View style={styles.borderedView}>
 
-                        {/* Orders Table */}
-                        {orders.map((o, i) => (
-                            <View key={i} style={styles.tableRow} wrap={false}>
-                                <View style={styles.barcodeBlock}>
-                                    <Text style={styles.barcodeText}>{getBarcode(o.order_id.toString())}</Text>
-                                    <Text>{o.order_id}</Text>
+                            {/* Orders Table */}
+                            {orders.map((o, i) => (
+                                <View key={i} style={styles.tableRow} wrap={false}>
+                                    <View style={styles.barcodeBlock}>
+                                        <Text style={styles.barcodeText}>{getBarcode(o.order_id.toString())}</Text>
+                                        <Text>{o.order_id}</Text>
+                                    </View>
+                                    <Text style={styles.cell}>{o.customer_name}</Text>
+                                    <Text style={styles.cell}>{o.warehouse}</Text>
+                                    <Text style={styles.cell}>
+                                        {[o.address.business_name, o.address.street, o.address.city, o.address.country, o.address.zip_code].filter(Boolean).join(", ")}
+                                    </Text>
+                                    <Text style={[styles.cell, { flex: 0.5 }]}>{o.quantity}</Text>
                                 </View>
-                                <Text style={styles.cell}>{o.customer_name}</Text>
-                                <Text style={styles.cell}>{o.warehouse}</Text>
-                                <Text style={styles.cell}>
-                                    {[o.address.business_name, o.address.street, o.address.city, o.address.country, o.address.zip_code].filter(Boolean).join(", ")}
-                                </Text>
-                                <Text style={[styles.cell, { flex: 0.5 }]}>{o.quantity}</Text>
-                            </View>
-                        ))}
+                            ))}
+                        </View>
+
                         <ProductFooter orders={orders} product={product} />
                     </View>
                 ))}
@@ -94,13 +98,13 @@ const ProductFooter: React.FC<{ orders:  ProductOrderEntry[], product: Product }
                 <View style={styles.tableHeader}>
                     <Text style={[styles.cell, { flex: 1 }]}>Total Weight</Text>
                     <Text style={[styles.cell, { flex: 1 }]}>Total Volume</Text>
-                    <Text style={[styles.cell, { flex: 2 }]}>Total Quantity</Text>
+                    <Text style={[styles.cell, { flex: 1 }]}>Total Quantity</Text>
                 </View>
 
                 {/* Totals Values*/}
                 <View style={styles.tableRow}>
                     <Text style={[styles.cell, { flex: 1 }]}>{totals.weight} kg</Text>
-                    <Text style={[styles.cell, { flex: 2 }]}>{totals.volume} cm³</Text>
+                    <Text style={[styles.cell, { flex: 1 }]}>{totals.volume} cm³</Text>
                     <Text style={[styles.cell, { flex: 1 }]}>{totals.quantity}</Text>
                 </View>
             </View>

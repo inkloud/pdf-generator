@@ -3,8 +3,14 @@ import {NextResponse} from 'next/server';
 
 import {GroupedProduct, MainOrder, Order} from '../../types/fulfillment';
 import {groupOrdersByProduct} from '../../utils/sorting';
-import {GroupedProductPDF} from './pdf_fulfillment';
+import {GroupedProductPDFCustomer} from './pdf_fulfillment/customer';
+import {GroupedProductPDFBackoffice} from './pdf_fulfillment/backoffice';
+import {JSX} from "react";
 
+const PdfStyle: {[k: string]: (orders: GroupedProduct[]) => JSX.Element} = {
+    "BACKOFFICE": function(orders: GroupedProduct[]){return <GroupedProductPDFBackoffice orders={orders}/>},
+    "CUSTOMER": function(orders: GroupedProduct[]){return <GroupedProductPDFCustomer orders={orders}/>}
+}
 export async function GET() {
     return NextResponse.json([
         {
@@ -72,11 +78,12 @@ export async function POST(req: Request) {
     if (!jsonData) {
         return new Response('Missing JSON data', {status: 400});
     }
+    const style = (new URL(req.url)).searchParams.get("style") || ""
 
     const rawOrders = jsonData.map((orders: unknown) => Order.create(orders as Partial<MainOrder>));
     const grouped: GroupedProduct[] = groupOrdersByProduct(rawOrders);
 
-    const pdfNode = <GroupedProductPDF orders={grouped} />;
+    const pdfNode = PdfStyle[style](grouped);
 
     try {
         const nodeStream = await renderToStream(pdfNode);

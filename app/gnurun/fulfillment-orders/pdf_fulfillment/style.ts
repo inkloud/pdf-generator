@@ -12,6 +12,11 @@ export const styles = StyleSheet.create({
         padding: 40,
         fontSize: 11,
         fontFamily: 'Helvetica',
+        flexDirection: "column"
+    },
+    borderedView: {
+      borderLeft: "1px solid #ccc",
+      borderRight: "1px solid #ccc"
     },
     section: {
         marginBottom: 16,
@@ -97,7 +102,7 @@ export const styles = StyleSheet.create({
         marginTop: 16,
     },
     summaryTable: {
-        marginTop: 30,
+        marginTop: "auto",
         borderWidth: 1,
         borderColor: '#ccc',
     },
@@ -105,7 +110,7 @@ export const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "flex-start",
-        marginTop: 20,
+        marginTop: 50,
         marginBottom: 12,
         borderBottomWidth: 1,
         borderColor: "#ccc",
