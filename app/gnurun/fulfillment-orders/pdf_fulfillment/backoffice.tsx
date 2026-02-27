@@ -2,29 +2,40 @@ import React from "react";
 
 import { Document, Image, Page, Text, View } from "@react-pdf/renderer";
 import { styles } from "./style";
-import { getLogo } from "@/app/utils/formating";
-import { GroupedProduct, Product, ProductOrderEntry } from "@/app/types/fulfillment";
+import {getBarcode, getLogo} from "@/app/utils/formating";
+import {GroupedProduct, PositionAgg, Product, ProductOrderEntry} from "@/app/types/fulfillment";
 import {buildQtyLines, QtyLine} from "@/app/utils/sorting";
 
-type PositionAgg = { position: string; qty: number };
 
 /**
  * Aggregates quantities by position (e.g. CC.00.00.04) while preserving first-seen order.
  */
-const aggregateByPosition = (orders: ProductOrderEntry[]): PositionAgg[] => {
-    const map = new Map<string, number>();
-    for (const o of orders) {
-        const pos = (o.position || "").trim() || "-";
-        map.set(pos, (map.get(pos) ?? 0) + (o.quantity ?? 0));
+const uniquePositionsFromEntries = (entries: ProductOrderEntry[]) => {
+    const seen = new Set<string>();
+    const out: { position: string; qty: number }[] = [];
+
+    for (const e of entries) {
+        const pos = (e.position || "").trim() || "-";
+        if (!seen.has(pos)) {
+            seen.add(pos);
+            out.push({ position: pos, qty: 0 }); // qty not used for your Qty column anymore
+        }
     }
-    return Array.from(map.entries()).map(([position, qty]) => ({ position, qty }));
+    return out;
+};
+
+const calcGroupQty = (g: GroupedProduct) => {
+    const ordersCount = g.orders.length;
+    const stockPerOrder = g.orders[0]?.quantity ?? 0;
+    return { ordersCount, stockPerOrder, totalQty: ordersCount * stockPerOrder };
 };
 
 const totalsForProduct = (product: Product, totalQty: number) => {
     const unitVol = (product.length ?? 0) * (product.width ?? 0) * (product.height ?? 0);
+
     return {
-        weight: (product.weight ?? 0) * totalQty,
-        volume: unitVol * totalQty,
+        weight: (product.weight ?? 0) * totalQty, // kg if weight is kg
+        volume: unitVol * totalQty,               // cm³
         quantity: totalQty,
     };
 };
@@ -42,11 +53,22 @@ const totalsForAll = (rows: Array<{ product: Product; totalQty: number }>) => {
     );
 };
 
+const Barcode = function({picking_group}: {picking_group: number | null | undefined}) {
+    console.log(picking_group);
+    if(!picking_group) return null;
+    return(
+        <View style={styles.barcodeContainer}>
+            <Text style={styles.barcodeText}>{getBarcode(picking_group.toString())}</Text>
+            <Text style={styles.barcodeId}>{picking_group}</Text>
+        </View>
+    )
+}
+
 export const GroupedProductPDFBackoffice: React.FC<{ orders: GroupedProduct[] }> = ({ orders }) => {
     const rows = orders.map((g) => {
-        const positions = aggregateByPosition(g.orders);
-        const totalQty = positions.reduce((s, p) => s + p.qty, 0);
-        return { product: g.product, positions, totalQty };
+        const positions = uniquePositionsFromEntries(g.orders);
+        const { ordersCount, stockPerOrder, totalQty } = calcGroupQty(g);
+        return { product: g.product, positions, ordersCount, stockPerOrder, totalQty, picking_group: g.orders[0].picking_group };
     });
 
     const grand = totalsForAll(rows.map((r) => ({ product: r.product, totalQty: r.totalQty })));
@@ -59,6 +81,7 @@ export const GroupedProductPDFBackoffice: React.FC<{ orders: GroupedProduct[] }>
                     <Text style={styles.title}>Picking List</Text>
                     <View style={styles.topHeaderRow}>
                         <Image style={styles.logo} src={getLogo()}/>
+                        <Barcode picking_group={rows[0].picking_group} />
                     </View>
                 </View>
 
@@ -81,14 +104,14 @@ export const GroupedProductPDFBackoffice: React.FC<{ orders: GroupedProduct[] }>
 
 
                             <View style={[styles.cell, { flex: 2 }]}>
-                                {buildQtyLines(r.positions).map((l, i) => (
-                                    <Text key={`pos-${i}`}>{l.position}</Text>
+                                {r.positions.map((p, i) => (
+                                    <Text key={`pos-${i}`}>{p.position}</Text>
                                 ))}
                             </View>
 
                             <View style={[styles.cell, { flex: 1.2 }]}>
-                                {buildQtyLines(r.positions).map((l, i) => (
-                                    <Text key={`qty-${i}`}>{l.qtyText}</Text>
+                                {r.positions.map((_, i) => (
+                                    <Text key={`qty-${i}`}>{i === 0 ? `${r.ordersCount} x ${r.stockPerOrder}` : ""}</Text>
                                 ))}
                             </View>
 

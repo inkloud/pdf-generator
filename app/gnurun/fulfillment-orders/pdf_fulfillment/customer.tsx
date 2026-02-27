@@ -18,65 +18,84 @@ const checkTotals = (orders:  ProductOrderEntry[], product: Product) => {
 export const GroupedProductPDFCustomer: React.FC<{ orders: GroupedProduct[] }> = ({ orders }) => {
     return (
         <Document>
-            <Page size="A4" style={styles.page}>
-                {/* Logo and Title */}
-                <View>
-                    <Text style={styles.title}>Picking List</Text>
+            <Page size="A4" style={styles.page} wrap>
+                {/* repeats on every physical page */}
+                <View
+                    fixed
+                    render={({ pageNumber }) =>
+                        pageNumber === 1 ? (
+                            <View>
+                                <Text style={styles.title}>Picking List</Text>
+                                <View style={styles.topHeaderRow}>
+                                    <Image style={styles.logo} src={getLogo()} />
+                                </View>
+                            </View>
+                        ) : null
+                    }
+                />
 
-                    <View style={styles.topHeaderRow}>
-                        <Image style={styles.logo} src={getLogo()} />
-
-                    </View>
-                </View>
-                {orders.map(({ product, orders }) => (
-                    <View key={product.product_id} wrap={false}>
-
-                        {/* Product Header */}
+                {orders.map((gp, idx) => (
+                    <View
+                        key={gp.product.product_id}
+                        break={idx > 0}      // ✅ HP302 starts new page
+                        wrap                // ✅ allow this section to paginate
+                    >
+                        {/* product header only once (won’t repeat on next physical page) */}
                         <View style={styles.productHeader}>
-                            <Text style={styles.skuText}>{product.product_sku}</Text>
+                            <Text style={styles.skuText}>{gp.product.product_sku}</Text>
                             <View style={styles.productDetailsRow}>
                                 <View style={styles.productDetailCell}>
-                                    <Text>{product.product_name}</Text>
+                                    <Text>{gp.product.product_name}</Text>
                                 </View>
                                 <View style={styles.productDetailCell}>
-                                    <Text>{product.product_position}</Text>
+                                    <Text>{gp.product.product_position}</Text>
                                 </View>
                             </View>
                         </View>
 
+                        {/* table header: choose ONE behavior */}
 
-                        {/* Table Header */}
-                        <View style={styles.tableHeader}>
+                        {/* A) repeat table header on every physical page */}
+                        <View style={styles.tableHeader} fixed>
                             <Text style={[styles.cell, { flex: 1 }]}>Order</Text>
                             <Text style={styles.cell}>Sender</Text>
                             <Text style={styles.cell}>Warehouse</Text>
                             <Text style={styles.cell}>Address</Text>
                             <Text style={[styles.cell, { flex: 0.5 }]}>Product Qty</Text>
                         </View>
-                        <View style={styles.borderedView}>
 
-                            {/* Orders Table */}
-                            {orders.map((o, i) => (
-                                <View key={i} style={styles.tableRow} wrap={false}>
+                        {/* table body */}
+                        <View style={styles.borderedView} wrap>
+                            {gp.orders.map((o, i) => (
+                                <View
+                                    key={`${o.order_id}-${i}`}
+                                    style={styles.tableRow}
+                                    wrap={false}   // ✅ prevents a single row splitting across pages
+                                >
                                     <View style={styles.barcodeBlock}>
-                                        <Text style={styles.barcodeText}>{getBarcode(o.order_id.toString())}</Text>
+                                        <Text style={styles.barcodeText}>
+                                            {getBarcode(o.order_id.toString())}
+                                        </Text>
                                         <Text>{o.order_id}</Text>
                                     </View>
+
                                     <Text style={styles.cell}>{o.customer_name}</Text>
                                     <Text style={styles.cell}>{o.warehouse}</Text>
                                     <Text style={styles.cell}>
-                                        {[o.address.business_name, o.address.street, o.address.city, o.address.country, o.address.zip_code].filter(Boolean).join(", ")}
+                                        {[o.address.business_name, o.address.street, o.address.city, o.address.country, o.address.zip_code]
+                                            .filter(Boolean)
+                                            .join(", ")}
                                     </Text>
                                     <Text style={[styles.cell, { flex: 0.5 }]}>{o.quantity}</Text>
                                 </View>
                             ))}
                         </View>
 
-                        <ProductFooter orders={orders} product={product} />
+                        {/* footer totals (will appear once after last row, can land on last page) */}
+                        <ProductFooter orders={gp.orders} product={gp.product} />
                     </View>
                 ))}
 
-                {/* Page Number */}
                 <Text
                     style={styles.pageNumber}
                     render={({ pageNumber, totalPages }) => `Page ${pageNumber} of ${totalPages}`}

@@ -1,4 +1,4 @@
-import {GroupedProduct, Order} from "../types/fulfillment";
+import {GroupedProduct, Order, PositionAgg, Product} from "../types/fulfillment";
 
 export type QtyLine = {
     position: string;
@@ -56,6 +56,7 @@ export function groupOrdersByProduct(orders: Order[]): GroupedProduct[] {
                 quantity: product.stock,
                 position: product.product_position,
                 address: order.address,
+                picking_group: order.picking_group
             });
         }
     }
