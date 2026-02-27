@@ -37,8 +37,8 @@ export const GroupedProductPDFCustomer: React.FC<{ orders: GroupedProduct[] }> =
                 {orders.map((gp, idx) => (
                     <View
                         key={gp.product.product_id}
-                        break={idx > 0}      // ✅ HP302 starts new page
-                        wrap                // ✅ allow this section to paginate
+                        break={idx > 0}
+                        wrap
                     >
                         {/* product header only once (won’t repeat on next physical page) */}
                         <View style={styles.productHeader}>
@@ -70,7 +70,7 @@ export const GroupedProductPDFCustomer: React.FC<{ orders: GroupedProduct[] }> =
                                 <View
                                     key={`${o.order_id}-${i}`}
                                     style={styles.tableRow}
-                                    wrap={false}   // ✅ prevents a single row splitting across pages
+                                    wrap={false}
                                 >
                                     <View style={styles.barcodeBlock}>
                                         <Text style={styles.barcodeText}>
