@@ -112,11 +112,6 @@ const SinglePage: React.FC<{id: number; customer_id: number; box: Box; index: nu
     index,
     length
 }) {
-    console.log(id,
-        customer_id,
-        box,
-        index,
-        length)
 
     return (
         <>
