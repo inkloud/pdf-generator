@@ -2,7 +2,7 @@ import {renderToStream} from '@react-pdf/renderer';
 import {NextResponse} from 'next/server';
 
 import {GroupedProduct, MainOrder, Order} from '../../types/fulfillment';
-import {groupOrdersByProduct} from '../../utils/sorting';
+import {groupOrdersByProductPickingGroupFirst} from '../../utils/sorting';
 import {GroupedProductPDFCustomer} from './pdf_fulfillment/customer';
 import {GroupedProductPDFBackoffice} from './pdf_fulfillment/backoffice';
 import {JSX} from "react";
@@ -81,7 +81,7 @@ export async function POST(req: Request) {
     const style = (new URL(req.url)).searchParams.get("style") || ""
 
     const rawOrders = jsonData.map((orders: unknown) => Order.create(orders as Partial<MainOrder>));
-    const grouped: GroupedProduct[] = groupOrdersByProduct(rawOrders);
+    const grouped: GroupedProduct[] = groupOrdersByProductPickingGroupFirst(rawOrders);
 
     const pdfNode = PdfStyle[style](grouped);
 
