@@ -23,7 +23,7 @@ export function formatAddress(addressObj: Order["address"]) {
 export const formatDate = (iso: string) => iso.split('T')[0];
 
 export function getLogo(){
-    const imagePath = path.resolve(process.cwd(), 'static/media/image/gnurun-hd.png');
+    const imagePath = path.resolve(process.cwd(), 'app/static/media/image/gnurun-hd.png');
     const imageBuffer = fs.readFileSync(imagePath);
     const base64 = imageBuffer.toString('base64');
     return `data:image/png;base64,${base64}`;
