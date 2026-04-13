@@ -90,7 +90,7 @@ const Header: React.FC<{ order: Order }> = ({order}) => {
                     <Image style={styles.logo} src={getLogo()} />
 
                     <View style={styles.barcodeContainer}>
-                        <Image style={styles.barcode} src={getBarcode()} />
+                        <Image style={styles.barcode} src={getBarcode(order.id.toString())} />
                         <Text style={styles.barcodeId}>ID: {order.id}</Text>
                     </View>
                 </View>
