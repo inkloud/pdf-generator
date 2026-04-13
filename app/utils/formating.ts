@@ -1,6 +1,8 @@
 import {Order} from "../types/fulfillment";
 import fs from "fs";
 import path from 'path';
+import {createCanvas} from "canvas";
+import JsBarcode from "jsbarcode";
 
 export function formatAddress(addressObj: Order["address"]) {
     const { address, street, city, province, zip_code, country } = addressObj;
@@ -30,7 +32,12 @@ export function getLogo(){
 }
 
 export function getBarcode(value: string) {
-    // Aggiungi asterischi per il formato Code 39 (richiesto dal font)
-    const barcodeValue = `*${value}*`;
-    return barcodeValue;
+    const canvas = createCanvas(300, 80);
+    JsBarcode(canvas, value, {
+        format: "CODE39",
+        displayValue: false,
+        margin: 0,
+        height: 60,
+    });
+    return canvas.toDataURL("image/png");
 }
