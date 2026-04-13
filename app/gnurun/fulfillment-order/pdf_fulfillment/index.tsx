@@ -15,13 +15,51 @@ const checkTotals = (order: Order) => {
     return totals;
 };
 
-type FlatRow = {
-    key: string
-    product_sku: string
-    product_name: string
-    wh_position: string
-    stock: number
-}
+type ProductRow = {
+    product: Product;
+    orderQuantity: number;
+    quantity: number;
+    position: string;
+};
+
+const splitPositions = (productPosition: string): string[] => {
+    return productPosition
+        .split(/\r?\n|[,;|]+/)
+        .map((position) => position.trim())
+        .filter(Boolean);
+};
+
+const getProductRows = (products: Product[]): ProductRow[] => {
+    return products.flatMap((product) => {
+        const orderQuantity = product.stock;
+        const positions = splitPositions(product.product_position);
+
+        if (!positions.length) {
+            return [{
+                product,
+                orderQuantity,
+                quantity: orderQuantity,
+                position: product.product_position,
+            }];
+        }
+
+        if (positions.length === orderQuantity) {
+            return positions.map((position) => ({
+                product,
+                orderQuantity,
+                quantity: 1,
+                position,
+            }));
+        }
+
+        return [{
+            product,
+            orderQuantity,
+            quantity: orderQuantity,
+            position: positions.join(", "),
+        }];
+    });
+};
 
 export const FulfillmentPDF: React.FC<{ order: Order }> = ({ order }) => {
 
@@ -52,8 +90,8 @@ const Header: React.FC<{ order: Order }> = ({order}) => {
                     <Image style={styles.logo} src={getLogo()} />
 
                     <View style={styles.barcodeContainer}>
-                        <Text style={styles.barcodeText}>{getBarcode(order.id.toString())}</Text>
-                        <Text style={styles.barcodeId}>{order.id}</Text>
+                        <Image style={styles.barcode} src={getBarcode()} />
+                        <Text style={styles.barcodeId}>ID: {order.id}</Text>
                     </View>
                 </View>
             </View>
@@ -89,49 +127,29 @@ const Header: React.FC<{ order: Order }> = ({order}) => {
     )
 }
 
-function buildProductPositionRows(products: Product[]): FlatRow[] {
-    const rows: FlatRow[] = []
-
-    for (const p of products) {
-        const map: Record<string, number> = {}
-
-        for (const pos of p.positions ?? []) {
-            map[pos.wh_position] = (map[pos.wh_position] || 0) + pos.stock
-        }
-
-        for (const [wh_position, stock] of Object.entries(map)) {
-            rows.push({
-                key: `${p.product_id}-${wh_position}`, // stable key
-                product_sku: p.product_sku,
-                product_name: p.product_name,
-                wh_position,
-                stock,
-            })
-        }
-    }
-
-    return rows
-}
-
 const Products: React.FC<{ products: Product[] }> = ({ products }) => {
-    const rows = buildProductPositionRows(products)
+    const rows = getProductRows(products);
 
     return(
         <>
             {/* Table Header */}
             <View style={styles.tableHeader}>
-                <Text style={[styles.cell, { flex: 1 }]}>SKU</Text>
+                <Text style={[styles.cell, { flex: 1 }]}>No.</Text>
+                <Text style={[styles.cell, { flex: 1 }]}>Barcode</Text>
                 <Text style={[styles.cell, { flex: 2 }]}>Product</Text>
-                <Text style={[styles.cell, { flex: 1 }]}>Quantity</Text>
                 <Text style={[styles.cell, { flex: 1 }]}>Position</Text>
+                <Text style={[styles.cell, { flex: 1 }]}>Qty order</Text>
+                <Text style={[styles.cell, { flex: 1 }]}>Quantity</Text>
             </View>
 
-            {rows.map((r) => (
-                <View key={r.key} style={styles.tableRow}>
-                    <Text style={[styles.cell, { flex: 1 }]}>{r.product_sku}</Text>
-                    <Text style={[styles.cell, { flex: 2 }]}>{r.product_name}</Text>
-                    <Text style={[styles.cell, { flex: 1 }]}>{r.stock}</Text>
-                    <Text style={[styles.cell, { flex: 1 }]}>{r.wh_position}</Text>
+            {rows.map((row, i) => (
+                <View key={i} style={styles.tableRow}>
+                    <Text style={[styles.cell]}>{i+1}</Text>
+                    <Text style={[styles.cell, { flex: 1 }]}>{row.product.product_sku}</Text>
+                    <Text style={[styles.cell, { flex: 2 }]}>{row.product.product_name}</Text>
+                    <Text style={[styles.cell, { flex: 1 }]}>{row.position}</Text>
+                    <Text style={[styles.cell, { flex: 1 }]}>{row.orderQuantity}</Text>
+                    <Text style={[styles.cell, { flex: 1 }]}>{row.quantity}</Text>
                 </View>
             ))}
         </>
@@ -146,16 +164,16 @@ const Footer: React.FC<{ order: Order }> = ({order}) => {
             <View style={styles.summaryTable}>
                 {/* Totals Header */}
                 <View style={styles.tableHeader}>
-                    <Text style={[styles.cell, { flex: 1 }]}>Total weight</Text>
-                    <Text style={[styles.cell, { flex: 1 }]}>Total volume</Text>
-                    <Text style={[styles.cell, { flex: 2 }]}>Total quantity</Text>
+                    <Text style={[styles.cell, { flex: 1 }]}>Total Weight</Text>
+                    <Text style={[styles.cell, { flex: 1 }]}>Total Volume</Text>
+                    <Text style={[styles.cell, { flex: 2 }]}>Total Quantity</Text>
                 </View>
 
                 {/* Totals Values*/}
                 <View style={styles.tableRow}>
                     <Text style={[styles.cell, { flex: 1 }]}>{totals.weight} kg</Text>
-                    <Text style={[styles.cell, { flex: 1 }]}>{totals.volume} cm³</Text>
-                    <Text style={[styles.cell, { flex: 2 }]}>{totals.quantity}</Text>
+                    <Text style={[styles.cell, { flex: 2 }]}>{totals.volume} cm³</Text>
+                    <Text style={[styles.cell, { flex: 1 }]}>{totals.quantity}</Text>
                 </View>
             </View>
 
