@@ -8,7 +8,7 @@ import {Order, Product} from "../../../types/fulfillment";
 const checkTotals = (order: Order) => {
     const totals = { weight: 0, quantity: 0, volume: 0 };
     order.products.forEach((p) => {
-        totals.weight += p.weight;
+        totals.weight += (p.weight*p.qty_order);
         totals.quantity += p.stock;
         totals.volume += p.length * p.width * p.height * p.stock;
     });
@@ -114,7 +114,7 @@ const Products: React.FC<{ products: Product[] }> = ({ products }) => {
                     <View key={i} style={styles.tableRow}>
                         <Text style={[styles.cell, { flex: 1 }]}>{product.product_sku}</Text>
                         <Text style={[styles.cell, { flex: 2 }]}>{product.product_name}</Text>
-                        <Text style={[styles.cell, { flex: 1 }]}>{product.stock}</Text>
+                        <Text style={[styles.cell, { flex: 1 }]}>{product.qty_order}</Text>
                         <View style={{ flex: 2, flexDirection: 'column' }}>
                             {distribution.map((d, j) => (
                                 <View key={j} style={{ flexDirection: 'row' }}>

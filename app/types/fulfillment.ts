@@ -64,6 +64,7 @@ export interface Product {
     weight: number;
     note: string;
     stock: number;
+    qty_order: number;
     positions: ProductPosition[];
 }
 
@@ -82,6 +83,7 @@ function _addProducts(products: Product[] | undefined): any {
             weight: product.weight || 0,
             note: product.note || '',
             stock: product.stock || 0,
+            qty_order: product.qty_order || 0,
             positions: (product.positions as ProductPosition[]) || []
         };
     });
