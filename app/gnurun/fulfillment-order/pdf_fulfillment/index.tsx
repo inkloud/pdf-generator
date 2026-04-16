@@ -15,50 +15,19 @@ const checkTotals = (order: Order) => {
     return totals;
 };
 
-type ProductRow = {
-    product: Product;
-    orderQuantity: number;
+type Distribution = {
     quantity: number;
     position: string;
 };
 
-const splitPositions = (productPosition: string): string[] => {
-    return productPosition
-        .split(/\r?\n|[,;|]+/)
-        .map((position) => position.trim())
-        .filter(Boolean);
-};
-
-const getProductRows = (products: Product[]): ProductRow[] => {
-    return products.flatMap((product) => {
-        const orderQuantity = product.stock;
-        const positions = splitPositions(product.product_position);
-
-        if (!positions.length) {
-            return [{
-                product,
-                orderQuantity,
-                quantity: orderQuantity,
-                position: product.product_position,
-            }];
-        }
-
-        if (positions.length === orderQuantity) {
-            return positions.map((position) => ({
-                product,
-                orderQuantity,
-                quantity: 1,
-                position,
-            }));
-        }
-
-        return [{
-            product,
-            orderQuantity,
-            quantity: orderQuantity,
-            position: positions.join(", "),
-        }];
-    });
+const getDistribution = (product: Product): Distribution[] => {
+    if (product.positions && product.positions.length > 0) {
+        return product.positions.map((p) => ({
+            quantity: p.stock,
+            position: p.wh_position,
+        }));
+    }
+    return [{ quantity: product.stock, position: product.product_position }];
 };
 
 export const FulfillmentPDF: React.FC<{ order: Order }> = ({ order }) => {
@@ -128,30 +97,35 @@ const Header: React.FC<{ order: Order }> = ({order}) => {
 }
 
 const Products: React.FC<{ products: Product[] }> = ({ products }) => {
-    const rows = getProductRows(products);
-
     return(
         <>
             {/* Table Header */}
             <View style={styles.tableHeader}>
-                <Text style={[styles.cell, { flex: 1 }]}>No.</Text>
-                <Text style={[styles.cell, { flex: 1 }]}>Barcode</Text>
-                <Text style={[styles.cell, { flex: 2 }]}>Product</Text>
-                <Text style={[styles.cell, { flex: 1 }]}>Position</Text>
+                <Text style={[styles.cell, { flex: 1 }]}>Code</Text>
+                <Text style={[styles.cell, { flex: 2 }]}>Description</Text>
                 <Text style={[styles.cell, { flex: 1 }]}>Qty order</Text>
                 <Text style={[styles.cell, { flex: 1 }]}>Quantity</Text>
+                <Text style={[styles.cell, { flex: 1 }]}>Position</Text>
             </View>
 
-            {rows.map((row, i) => (
-                <View key={i} style={styles.tableRow}>
-                    <Text style={[styles.cell]}>{i+1}</Text>
-                    <Text style={[styles.cell, { flex: 1 }]}>{row.product.product_sku}</Text>
-                    <Text style={[styles.cell, { flex: 2 }]}>{row.product.product_name}</Text>
-                    <Text style={[styles.cell, { flex: 1 }]}>{row.position}</Text>
-                    <Text style={[styles.cell, { flex: 1 }]}>{row.orderQuantity}</Text>
-                    <Text style={[styles.cell, { flex: 1 }]}>{row.quantity}</Text>
-                </View>
-            ))}
+            {products.map((product, i) => {
+                const distribution = getDistribution(product);
+                return (
+                    <View key={i} style={styles.tableRow}>
+                        <Text style={[styles.cell, { flex: 1 }]}>{product.product_sku}</Text>
+                        <Text style={[styles.cell, { flex: 2 }]}>{product.product_name}</Text>
+                        <Text style={[styles.cell, { flex: 1 }]}>{product.stock}</Text>
+                        <View style={{ flex: 2, flexDirection: 'column' }}>
+                            {distribution.map((d, j) => (
+                                <View key={j} style={{ flexDirection: 'row' }}>
+                                    <Text style={[styles.cell, { flex: 1 }]}>{d.quantity}</Text>
+                                    <Text style={[styles.cell, { flex: 1 }]}>{d.position}</Text>
+                                </View>
+                            ))}
+                        </View>
+                    </View>
+                );
+            })}
         </>
     )
 }
