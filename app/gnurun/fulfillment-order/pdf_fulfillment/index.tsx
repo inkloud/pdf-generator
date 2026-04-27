@@ -7,10 +7,12 @@ import {Order, Product} from "../../../types/fulfillment";
 
 const checkTotals = (order: Order) => {
     const totals = { weight: 0, quantity: 0, volume: 0 };
+    // The total quantity is based on the the stock that sent along with order. But the Totals are calculated based on the qty_order that is set in the order by the customer
+    
     order.products.forEach((p) => {
         totals.weight += (p.weight*p.qty_order);
         totals.quantity += p.stock;
-        totals.volume += p.length * p.width * p.height * p.stock;
+        totals.volume += (p.length * p.width * p.height) * p.qty_order;
     });
     return totals;
 };
