@@ -50,12 +50,16 @@ const totalsForAll = (rows: Array<{ product: Product; totalQty: number }>) => {
     );
 };
 
+const formatDecimal = (value: number, maxDecimals = 3) => {
+    return Number(value.toFixed(maxDecimals)).toString();
+};
+
 const Barcode = function({picking_group}: {picking_group: number | null | undefined}) {
 
     if(!picking_group) return null;
     return(
         <View style={styles.barcodeContainer}>
-            <Text style={styles.barcodeText}>{getBarcode(picking_group.toString())}</Text>
+            <Image style={styles.barcode} src={getBarcode(picking_group.toString())} />
             <Text style={styles.barcodeId}>{picking_group}</Text>
         </View>
     )
@@ -135,8 +139,8 @@ export const GroupedProductPDFBackoffice: React.FC<{ orders: GroupedProduct[] }>
                                 <Text style={[styles.cell, { flex: 1 }]}>Total qty</Text>
                             </View>
                             <View style={styles.tableRow}>
-                                <Text style={[styles.cell, { flex: 1 }]}>{grand.weight} kg</Text>
-                                <Text style={[styles.cell, { flex: 1 }]}>{grand.volume} cm³</Text>
+                                <Text style={[styles.cell, { flex: 1 }]}>{formatDecimal(grand.weight)} kg</Text>
+                                <Text style={[styles.cell, { flex: 1 }]}>{formatDecimal(grand.volume)} cm³</Text>
                                 <Text style={[styles.cell, { flex: 1 }]}>{grand.quantity}</Text>
                             </View>
                         </View>
