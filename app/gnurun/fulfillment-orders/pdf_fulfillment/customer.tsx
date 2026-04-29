@@ -15,6 +15,10 @@ const checkTotals = (orders:  ProductOrderEntry[], product: Product) => {
     return totals;
 };
 
+const formatDecimal = (value: number, maxDecimals = 3) => {
+    return Number(value.toFixed(maxDecimals)).toString();
+};
+
 export const GroupedProductPDFCustomer: React.FC<{ orders: GroupedProduct[] }> = ({ orders }) => {
     return (
         <Document>
@@ -73,9 +77,9 @@ export const GroupedProductPDFCustomer: React.FC<{ orders: GroupedProduct[] }> =
                                     wrap={false}
                                 >
                                     <View style={styles.barcodeBlock}>
-                                        <Text style={styles.barcodeText}>
-                                            {getBarcode(o.order_id.toString())}
-                                        </Text>
+                                        <Image style={styles.barcodeText}
+                                            src={getBarcode(o.order_id.toString())}
+                                        />
                                         <Text>{o.order_id}</Text>
                                     </View>
 
@@ -122,9 +126,9 @@ const ProductFooter: React.FC<{ orders:  ProductOrderEntry[], product: Product }
 
                 {/* Totals Values*/}
                 <View style={styles.tableRow}>
-                    <Text style={[styles.cell, { flex: 1 }]}>{totals.weight} kg</Text>
-                    <Text style={[styles.cell, { flex: 1 }]}>{totals.volume} cm³</Text>
-                    <Text style={[styles.cell, { flex: 1 }]}>{totals.quantity}</Text>
+                    <Text style={[styles.cell, { flex: 1 }]}>{formatDecimal(totals.weight)} kg</Text>
+                    <Text style={[styles.cell, { flex: 1 }]}>{formatDecimal(totals.volume)} cm³</Text>
+                    <Text style={[styles.cell, { flex: 1 }]}>{formatDecimal(totals.quantity)}</Text>
                 </View>
             </View>
         </>
