@@ -1,18 +1,18 @@
 import React from "react";
 
-import {Document, Image, Page, Text, View} from '@react-pdf/renderer';
-import {styles} from './style';
-import {formatAddress, formatDate, getBarcode, getLogo} from "../../../utils/formating";
-import {Order, Product} from "../../../types/fulfillment";
+import { Document, Image, Page, Text, View } from "@react-pdf/renderer";
+import { styles } from "./style";
+import { formatAddress, formatDate, getBarcode, getLogo } from "../../../utils/formating";
+import { Order, Product } from "../../../types/fulfillment";
 
 const checkTotals = (order: Order) => {
     const totals = { weight: 0, quantity: 0, volume: 0 };
-    // The total quantity is based on the the stock that sent along with order. But the Totals are calculated based on the qty_order that is set in the order by the customer
-    
+    // The total quantity is based on the stock sent with the order.
+    // Totals for weight and volume are calculated from qty_order.
     order.products.forEach((p) => {
-        totals.weight += (p.weight*p.qty_order);
+        totals.weight += p.weight * p.qty_order;
         totals.quantity += p.stock;
-        totals.volume += (p.length * p.width * p.height) * p.qty_order;
+        totals.volume += p.length * p.width * p.height * p.qty_order;
     });
     return totals;
 };
@@ -32,28 +32,25 @@ const getDistribution = (product: Product): Distribution[] => {
     return [{ quantity: product.stock, position: product.product_position }];
 };
 
-export const FulfillmentPDF: React.FC<{ order: Order }> = ({ order }) => {
+const formatDecimal = (value: number, maxDecimals = 3) => {
+    return Number(value.toFixed(maxDecimals)).toString();
+};
 
+export const FulfillmentPDF: React.FC<{ order: Order }> = ({ order }) => {
     return (
         <Document>
             <Page size="A4" style={styles.page}>
-                {/* Products Table */}
-                <Header order={order}/>
-
-                {/* Products Table */}
+                <Header order={order} />
                 <Products products={order.products} />
-
-                {/* Footer */}
                 <Footer order={order} />
             </Page>
         </Document>
     );
 };
 
-const Header: React.FC<{ order: Order }> = ({order}) => {
-    return(
+const Header: React.FC<{ order: Order }> = ({ order }) => {
+    return (
         <>
-            {/* Logo and Title */}
             <View style={{ marginBottom: 24 }}>
                 <Text style={styles.title}>Picking List</Text>
 
@@ -67,7 +64,6 @@ const Header: React.FC<{ order: Order }> = ({order}) => {
                 </View>
             </View>
 
-            {/* Order Info */}
             <View style={styles.section}>
                 <View style={styles.infoBox}>
                     <View style={styles.box}>
@@ -82,7 +78,6 @@ const Header: React.FC<{ order: Order }> = ({order}) => {
                 </View>
             </View>
 
-            {/* Address Info */}
             <View style={styles.section}>
                 <View style={styles.infoBox}>
                     <View style={styles.box}>
@@ -95,13 +90,12 @@ const Header: React.FC<{ order: Order }> = ({order}) => {
                 </View>
             </View>
         </>
-    )
-}
+    );
+};
 
 const Products: React.FC<{ products: Product[] }> = ({ products }) => {
-    return(
+    return (
         <>
-            {/* Table Header */}
             <View style={styles.tableHeader}>
                 <Text style={[styles.cell, { flex: 1 }]}>Code</Text>
                 <Text style={[styles.cell, { flex: 2 }]}>Description</Text>
@@ -117,9 +111,9 @@ const Products: React.FC<{ products: Product[] }> = ({ products }) => {
                         <Text style={[styles.cell, { flex: 1 }]}>{product.product_sku}</Text>
                         <Text style={[styles.cell, { flex: 2 }]}>{product.product_name}</Text>
                         <Text style={[styles.cell, { flex: 1 }]}>{product.qty_order}</Text>
-                        <View style={{ flex: 2, flexDirection: 'column' }}>
+                        <View style={{ flex: 2, flexDirection: "column" }}>
                             {distribution.map((d, j) => (
-                                <View key={j} style={{ flexDirection: 'row' }}>
+                                <View key={j} style={{ flexDirection: "row" }}>
                                     <Text style={[styles.cell, { flex: 1 }]}>{d.quantity}</Text>
                                     <Text style={[styles.cell, { flex: 1 }]}>{d.position}</Text>
                                 </View>
@@ -129,39 +123,33 @@ const Products: React.FC<{ products: Product[] }> = ({ products }) => {
                 );
             })}
         </>
-    )
-}
+    );
+};
 
-const Footer: React.FC<{ order: Order }> = ({order}) => {
+const Footer: React.FC<{ order: Order }> = ({ order }) => {
     const totals = checkTotals(order);
-    return(
+
+    return (
         <>
-            {/* Totals */}
             <View style={styles.summaryTable}>
-                {/* Totals Header */}
                 <View style={styles.tableHeader}>
                     <Text style={[styles.cell, { flex: 1 }]}>Total Weight</Text>
                     <Text style={[styles.cell, { flex: 1 }]}>Total Volume</Text>
                     <Text style={[styles.cell, { flex: 2 }]}>Total Quantity</Text>
                 </View>
 
-                {/* Totals Values*/}
                 <View style={styles.tableRow}>
-                    <Text style={[styles.cell, { flex: 1 }]}>{totals.weight} kg</Text>
-                    <Text style={[styles.cell, { flex: 2 }]}>{totals.volume} cm³</Text>
+                    <Text style={[styles.cell, { flex: 1 }]}>{formatDecimal(totals.weight)} kg</Text>
+                    <Text style={[styles.cell, { flex: 2 }]}>{formatDecimal(totals.volume)} cm3</Text>
                     <Text style={[styles.cell, { flex: 1 }]}>{totals.quantity}</Text>
                 </View>
             </View>
 
-
-            {/* Page Number */}
             <Text
                 style={styles.pageNumber}
-                render={({ pageNumber, totalPages }) =>
-                    `Page ${pageNumber} of ${totalPages}`
-                }
+                render={({ pageNumber, totalPages }) => `Page ${pageNumber} of ${totalPages}`}
                 fixed
             />
         </>
-    )
-}
+    );
+};
