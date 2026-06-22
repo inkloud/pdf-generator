@@ -12,7 +12,8 @@ const uniquePositionsFromEntries = (entries: ProductOrderEntry[]) => {
     const out: { position: string; qty: number }[] = [];
 
     for (const e of entries) {
-        const pos = (e.position || "").trim() || "-";
+        const pos = (e.position || "").trim();
+        if (!pos) continue;
         if (!seen.has(pos)) {
             seen.add(pos);
             out.push({ position: pos, qty: 0 });
@@ -22,9 +23,18 @@ const uniquePositionsFromEntries = (entries: ProductOrderEntry[]) => {
 };
 
 const calcGroupQty = (g: GroupedProduct) => {
-    const ordersCount = g.orders.length;
-    const stockPerOrder = g.orders[0]?.quantity ?? 0;
-    return { ordersCount, stockPerOrder, totalQty: ordersCount * stockPerOrder };
+    const qtyByOrder = new Map<number, number>();
+
+    for (const entry of g.orders) {
+        qtyByOrder.set(entry.order_id, (qtyByOrder.get(entry.order_id) ?? 0) + (entry.quantity ?? 0));
+    }
+
+    const perOrderQtys = Array.from(qtyByOrder.values());
+    const ordersCount = perOrderQtys.length;
+    const stockPerOrder = perOrderQtys[0] ?? 0;
+    const totalQty = perOrderQtys.reduce((sum, qty) => sum + qty, 0);
+
+    return { ordersCount, stockPerOrder, totalQty };
 };
 
 const totalsForProduct = (product: Product, totalQty: number) => {

@@ -1,0 +1,823 @@
+POST http://localhost:3000/gnurun/fulfillment-orders?style=BACKOFFICE
+content-type: application/json
+
+[
+  {
+    "id": 2567,
+    "created_at": "2025-07-04T08:05:27",
+    "customer": {
+      "customer_id": 1,
+      "company_id": 1,
+      "company_name": "Life365 Italy TEST"
+    },
+    "customer_id": 1,
+    "warehouse": "Gnu000 Test",
+    "address": {
+      "business_name": "",
+      "reference_name": "",
+      "city": "",
+      "street": "",
+      "province": "",
+      "country": "",
+      "zip_code": "",
+      "email": "",
+      "tel": ""
+    },
+    "extra_data": {
+      "courier_data": {
+        "courier_name": "",
+        "courier_tracking": ""
+      },
+      "customer_reference": null,
+      "reference_name": null,
+      "provider": "GNURUN console"
+    },
+    "products": [
+      {
+        "product_id": 1,
+        "product_sku": "HP301",
+        "product_name": "HP301",
+        "product_position": "TT010103",
+        "height": 9,
+        "width": 4,
+        "length": 4,
+        "weight": 0.12,
+        "note": null,
+        "stock": 3,
+        "positions": [
+          {
+            "product_id": 1,
+            "wh_id": 1,
+            "delivery_id": 3,
+            "wh_position": "TT010103",
+            "stock": 3,
+            "qty_order": 3
+          }
+        ],
+        "qty_order": 3
+      },
+      {
+        "product_id": 2,
+        "product_sku": "HP302",
+        "product_name": "HP302",
+        "product_position": "AA010101",
+        "height": 10,
+        "width": 10,
+        "length": 10,
+        "weight": 0.1,
+        "note": "Ne manca uno",
+        "stock": 1,
+        "positions": [
+          {
+            "product_id": 2,
+            "wh_id": 1,
+            "delivery_id": 1,
+            "wh_position": "CC000003",
+            "stock": 1,
+            "qty_order": 1
+          }
+        ],
+        "qty_order": 1
+      },
+      {
+        "product_id": 3,
+        "product_sku": "HP303",
+        "product_name": "HP303",
+        "product_position": "BB020202",
+        "height": 12,
+        "width": 6,
+        "length": 5,
+        "weight": 0.18,
+        "note": null,
+        "stock": 2,
+        "positions": [
+          {
+            "product_id": 3,
+            "wh_id": 1,
+            "delivery_id": 2,
+            "wh_position": "BB020202",
+            "stock": 2,
+            "qty_order": 2
+          }
+        ],
+        "qty_order": 2
+      },
+      {
+        "product_id": 4,
+        "product_sku": "HP304",
+        "product_name": "HP304",
+        "product_position": "DD030301",
+        "height": 8,
+        "width": 8,
+        "length": 3,
+        "weight": 0.09,
+        "note": null,
+        "stock": 2,
+        "positions": [
+          {
+            "product_id": 4,
+            "wh_id": 1,
+            "delivery_id": 4,
+            "wh_position": "DD030301",
+            "stock": 2,
+            "qty_order": 2
+          }
+        ],
+        "qty_order": 2
+      }
+    ],
+    "picking_group": 7881
+  },
+  {
+    "id": 7881,
+    "created_at": "2026-01-27T11:44:14",
+    "customer": {
+      "customer_id": 1,
+      "company_id": 1,
+      "company_name": "Life365 Italy TEST"
+    },
+    "customer_id": 1,
+    "warehouse": "Gnu000 Test",
+    "address": {
+      "business_name": "Temu label png",
+      "reference_name": "",
+      "city": "",
+      "street": "",
+      "province": "",
+      "country": "",
+      "zip_code": "",
+      "email": "",
+      "tel": ""
+    },
+    "extra_data": {
+      "courier_data": {
+        "courier_name": "EVRI",
+        "courier_tracking": "TEST82631907610627"
+      },
+      "customer_reference": "__self_test__82631907610624",
+      "reference_name": "",
+      "provider": "Temu"
+    },
+    "products": [
+      {
+        "product_id": 1,
+        "product_sku": "HP301",
+        "qty_order": 1
+      },
+      {
+        "product_id": 1,
+        "product_sku": "HP301",
+        "qty_order": 1
+      },
+      {
+        "product_id": 1,
+        "product_sku": "HP301",
+        "qty_order": 1
+      },
+      {
+        "product_id": 2,
+        "product_sku": "HP302",
+        "qty_order": 1
+      },
+      {
+        "product_id": 3,
+        "product_sku": "HP303",
+        "qty_order": 2
+      },
+      {
+        "product_id": 4,
+        "product_sku": "HP304",
+        "qty_order": 2
+      }
+    ],
+    "picking_group": 7881
+  },
+  {
+    "id": 7882,
+    "created_at": "2026-01-27T11:44:35",
+    "customer": {
+      "customer_id": 1,
+      "company_id": 1,
+      "company_name": "Life365 Italy TEST"
+    },
+    "customer_id": 1,
+    "warehouse": "Gnu000 Test",
+    "address": {
+      "business_name": "Temu label png",
+      "reference_name": "",
+      "city": "",
+      "street": "",
+      "province": "",
+      "country": "",
+      "zip_code": "",
+      "email": "",
+      "tel": ""
+    },
+    "extra_data": {
+      "courier_data": {
+        "courier_name": "EVRI",
+        "courier_tracking": "TEST82631907610627"
+      },
+      "customer_reference": "__self_test__82631907610624",
+      "reference_name": "",
+      "provider": "Temu"
+    },
+    "products": [
+      {
+        "product_id": 1,
+        "product_sku": "HP301",
+        "qty_order": 1
+      },
+      {
+        "product_id": 1,
+        "product_sku": "HP301",
+        "qty_order": 1
+      },
+      {
+        "product_id": 1,
+        "product_sku": "HP301",
+        "qty_order": 1
+      },
+      {
+        "product_id": 2,
+        "product_sku": "HP302",
+        "qty_order": 1
+      },
+      {
+        "product_id": 3,
+        "product_sku": "HP303",
+        "qty_order": 2
+      },
+      {
+        "product_id": 4,
+        "product_sku": "HP304",
+        "qty_order": 2
+      }
+    ],
+    "picking_group": 7881
+  },
+  {
+    "id": 7883,
+    "created_at": "2026-01-27T11:45:42",
+    "customer": {
+      "customer_id": 1,
+      "company_id": 1,
+      "company_name": "Life365 Italy TEST"
+    },
+    "customer_id": 1,
+    "warehouse": "Gnu000 Test",
+    "address": {
+      "business_name": "Temu label pdf",
+      "reference_name": "",
+      "city": "",
+      "street": "",
+      "province": "",
+      "country": "",
+      "zip_code": "",
+      "email": "",
+      "tel": ""
+    },
+    "extra_data": {
+      "courier_data": {
+        "courier_name": "DHL",
+        "courier_tracking": "TEST82633551777799"
+      },
+      "customer_reference": "__self_test__82633551777796",
+      "reference_name": "",
+      "provider": "Temu"
+    },
+    "products": [
+      {
+        "product_id": 1,
+        "product_sku": "HP301",
+        "qty_order": 1
+      },
+      {
+        "product_id": 1,
+        "product_sku": "HP301",
+        "qty_order": 1
+      },
+      {
+        "product_id": 1,
+        "product_sku": "HP301",
+        "qty_order": 1
+      },
+      {
+        "product_id": 2,
+        "product_sku": "HP302",
+        "qty_order": 1
+      },
+      {
+        "product_id": 3,
+        "product_sku": "HP303",
+        "qty_order": 2
+      },
+      {
+        "product_id": 4,
+        "product_sku": "HP304",
+        "qty_order": 2
+      }
+    ],
+    "picking_group": 7881
+  },
+  {
+    "id": 7884,
+    "created_at": "2026-01-27T11:45:43",
+    "customer": {
+      "customer_id": 1,
+      "company_id": 1,
+      "company_name": "Life365 Italy TEST"
+    },
+    "customer_id": 1,
+    "warehouse": "Gnu000 Test",
+    "address": {
+      "business_name": "Temu label png",
+      "reference_name": "",
+      "city": "",
+      "street": "",
+      "province": "",
+      "country": "",
+      "zip_code": "",
+      "email": "",
+      "tel": ""
+    },
+    "extra_data": {
+      "courier_data": {
+        "courier_name": "DHL",
+        "courier_tracking": "TEST82633551777795"
+      },
+      "customer_reference": "__self_test__82633551777792",
+      "reference_name": "",
+      "provider": "Temu"
+    },
+    "products": [
+      {
+        "product_id": 1,
+        "product_sku": "HP301",
+        "qty_order": 1
+      },
+      {
+        "product_id": 1,
+        "product_sku": "HP301",
+        "qty_order": 1
+      },
+      {
+        "product_id": 1,
+        "product_sku": "HP301",
+        "qty_order": 1
+      },
+      {
+        "product_id": 2,
+        "product_sku": "HP302",
+        "qty_order": 1
+      },
+      {
+        "product_id": 3,
+        "product_sku": "HP303",
+        "qty_order": 2
+      },
+      {
+        "product_id": 4,
+        "product_sku": "HP304",
+        "qty_order": 2
+      }
+    ],
+    "picking_group": 7881
+  },
+  {
+    "id": 7885,
+    "created_at": "2026-01-27T11:46:08",
+    "customer": {
+      "customer_id": 1,
+      "company_id": 1,
+      "company_name": "Life365 Italy TEST"
+    },
+    "customer_id": 1,
+    "warehouse": "Gnu000 Test",
+    "address": {
+      "business_name": "Temu label pdf",
+      "reference_name": "",
+      "city": "",
+      "street": "",
+      "province": "",
+      "country": "",
+      "zip_code": "",
+      "email": "",
+      "tel": ""
+    },
+    "extra_data": {
+      "courier_data": {
+        "courier_name": "DHL",
+        "courier_tracking": "TEST82633577992199"
+      },
+      "customer_reference": "__self_test__82633577992196",
+      "reference_name": "",
+      "provider": "Temu"
+    },
+    "products": [
+      {
+        "product_id": 1,
+        "product_sku": "HP301",
+        "qty_order": 1
+      },
+      {
+        "product_id": 1,
+        "product_sku": "HP301",
+        "qty_order": 1
+      },
+      {
+        "product_id": 1,
+        "product_sku": "HP301",
+        "qty_order": 1
+      },
+      {
+        "product_id": 2,
+        "product_sku": "HP302",
+        "qty_order": 1
+      },
+      {
+        "product_id": 3,
+        "product_sku": "HP303",
+        "qty_order": 2
+      },
+      {
+        "product_id": 4,
+        "product_sku": "HP304",
+        "qty_order": 2
+      }
+    ],
+    "picking_group": 7881
+  },
+  {
+    "id": 7886,
+    "created_at": "2026-01-27T11:46:08",
+    "customer": {
+      "customer_id": 1,
+      "company_id": 1,
+      "company_name": "Life365 Italy TEST"
+    },
+    "customer_id": 1,
+    "warehouse": "Gnu000 Test",
+    "address": {
+      "business_name": "Temu label png",
+      "reference_name": "",
+      "city": "",
+      "street": "",
+      "province": "",
+      "country": "",
+      "zip_code": "",
+      "email": "",
+      "tel": ""
+    },
+    "extra_data": {
+      "courier_data": {
+        "courier_name": "DHL",
+        "courier_tracking": "TEST82633577992195"
+      },
+      "customer_reference": "__self_test__82633577992192",
+      "reference_name": "",
+      "provider": "Temu"
+    },
+    "products": [
+      {
+        "product_id": 1,
+        "product_sku": "HP301",
+        "qty_order": 1
+      },
+      {
+        "product_id": 1,
+        "product_sku": "HP301",
+        "qty_order": 1
+      },
+      {
+        "product_id": 1,
+        "product_sku": "HP301",
+        "qty_order": 1
+      },
+      {
+        "product_id": 2,
+        "product_sku": "HP302",
+        "qty_order": 1
+      },
+      {
+        "product_id": 3,
+        "product_sku": "HP303",
+        "qty_order": 2
+      },
+      {
+        "product_id": 4,
+        "product_sku": "HP304",
+        "qty_order": 2
+      }
+    ],
+    "picking_group": 7881
+  },
+  {
+    "id": 7887,
+    "created_at": "2026-01-27T11:47:30",
+    "customer": {
+      "customer_id": 1,
+      "company_id": 1,
+      "company_name": "Life365 Italy TEST"
+    },
+    "customer_id": 1,
+    "warehouse": "Gnu000 Test",
+    "address": {
+      "business_name": "Temu label pdf",
+      "reference_name": "",
+      "city": "",
+      "street": "",
+      "province": "",
+      "country": "",
+      "zip_code": "",
+      "email": "",
+      "tel": ""
+    },
+    "extra_data": {
+      "courier_data": {
+        "courier_name": "Chronopost",
+        "courier_tracking": "TEST82633663975431"
+      },
+      "customer_reference": "__self_test__82633663975428",
+      "reference_name": "",
+      "provider": "Temu"
+    },
+    "products": [
+      {
+        "product_id": 1,
+        "product_sku": "HP301",
+        "qty_order": 1
+      },
+      {
+        "product_id": 1,
+        "product_sku": "HP301",
+        "qty_order": 1
+      },
+      {
+        "product_id": 1,
+        "product_sku": "HP301",
+        "qty_order": 1
+      },
+      {
+        "product_id": 2,
+        "product_sku": "HP302",
+        "qty_order": 1
+      },
+      {
+        "product_id": 3,
+        "product_sku": "HP303",
+        "qty_order": 2
+      },
+      {
+        "product_id": 4,
+        "product_sku": "HP304",
+        "qty_order": 2
+      }
+    ],
+    "picking_group": 7881
+  },
+  {
+    "id": 7888,
+    "created_at": "2026-01-27T11:47:30",
+    "customer": {
+      "customer_id": 1,
+      "company_id": 1,
+      "company_name": "Life365 Italy TEST"
+    },
+    "customer_id": 1,
+    "warehouse": "Gnu000 Test",
+    "address": {
+      "business_name": "Temu label png",
+      "reference_name": "",
+      "city": "",
+      "street": "",
+      "province": "",
+      "country": "",
+      "zip_code": "",
+      "email": "",
+      "tel": ""
+    },
+    "extra_data": {
+      "courier_data": {
+        "courier_name": "Chronopost",
+        "courier_tracking": "TEST82633663975427"
+      },
+      "customer_reference": "__self_test__82633663975424",
+      "reference_name": "",
+      "provider": "Temu"
+    },
+    "products": [
+      {
+        "product_id": 1,
+        "product_sku": "HP301",
+        "qty_order": 1
+      },
+      {
+        "product_id": 1,
+        "product_sku": "HP301",
+        "qty_order": 1
+      },
+      {
+        "product_id": 1,
+        "product_sku": "HP301",
+        "qty_order": 1
+      },
+      {
+        "product_id": 2,
+        "product_sku": "HP302",
+        "qty_order": 1
+      },
+      {
+        "product_id": 3,
+        "product_sku": "HP303",
+        "qty_order": 2
+      },
+      {
+        "product_id": 4,
+        "product_sku": "HP304",
+        "qty_order": 2
+      }
+    ],
+    "picking_group": 7881
+  },
+  {
+    "id": 7889,
+    "created_at": "2026-01-27T11:47:44",
+    "customer": {
+      "customer_id": 1,
+      "company_id": 1,
+      "company_name": "Life365 Italy TEST"
+    },
+    "customer_id": 1,
+    "warehouse": "Gnu000 Test",
+    "address": {
+      "business_name": "Temu label pdf",
+      "reference_name": "",
+      "city": "",
+      "street": "",
+      "province": "",
+      "country": "",
+      "zip_code": "",
+      "email": "",
+      "tel": ""
+    },
+    "extra_data": {
+      "courier_data": {
+        "courier_name": "Chronopost",
+        "courier_tracking": "TEST82633678655494"
+      },
+      "customer_reference": "__self_test__82633678655489",
+      "reference_name": "",
+      "provider": "Temu"
+    },
+    "products": [
+      {
+        "product_id": 1,
+        "product_sku": "HP301",
+        "qty_order": 3
+      },
+      {
+        "product_id": 2,
+        "product_sku": "HP302",
+        "qty_order": 1
+      },
+      {
+        "product_id": 3,
+        "product_sku": "HP303",
+        "product_name": "HP303",
+        "product_position": "BB020202",
+        "height": 12,
+        "width": 6,
+        "length": 5,
+        "weight": 0.18,
+        "note": null,
+        "stock": 2,
+        "positions": [
+          {
+            "product_id": 3,
+            "wh_id": 1,
+            "delivery_id": 2,
+            "wh_position": "BB020202",
+            "stock": 2,
+            "qty_order": 2
+          }
+        ],
+        "qty_order": 2
+      },
+      {
+        "product_id": 4,
+        "product_sku": "HP304",
+        "product_name": "HP304",
+        "product_position": "DD030301",
+        "height": 8,
+        "width": 8,
+        "length": 3,
+        "weight": 0.09,
+        "note": null,
+        "stock": 2,
+        "positions": [
+          {
+            "product_id": 4,
+            "wh_id": 1,
+            "delivery_id": 4,
+            "wh_position": "DD030301",
+            "stock": 2,
+            "qty_order": 2
+          }
+        ],
+        "qty_order": 2
+      }
+    ],
+    "picking_group": 7881
+  },
+  {
+    "id": 7890,
+    "created_at": "2026-01-27T11:47:44",
+    "customer": {
+      "customer_id": 1,
+      "company_id": 1,
+      "company_name": "Life365 Italy TEST"
+    },
+    "customer_id": 1,
+    "warehouse": "Gnu000 Test",
+    "address": {
+      "business_name": "Temu label png",
+      "reference_name": "",
+      "city": "",
+      "street": "",
+      "province": "",
+      "country": "",
+      "zip_code": "",
+      "email": "",
+      "tel": ""
+    },
+    "extra_data": {
+      "courier_data": {
+        "courier_name": "Chronopost",
+        "courier_tracking": "TEST82633678655494"
+      },
+      "customer_reference": "__self_test__82633678655488",
+      "reference_name": "",
+      "provider": "Temu"
+    },
+    "products": [
+      {
+        "product_id": 1,
+        "product_sku": "HP301",
+        "qty_order": 3
+      },
+      {
+        "product_id": 2,
+        "product_sku": "HP302",
+        "qty_order": 1
+      },
+      {
+        "product_id": 3,
+        "product_sku": "HP303",
+        "product_name": "HP303",
+        "product_position": "BB020202",
+        "height": 12,
+        "width": 6,
+        "length": 5,
+        "weight": 0.18,
+        "note": null,
+        "stock": 2,
+        "positions": [
+          {
+            "product_id": 3,
+            "wh_id": 1,
+            "delivery_id": 2,
+            "wh_position": "BB020202",
+            "stock": 2,
+            "qty_order": 2
+          }
+        ],
+        "qty_order": 2
+      },
+      {
+        "product_id": 4,
+        "product_sku": "HP304",
+        "product_name": "HP304",
+        "product_position": "DD030301",
+        "height": 8,
+        "width": 8,
+        "length": 3,
+        "weight": 0.09,
+        "note": null,
+        "stock": 2,
+        "positions": [
+          {
+            "product_id": 4,
+            "wh_id": 1,
+            "delivery_id": 4,
+            "wh_position": "DD030301",
+            "stock": 2,
+            "qty_order": 2
+          }
+        ],
+        "qty_order": 2
+      }
+    ],
+    "picking_group": 7881
+  }
+]

@@ -52,7 +52,7 @@ export function groupOrdersByProduct(orders: Order[]): GroupedProduct[] {
                 order_id: order.id,
                 customer_name: order.customer.company_name,
                 warehouse: order.warehouse,
-                quantity: product.stock,
+                quantity: product.qty_order ?? product.stock,
                 position: product.product_position,
                 address: order.address,
                 picking_group: order.picking_group
