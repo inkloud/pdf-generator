@@ -1,6 +1,6 @@
 {
   "name": "pdf-generator",
-  "version": "10.0.0",
+  "version": "9.1.0",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -28,7 +28,7 @@
     "eslint": "10.6.0",
     "eslint-config-next": "16.2.10",
     "npm-check-updates": "^22.2.9",
-    "typescript": "7.0.2"
+    "typescript": "6.0.3"
   },
   "prettier": {
     "arrowParens": "always",
