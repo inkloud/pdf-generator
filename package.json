@@ -28,7 +28,7 @@
     "eslint": "10.8.0",
     "eslint-config-next": "16.2.12",
     "npm-check-updates": "^23.0.0",
-    "typescript": "7.0.2"
+    "typescript": "6.0.3"
   },
   "prettier": {
     "arrowParens": "always",
