@@ -38,9 +38,9 @@ content-type: application/json
         "product_sku": "HP301",
         "product_name": "HP301",
         "product_position": "TT010103",
-        "height": 9,
-        "width": 4,
-        "length": 4,
+        "height": 9.0,
+        "width": 4.0,
+        "length": 4.0,
         "weight": 0.12,
         "note": null,
         "stock": 3,
@@ -54,6 +54,7 @@ content-type: application/json
             "qty_order": 3
           }
         ],
+        "stocked_product_id": 1,
         "qty_order": 3
       },
       {
@@ -61,9 +62,9 @@ content-type: application/json
         "product_sku": "HP302",
         "product_name": "HP302",
         "product_position": "AA010101",
-        "height": 10,
-        "width": 10,
-        "length": 10,
+        "height": 10.0,
+        "width": 10.0,
+        "length": 10.0,
         "weight": 0.1,
         "note": "Ne manca uno",
         "stock": 1,
@@ -77,53 +78,8 @@ content-type: application/json
             "qty_order": 1
           }
         ],
+        "stocked_product_id": 4,
         "qty_order": 1
-      },
-      {
-        "product_id": 3,
-        "product_sku": "HP303",
-        "product_name": "HP303",
-        "product_position": "BB020202",
-        "height": 12,
-        "width": 6,
-        "length": 5,
-        "weight": 0.18,
-        "note": null,
-        "stock": 2,
-        "positions": [
-          {
-            "product_id": 3,
-            "wh_id": 1,
-            "delivery_id": 2,
-            "wh_position": "BB020202",
-            "stock": 2,
-            "qty_order": 2
-          }
-        ],
-        "qty_order": 2
-      },
-      {
-        "product_id": 4,
-        "product_sku": "HP304",
-        "product_name": "HP304",
-        "product_position": "DD030301",
-        "height": 8,
-        "width": 8,
-        "length": 3,
-        "weight": 0.09,
-        "note": null,
-        "stock": 2,
-        "positions": [
-          {
-            "product_id": 4,
-            "wh_id": 1,
-            "delivery_id": 4,
-            "wh_position": "DD030301",
-            "stock": 2,
-            "qty_order": 2
-          }
-        ],
-        "qty_order": 2
       }
     ],
     "picking_group": 7881
@@ -162,32 +118,98 @@ content-type: application/json
       {
         "product_id": 1,
         "product_sku": "HP301",
+        "product_name": "HP301",
+        "product_position": "TT010103",
+        "height": 9.0,
+        "width": 4.0,
+        "length": 4.0,
+        "weight": 0.12,
+        "note": null,
+        "stock": 1,
+        "positions": [
+          {
+            "product_id": 1,
+            "wh_id": 1,
+            "delivery_id": 3,
+            "wh_position": "TT010103",
+            "stock": 1,
+            "qty_order": 1
+          }
+        ],
+        "stocked_product_id": 1,
         "qty_order": 1
       },
       {
         "product_id": 1,
         "product_sku": "HP301",
+        "product_name": "HP301",
+        "product_position": "TT010103",
+        "height": 9.0,
+        "width": 4.0,
+        "length": 4.0,
+        "weight": 0.12,
+        "note": null,
+        "stock": 1,
+        "positions": [
+          {
+            "product_id": 1,
+            "wh_id": 1,
+            "delivery_id": 3,
+            "wh_position": "TT010103",
+            "stock": 1,
+            "qty_order": 1
+          }
+        ],
+        "stocked_product_id": 1,
         "qty_order": 1
       },
       {
         "product_id": 1,
         "product_sku": "HP301",
+        "product_name": "HP301",
+        "product_position": "TT010103",
+        "height": 9.0,
+        "width": 4.0,
+        "length": 4.0,
+        "weight": 0.12,
+        "note": null,
+        "stock": 1,
+        "positions": [
+          {
+            "product_id": 1,
+            "wh_id": 1,
+            "delivery_id": 3,
+            "wh_position": "TT010103",
+            "stock": 1,
+            "qty_order": 1
+          }
+        ],
+        "stocked_product_id": 1,
         "qty_order": 1
       },
       {
         "product_id": 2,
         "product_sku": "HP302",
+        "product_name": "HP302",
+        "product_position": "AA010101",
+        "height": 10.0,
+        "width": 10.0,
+        "length": 10.0,
+        "weight": 0.1,
+        "note": null,
+        "stock": 1,
+        "positions": [
+          {
+            "product_id": 2,
+            "wh_id": 1,
+            "delivery_id": 1,
+            "wh_position": "CC000003",
+            "stock": 1,
+            "qty_order": 1
+          }
+        ],
+        "stocked_product_id": 2,
         "qty_order": 1
-      },
-      {
-        "product_id": 3,
-        "product_sku": "HP303",
-        "qty_order": 2
-      },
-      {
-        "product_id": 4,
-        "product_sku": "HP304",
-        "qty_order": 2
       }
     ],
     "picking_group": 7881
@@ -226,32 +248,98 @@ content-type: application/json
       {
         "product_id": 1,
         "product_sku": "HP301",
+        "product_name": "HP301",
+        "product_position": "TT010103",
+        "height": 9.0,
+        "width": 4.0,
+        "length": 4.0,
+        "weight": 0.12,
+        "note": null,
+        "stock": 1,
+        "positions": [
+          {
+            "product_id": 1,
+            "wh_id": 1,
+            "delivery_id": 3,
+            "wh_position": "TT010103",
+            "stock": 1,
+            "qty_order": 1
+          }
+        ],
+        "stocked_product_id": 1,
         "qty_order": 1
       },
       {
         "product_id": 1,
         "product_sku": "HP301",
+        "product_name": "HP301",
+        "product_position": "TT010103",
+        "height": 9.0,
+        "width": 4.0,
+        "length": 4.0,
+        "weight": 0.12,
+        "note": null,
+        "stock": 1,
+        "positions": [
+          {
+            "product_id": 1,
+            "wh_id": 1,
+            "delivery_id": 3,
+            "wh_position": "TT010103",
+            "stock": 1,
+            "qty_order": 1
+          }
+        ],
+        "stocked_product_id": 1,
         "qty_order": 1
       },
       {
         "product_id": 1,
         "product_sku": "HP301",
+        "product_name": "HP301",
+        "product_position": "TT010103",
+        "height": 9.0,
+        "width": 4.0,
+        "length": 4.0,
+        "weight": 0.12,
+        "note": null,
+        "stock": 1,
+        "positions": [
+          {
+            "product_id": 1,
+            "wh_id": 1,
+            "delivery_id": 3,
+            "wh_position": "TT010103",
+            "stock": 1,
+            "qty_order": 1
+          }
+        ],
+        "stocked_product_id": 1,
         "qty_order": 1
       },
       {
         "product_id": 2,
         "product_sku": "HP302",
+        "product_name": "HP302",
+        "product_position": "AA010101",
+        "height": 10.0,
+        "width": 10.0,
+        "length": 10.0,
+        "weight": 0.1,
+        "note": null,
+        "stock": 1,
+        "positions": [
+          {
+            "product_id": 2,
+            "wh_id": 1,
+            "delivery_id": 1,
+            "wh_position": "CC000003",
+            "stock": 1,
+            "qty_order": 1
+          }
+        ],
+        "stocked_product_id": 2,
         "qty_order": 1
-      },
-      {
-        "product_id": 3,
-        "product_sku": "HP303",
-        "qty_order": 2
-      },
-      {
-        "product_id": 4,
-        "product_sku": "HP304",
-        "qty_order": 2
       }
     ],
     "picking_group": 7881
@@ -290,32 +378,98 @@ content-type: application/json
       {
         "product_id": 1,
         "product_sku": "HP301",
+        "product_name": "HP301",
+        "product_position": "TT010103",
+        "height": 9.0,
+        "width": 4.0,
+        "length": 4.0,
+        "weight": 0.12,
+        "note": null,
+        "stock": 1,
+        "positions": [
+          {
+            "product_id": 1,
+            "wh_id": 1,
+            "delivery_id": 3,
+            "wh_position": "TT010103",
+            "stock": 1,
+            "qty_order": 1
+          }
+        ],
+        "stocked_product_id": 1,
         "qty_order": 1
       },
       {
         "product_id": 1,
         "product_sku": "HP301",
+        "product_name": "HP301",
+        "product_position": "TT010103",
+        "height": 9.0,
+        "width": 4.0,
+        "length": 4.0,
+        "weight": 0.12,
+        "note": null,
+        "stock": 1,
+        "positions": [
+          {
+            "product_id": 1,
+            "wh_id": 1,
+            "delivery_id": 3,
+            "wh_position": "TT010103",
+            "stock": 1,
+            "qty_order": 1
+          }
+        ],
+        "stocked_product_id": 1,
         "qty_order": 1
       },
       {
         "product_id": 1,
         "product_sku": "HP301",
+        "product_name": "HP301",
+        "product_position": "TT010103",
+        "height": 9.0,
+        "width": 4.0,
+        "length": 4.0,
+        "weight": 0.12,
+        "note": null,
+        "stock": 1,
+        "positions": [
+          {
+            "product_id": 1,
+            "wh_id": 1,
+            "delivery_id": 3,
+            "wh_position": "TT010103",
+            "stock": 1,
+            "qty_order": 1
+          }
+        ],
+        "stocked_product_id": 1,
         "qty_order": 1
       },
       {
         "product_id": 2,
         "product_sku": "HP302",
+        "product_name": "HP302",
+        "product_position": "AA010101",
+        "height": 10.0,
+        "width": 10.0,
+        "length": 10.0,
+        "weight": 0.1,
+        "note": null,
+        "stock": 1,
+        "positions": [
+          {
+            "product_id": 2,
+            "wh_id": 1,
+            "delivery_id": 1,
+            "wh_position": "CC000003",
+            "stock": 1,
+            "qty_order": 1
+          }
+        ],
+        "stocked_product_id": 2,
         "qty_order": 1
-      },
-      {
-        "product_id": 3,
-        "product_sku": "HP303",
-        "qty_order": 2
-      },
-      {
-        "product_id": 4,
-        "product_sku": "HP304",
-        "qty_order": 2
       }
     ],
     "picking_group": 7881
@@ -354,32 +508,98 @@ content-type: application/json
       {
         "product_id": 1,
         "product_sku": "HP301",
+        "product_name": "HP301",
+        "product_position": "TT010103",
+        "height": 9.0,
+        "width": 4.0,
+        "length": 4.0,
+        "weight": 0.12,
+        "note": null,
+        "stock": 1,
+        "positions": [
+          {
+            "product_id": 1,
+            "wh_id": 1,
+            "delivery_id": 3,
+            "wh_position": "TT010103",
+            "stock": 1,
+            "qty_order": 1
+          }
+        ],
+        "stocked_product_id": 1,
         "qty_order": 1
       },
       {
         "product_id": 1,
         "product_sku": "HP301",
+        "product_name": "HP301",
+        "product_position": "TT010103",
+        "height": 9.0,
+        "width": 4.0,
+        "length": 4.0,
+        "weight": 0.12,
+        "note": null,
+        "stock": 1,
+        "positions": [
+          {
+            "product_id": 1,
+            "wh_id": 1,
+            "delivery_id": 3,
+            "wh_position": "TT010103",
+            "stock": 1,
+            "qty_order": 1
+          }
+        ],
+        "stocked_product_id": 1,
         "qty_order": 1
       },
       {
         "product_id": 1,
         "product_sku": "HP301",
+        "product_name": "HP301",
+        "product_position": "TT010103",
+        "height": 9.0,
+        "width": 4.0,
+        "length": 4.0,
+        "weight": 0.12,
+        "note": null,
+        "stock": 1,
+        "positions": [
+          {
+            "product_id": 1,
+            "wh_id": 1,
+            "delivery_id": 3,
+            "wh_position": "TT010103",
+            "stock": 1,
+            "qty_order": 1
+          }
+        ],
+        "stocked_product_id": 1,
         "qty_order": 1
       },
       {
         "product_id": 2,
         "product_sku": "HP302",
+        "product_name": "HP302",
+        "product_position": "AA010101",
+        "height": 10.0,
+        "width": 10.0,
+        "length": 10.0,
+        "weight": 0.1,
+        "note": null,
+        "stock": 1,
+        "positions": [
+          {
+            "product_id": 2,
+            "wh_id": 1,
+            "delivery_id": 1,
+            "wh_position": "CC000003",
+            "stock": 1,
+            "qty_order": 1
+          }
+        ],
+        "stocked_product_id": 2,
         "qty_order": 1
-      },
-      {
-        "product_id": 3,
-        "product_sku": "HP303",
-        "qty_order": 2
-      },
-      {
-        "product_id": 4,
-        "product_sku": "HP304",
-        "qty_order": 2
       }
     ],
     "picking_group": 7881
@@ -418,32 +638,98 @@ content-type: application/json
       {
         "product_id": 1,
         "product_sku": "HP301",
+        "product_name": "HP301",
+        "product_position": "TT010103",
+        "height": 9.0,
+        "width": 4.0,
+        "length": 4.0,
+        "weight": 0.12,
+        "note": null,
+        "stock": 1,
+        "positions": [
+          {
+            "product_id": 1,
+            "wh_id": 1,
+            "delivery_id": 3,
+            "wh_position": "TT010103",
+            "stock": 1,
+            "qty_order": 1
+          }
+        ],
+        "stocked_product_id": 1,
         "qty_order": 1
       },
       {
         "product_id": 1,
         "product_sku": "HP301",
+        "product_name": "HP301",
+        "product_position": "TT010103",
+        "height": 9.0,
+        "width": 4.0,
+        "length": 4.0,
+        "weight": 0.12,
+        "note": null,
+        "stock": 1,
+        "positions": [
+          {
+            "product_id": 1,
+            "wh_id": 1,
+            "delivery_id": 3,
+            "wh_position": "TT010103",
+            "stock": 1,
+            "qty_order": 1
+          }
+        ],
+        "stocked_product_id": 1,
         "qty_order": 1
       },
       {
         "product_id": 1,
         "product_sku": "HP301",
+        "product_name": "HP301",
+        "product_position": "TT010103",
+        "height": 9.0,
+        "width": 4.0,
+        "length": 4.0,
+        "weight": 0.12,
+        "note": null,
+        "stock": 1,
+        "positions": [
+          {
+            "product_id": 1,
+            "wh_id": 1,
+            "delivery_id": 3,
+            "wh_position": "TT010103",
+            "stock": 1,
+            "qty_order": 1
+          }
+        ],
+        "stocked_product_id": 1,
         "qty_order": 1
       },
       {
         "product_id": 2,
         "product_sku": "HP302",
+        "product_name": "HP302",
+        "product_position": "AA010101",
+        "height": 10.0,
+        "width": 10.0,
+        "length": 10.0,
+        "weight": 0.1,
+        "note": null,
+        "stock": 1,
+        "positions": [
+          {
+            "product_id": 2,
+            "wh_id": 1,
+            "delivery_id": 1,
+            "wh_position": "CC000003",
+            "stock": 1,
+            "qty_order": 1
+          }
+        ],
+        "stocked_product_id": 2,
         "qty_order": 1
-      },
-      {
-        "product_id": 3,
-        "product_sku": "HP303",
-        "qty_order": 2
-      },
-      {
-        "product_id": 4,
-        "product_sku": "HP304",
-        "qty_order": 2
       }
     ],
     "picking_group": 7881
@@ -482,32 +768,98 @@ content-type: application/json
       {
         "product_id": 1,
         "product_sku": "HP301",
+        "product_name": "HP301",
+        "product_position": "TT010103",
+        "height": 9.0,
+        "width": 4.0,
+        "length": 4.0,
+        "weight": 0.12,
+        "note": null,
+        "stock": 1,
+        "positions": [
+          {
+            "product_id": 1,
+            "wh_id": 1,
+            "delivery_id": 3,
+            "wh_position": "TT010103",
+            "stock": 1,
+            "qty_order": 1
+          }
+        ],
+        "stocked_product_id": 1,
         "qty_order": 1
       },
       {
         "product_id": 1,
         "product_sku": "HP301",
+        "product_name": "HP301",
+        "product_position": "TT010103",
+        "height": 9.0,
+        "width": 4.0,
+        "length": 4.0,
+        "weight": 0.12,
+        "note": null,
+        "stock": 1,
+        "positions": [
+          {
+            "product_id": 1,
+            "wh_id": 1,
+            "delivery_id": 3,
+            "wh_position": "TT010103",
+            "stock": 1,
+            "qty_order": 1
+          }
+        ],
+        "stocked_product_id": 1,
         "qty_order": 1
       },
       {
         "product_id": 1,
         "product_sku": "HP301",
+        "product_name": "HP301",
+        "product_position": "TT010103",
+        "height": 9.0,
+        "width": 4.0,
+        "length": 4.0,
+        "weight": 0.12,
+        "note": null,
+        "stock": 1,
+        "positions": [
+          {
+            "product_id": 1,
+            "wh_id": 1,
+            "delivery_id": 3,
+            "wh_position": "TT010103",
+            "stock": 1,
+            "qty_order": 1
+          }
+        ],
+        "stocked_product_id": 1,
         "qty_order": 1
       },
       {
         "product_id": 2,
         "product_sku": "HP302",
+        "product_name": "HP302",
+        "product_position": "AA010101",
+        "height": 10.0,
+        "width": 10.0,
+        "length": 10.0,
+        "weight": 0.1,
+        "note": null,
+        "stock": 1,
+        "positions": [
+          {
+            "product_id": 2,
+            "wh_id": 1,
+            "delivery_id": 1,
+            "wh_position": "CC000003",
+            "stock": 1,
+            "qty_order": 1
+          }
+        ],
+        "stocked_product_id": 2,
         "qty_order": 1
-      },
-      {
-        "product_id": 3,
-        "product_sku": "HP303",
-        "qty_order": 2
-      },
-      {
-        "product_id": 4,
-        "product_sku": "HP304",
-        "qty_order": 2
       }
     ],
     "picking_group": 7881
@@ -546,32 +898,98 @@ content-type: application/json
       {
         "product_id": 1,
         "product_sku": "HP301",
+        "product_name": "HP301",
+        "product_position": "TT010103",
+        "height": 9.0,
+        "width": 4.0,
+        "length": 4.0,
+        "weight": 0.12,
+        "note": null,
+        "stock": 1,
+        "positions": [
+          {
+            "product_id": 1,
+            "wh_id": 1,
+            "delivery_id": 3,
+            "wh_position": "TT010103",
+            "stock": 1,
+            "qty_order": 1
+          }
+        ],
+        "stocked_product_id": 1,
         "qty_order": 1
       },
       {
         "product_id": 1,
         "product_sku": "HP301",
+        "product_name": "HP301",
+        "product_position": "TT010103",
+        "height": 9.0,
+        "width": 4.0,
+        "length": 4.0,
+        "weight": 0.12,
+        "note": null,
+        "stock": 1,
+        "positions": [
+          {
+            "product_id": 1,
+            "wh_id": 1,
+            "delivery_id": 3,
+            "wh_position": "TT010103",
+            "stock": 1,
+            "qty_order": 1
+          }
+        ],
+        "stocked_product_id": 1,
         "qty_order": 1
       },
       {
         "product_id": 1,
         "product_sku": "HP301",
+        "product_name": "HP301",
+        "product_position": "TT010103",
+        "height": 9.0,
+        "width": 4.0,
+        "length": 4.0,
+        "weight": 0.12,
+        "note": null,
+        "stock": 1,
+        "positions": [
+          {
+            "product_id": 1,
+            "wh_id": 1,
+            "delivery_id": 3,
+            "wh_position": "TT010103",
+            "stock": 1,
+            "qty_order": 1
+          }
+        ],
+        "stocked_product_id": 1,
         "qty_order": 1
       },
       {
         "product_id": 2,
         "product_sku": "HP302",
+        "product_name": "HP302",
+        "product_position": "AA010101",
+        "height": 10.0,
+        "width": 10.0,
+        "length": 10.0,
+        "weight": 0.1,
+        "note": null,
+        "stock": 1,
+        "positions": [
+          {
+            "product_id": 2,
+            "wh_id": 1,
+            "delivery_id": 1,
+            "wh_position": "CC000003",
+            "stock": 1,
+            "qty_order": 1
+          }
+        ],
+        "stocked_product_id": 2,
         "qty_order": 1
-      },
-      {
-        "product_id": 3,
-        "product_sku": "HP303",
-        "qty_order": 2
-      },
-      {
-        "product_id": 4,
-        "product_sku": "HP304",
-        "qty_order": 2
       }
     ],
     "picking_group": 7881
@@ -610,32 +1028,98 @@ content-type: application/json
       {
         "product_id": 1,
         "product_sku": "HP301",
+        "product_name": "HP301",
+        "product_position": "TT010103",
+        "height": 9.0,
+        "width": 4.0,
+        "length": 4.0,
+        "weight": 0.12,
+        "note": null,
+        "stock": 1,
+        "positions": [
+          {
+            "product_id": 1,
+            "wh_id": 1,
+            "delivery_id": 3,
+            "wh_position": "TT010103",
+            "stock": 1,
+            "qty_order": 1
+          }
+        ],
+        "stocked_product_id": 1,
         "qty_order": 1
       },
       {
         "product_id": 1,
         "product_sku": "HP301",
+        "product_name": "HP301",
+        "product_position": "TT010103",
+        "height": 9.0,
+        "width": 4.0,
+        "length": 4.0,
+        "weight": 0.12,
+        "note": null,
+        "stock": 1,
+        "positions": [
+          {
+            "product_id": 1,
+            "wh_id": 1,
+            "delivery_id": 3,
+            "wh_position": "TT010103",
+            "stock": 1,
+            "qty_order": 1
+          }
+        ],
+        "stocked_product_id": 1,
         "qty_order": 1
       },
       {
         "product_id": 1,
         "product_sku": "HP301",
+        "product_name": "HP301",
+        "product_position": "TT010103",
+        "height": 9.0,
+        "width": 4.0,
+        "length": 4.0,
+        "weight": 0.12,
+        "note": null,
+        "stock": 1,
+        "positions": [
+          {
+            "product_id": 1,
+            "wh_id": 1,
+            "delivery_id": 3,
+            "wh_position": "TT010103",
+            "stock": 1,
+            "qty_order": 1
+          }
+        ],
+        "stocked_product_id": 1,
         "qty_order": 1
       },
       {
         "product_id": 2,
         "product_sku": "HP302",
+        "product_name": "HP302",
+        "product_position": "AA010101",
+        "height": 10.0,
+        "width": 10.0,
+        "length": 10.0,
+        "weight": 0.1,
+        "note": null,
+        "stock": 1,
+        "positions": [
+          {
+            "product_id": 2,
+            "wh_id": 1,
+            "delivery_id": 1,
+            "wh_position": "CC000003",
+            "stock": 1,
+            "qty_order": 1
+          }
+        ],
+        "stocked_product_id": 2,
         "qty_order": 1
-      },
-      {
-        "product_id": 3,
-        "product_sku": "HP303",
-        "qty_order": 2
-      },
-      {
-        "product_id": 4,
-        "product_sku": "HP304",
-        "qty_order": 2
       }
     ],
     "picking_group": 7881
@@ -674,58 +1158,50 @@ content-type: application/json
       {
         "product_id": 1,
         "product_sku": "HP301",
+        "product_name": "HP301",
+        "product_position": "TT010103",
+        "height": 9.0,
+        "width": 4.0,
+        "length": 4.0,
+        "weight": 0.12,
+        "note": null,
+        "stock": 3,
+        "positions": [
+          {
+            "product_id": 1,
+            "wh_id": 1,
+            "delivery_id": 3,
+            "wh_position": "TT010103",
+            "stock": 3,
+            "qty_order": 3
+          }
+        ],
+        "stocked_product_id": 1,
         "qty_order": 3
       },
       {
         "product_id": 2,
         "product_sku": "HP302",
+        "product_name": "HP302",
+        "product_position": "AA010101",
+        "height": 10.0,
+        "width": 10.0,
+        "length": 10.0,
+        "weight": 0.1,
+        "note": null,
+        "stock": 1,
+        "positions": [
+          {
+            "product_id": 2,
+            "wh_id": 1,
+            "delivery_id": 1,
+            "wh_position": "CC000003",
+            "stock": 1,
+            "qty_order": 1
+          }
+        ],
+        "stocked_product_id": 2,
         "qty_order": 1
-      },
-      {
-        "product_id": 3,
-        "product_sku": "HP303",
-        "product_name": "HP303",
-        "product_position": "BB020202",
-        "height": 12,
-        "width": 6,
-        "length": 5,
-        "weight": 0.18,
-        "note": null,
-        "stock": 2,
-        "positions": [
-          {
-            "product_id": 3,
-            "wh_id": 1,
-            "delivery_id": 2,
-            "wh_position": "BB020202",
-            "stock": 2,
-            "qty_order": 2
-          }
-        ],
-        "qty_order": 2
-      },
-      {
-        "product_id": 4,
-        "product_sku": "HP304",
-        "product_name": "HP304",
-        "product_position": "DD030301",
-        "height": 8,
-        "width": 8,
-        "length": 3,
-        "weight": 0.09,
-        "note": null,
-        "stock": 2,
-        "positions": [
-          {
-            "product_id": 4,
-            "wh_id": 1,
-            "delivery_id": 4,
-            "wh_position": "DD030301",
-            "stock": 2,
-            "qty_order": 2
-          }
-        ],
-        "qty_order": 2
       }
     ],
     "picking_group": 7881
@@ -764,58 +1240,50 @@ content-type: application/json
       {
         "product_id": 1,
         "product_sku": "HP301",
+        "product_name": "HP301",
+        "product_position": "TT010103",
+        "height": 9.0,
+        "width": 4.0,
+        "length": 4.0,
+        "weight": 0.12,
+        "note": null,
+        "stock": 3,
+        "positions": [
+          {
+            "product_id": 1,
+            "wh_id": 1,
+            "delivery_id": 3,
+            "wh_position": "TT010103",
+            "stock": 3,
+            "qty_order": 3
+          }
+        ],
+        "stocked_product_id": 1,
         "qty_order": 3
       },
       {
         "product_id": 2,
         "product_sku": "HP302",
+        "product_name": "HP302",
+        "product_position": "AA010101",
+        "height": 10.0,
+        "width": 10.0,
+        "length": 10.0,
+        "weight": 0.1,
+        "note": null,
+        "stock": 1,
+        "positions": [
+          {
+            "product_id": 2,
+            "wh_id": 1,
+            "delivery_id": 1,
+            "wh_position": "CC000003",
+            "stock": 1,
+            "qty_order": 1
+          }
+        ],
+        "stocked_product_id": 2,
         "qty_order": 1
-      },
-      {
-        "product_id": 3,
-        "product_sku": "HP303",
-        "product_name": "HP303",
-        "product_position": "BB020202",
-        "height": 12,
-        "width": 6,
-        "length": 5,
-        "weight": 0.18,
-        "note": null,
-        "stock": 2,
-        "positions": [
-          {
-            "product_id": 3,
-            "wh_id": 1,
-            "delivery_id": 2,
-            "wh_position": "BB020202",
-            "stock": 2,
-            "qty_order": 2
-          }
-        ],
-        "qty_order": 2
-      },
-      {
-        "product_id": 4,
-        "product_sku": "HP304",
-        "product_name": "HP304",
-        "product_position": "DD030301",
-        "height": 8,
-        "width": 8,
-        "length": 3,
-        "weight": 0.09,
-        "note": null,
-        "stock": 2,
-        "positions": [
-          {
-            "product_id": 4,
-            "wh_id": 1,
-            "delivery_id": 4,
-            "wh_position": "DD030301",
-            "stock": 2,
-            "qty_order": 2
-          }
-        ],
-        "qty_order": 2
       }
     ],
     "picking_group": 7881

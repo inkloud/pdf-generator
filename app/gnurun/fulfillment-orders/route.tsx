@@ -7,10 +7,13 @@ import {GroupedProductPDFCustomer} from './pdf_fulfillment/customer';
 import {GroupedProductPDFBackoffice} from './pdf_fulfillment/backoffice';
 import {JSX} from "react";
 
-const PdfStyle: {[k: string]: (orders: GroupedProduct[]) => JSX.Element} = {
-    "BACKOFFICE": function(orders: GroupedProduct[]){return <GroupedProductPDFBackoffice orders={orders}/>},
-    "CUSTOMER": function(orders: GroupedProduct[]){return <GroupedProductPDFCustomer orders={orders}/>}
-}
+const PdfStyle: {[k: string]: (orders: GroupedProduct[], sourceOrders: Order[]) => JSX.Element} = {
+    "BACKOFFICE": function(orders: GroupedProduct[], sourceOrders: Order[]){
+        return <GroupedProductPDFBackoffice orders={orders} sourceOrders={sourceOrders}/>;
+    },
+    "CUSTOMER": function(orders: GroupedProduct[]){return <GroupedProductPDFCustomer orders={orders}/>;}
+};
+
 export async function GET() {
     return NextResponse.json([
         {
@@ -78,12 +81,11 @@ export async function POST(req: Request) {
     if (!jsonData) {
         return new Response('Missing JSON data', {status: 400});
     }
-    const style = (new URL(req.url)).searchParams.get("style") || ""
 
-    const rawOrders = jsonData.map((orders: unknown) => Order.create(orders as Partial<MainOrder>));
+    const style = (new URL(req.url)).searchParams.get("style") || "";
+    const rawOrders = jsonData.map((order: unknown) => Order.create(order as Partial<MainOrder>));
     const grouped: GroupedProduct[] = groupOrdersByProductPickingGroupFirst(rawOrders);
-
-    const pdfNode = PdfStyle[style](grouped);
+    const pdfNode = PdfStyle[style](grouped, rawOrders);
 
     try {
         const nodeStream = await renderToStream(pdfNode);
@@ -99,7 +101,7 @@ export async function POST(req: Request) {
             headers: {
                 'Content-Type': 'application/pdf',
                 'Content-Disposition': 'inline; filename="delivery.pdf"',
-                'Access-Control-Allow-Origin': '*', // Javid change the source here, for the prod
+                'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
                 'Access-Control-Allow-Headers': 'Content-Type'
             }
