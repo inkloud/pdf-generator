@@ -126,7 +126,7 @@ const getDistribution = (product: Product) => {
         const positionName = (position.wh_position || product.product_position || '').trim();
         if (!positionName) continue;
 
-        const quantity = position.qty_order ?? position.stock;
+        const quantity = position.stock;
         quantitiesByPosition.set(
             positionName,
             (quantitiesByPosition.get(positionName) ?? 0) + quantity
@@ -219,7 +219,10 @@ const OrderFooter: React.FC<{ order: Order }> = ({order}) => {
         (acc, product) => ({
             weight: acc.weight + product.weight * product.qty_order,
             volume: acc.volume + product.length * product.width * product.height * product.qty_order,
-            quantity: acc.quantity + product.stock,
+            quantity: acc.quantity + getDistribution(product).reduce(
+                (total, entry) => total + entry.quantity,
+                0
+            ),
         }),
         {weight: 0, volume: 0, quantity: 0}
     );
@@ -240,15 +243,29 @@ const OrderFooter: React.FC<{ order: Order }> = ({order}) => {
     );
 };
 
+const OrderPage: React.FC<{ order: Order }> = ({order}) => (
+    <Page size="A4" style={styles.page}>
+        <OrderHeader order={order}/>
+        <OrderProducts products={order.products}/>
+        <OrderFooter order={order}/>
+        <PageNumber/>
+    </Page>
+);
+
 export const GroupedProductPDFBackoffice: React.FC<{
     orders: GroupedProduct[];
     sourceOrders: Order[];
-}> = ({orders, sourceOrders}) => {
+    includeGroupSummary?: boolean;
+}> = ({orders, sourceOrders, includeGroupSummary = true}) => {
     const groups = groupByPickingGroup(orders);
 
     return (
         <Document>
-            {groups.map((group) => {
+            {!includeGroupSummary && sourceOrders.map((order) => (
+                <OrderPage key={`order-${order.id}`} order={order}/>
+            ))}
+
+            {includeGroupSummary && groups.map((group) => {
                 const rows = group.items.map((item) => {
                     const positions = uniquePositionsFromEntries(item.orders);
                     const {ordersCount, stockPerOrder, totalQty} = calcGroupQty(item);
@@ -331,12 +348,7 @@ export const GroupedProductPDFBackoffice: React.FC<{
                         </Page>
 
                         {groupOrders.map((order) => (
-                            <Page key={`order-${order.id}`} size="A4" style={styles.page}>
-                                <OrderHeader order={order}/>
-                                <OrderProducts products={order.products}/>
-                                <OrderFooter order={order}/>
-                                <PageNumber/>
-                            </Page>
+                            <OrderPage key={`order-${order.id}`} order={order}/>
                         ))}
                     </React.Fragment>
                 );

@@ -51,7 +51,6 @@ export interface ProductPosition {
     delivery_id: number;
     wh_position: string;
     stock: number;
-    qty_order?: number;
 }
 
 export interface Product {

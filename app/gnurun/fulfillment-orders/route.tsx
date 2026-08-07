@@ -1,17 +1,36 @@
 import {renderToStream} from '@react-pdf/renderer';
 import {NextResponse} from 'next/server';
 
+import {JSX} from 'react';
 import {GroupedProduct, MainOrder, Order} from '../../types/fulfillment';
 import {groupOrdersByProductPickingGroupFirst} from '../../utils/sorting';
-import {GroupedProductPDFCustomer} from './pdf_fulfillment/customer';
 import {GroupedProductPDFBackoffice} from './pdf_fulfillment/backoffice';
-import {JSX} from "react";
 
-const PdfStyle: {[k: string]: (orders: GroupedProduct[], sourceOrders: Order[]) => JSX.Element} = {
-    "BACKOFFICE": function(orders: GroupedProduct[], sourceOrders: Order[]){
-        return <GroupedProductPDFBackoffice orders={orders} sourceOrders={sourceOrders}/>;
-    },
-    "CUSTOMER": function(orders: GroupedProduct[]){return <GroupedProductPDFCustomer orders={orders}/>;}
+type PdfRenderer = (orders: GroupedProduct[], sourceOrders: Order[]) => JSX.Element;
+
+const PdfStyle: Record<string, PdfRenderer> = {
+    GROUPED: (orders, sourceOrders) => (
+        <GroupedProductPDFBackoffice
+            orders={orders}
+            sourceOrders={sourceOrders}
+            includeGroupSummary
+        />
+    ),
+    SEPARATE: (orders, sourceOrders) => (
+        <GroupedProductPDFBackoffice
+            orders={orders}
+            sourceOrders={sourceOrders}
+            includeGroupSummary={false}
+        />
+    ),
+    // Keep the previous name working for existing integrations.
+    BACKOFFICE: (orders, sourceOrders) => (
+        <GroupedProductPDFBackoffice
+            orders={orders}
+            sourceOrders={sourceOrders}
+            includeGroupSummary
+        />
+    ),
 };
 
 export async function GET() {
@@ -82,10 +101,19 @@ export async function POST(req: Request) {
         return new Response('Missing JSON data', {status: 400});
     }
 
-    const style = (new URL(req.url)).searchParams.get("style") || "";
+    const style = ((new URL(req.url)).searchParams.get('style') || 'GROUPED').toUpperCase();
+    const renderPdf = PdfStyle[style];
+
+    if (!renderPdf) {
+        return NextResponse.json(
+            {error: `Unsupported style '${style}'. Use GROUPED or SEPARATE.`},
+            {status: 400}
+        );
+    }
+
     const rawOrders = jsonData.map((order: unknown) => Order.create(order as Partial<MainOrder>));
     const grouped: GroupedProduct[] = groupOrdersByProductPickingGroupFirst(rawOrders);
-    const pdfNode = PdfStyle[style](grouped, rawOrders);
+    const pdfNode = renderPdf(grouped, rawOrders);
 
     try {
         const nodeStream = await renderToStream(pdfNode);
