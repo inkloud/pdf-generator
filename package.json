@@ -1,34 +1,36 @@
 {
   "name": "pdf-generator",
-  "version": "10.1.0",
+  "version": "11.0.0",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "update": "ncu -u"
+    "update": "ncu -u",
+    "codex": "codex"
   },
   "author": "Luca Bacchi <bacchilu@gmail.com> (https://github.com/bacchilu)",
   "license": "ISC",
   "description": "PDF generator using React-PDF",
   "dependencies": {
-    "@react-pdf/renderer": "^4.6.1",
+    "@react-pdf/renderer": "^4.9.0",
     "canvas": "^3.2.3",
     "decimal.js": "^10.6.0",
     "jsbarcode": "^3.12.3",
-    "next": "^16.3.1",
+    "next": "^16.3.3",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.6",
-    "@types/node": "26.2.0",
+    "@openai/codex": "^0.151.0",
+    "@types/node": "26.4.0",
     "@types/react": "19.2.18",
-    "@types/react-dom": "^19.2.4",
-    "eslint": "10.8.1",
-    "eslint-config-next": "16.3.1",
-    "npm-check-updates": "^23.0.2",
-    "typescript": "6.0.3"
+    "@types/react-dom": "^19.2.5",
+    "eslint": "10.9.1",
+    "eslint-config-next": "16.3.3",
+    "npm-check-updates": "^23.1.0",
+    "typescript": "7.0.2"
   },
   "prettier": {
     "arrowParens": "always",
