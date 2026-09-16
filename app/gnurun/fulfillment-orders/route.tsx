@@ -101,7 +101,7 @@ export async function POST(req: Request) {
         return new Response('Missing JSON data', {status: 400});
     }
 
-    const style = ((new URL(req.url)).searchParams.get('style') || 'GROUPED').toUpperCase();
+    const style = ((new URL(req.url)).searchParams.get('style') || 'SEPARATE').toUpperCase();
     const renderPdf = PdfStyle[style];
 
     if (!renderPdf) {

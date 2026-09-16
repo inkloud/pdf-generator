@@ -1,4 +1,4 @@
-POST http://localhost:3000/gnurun/fulfillment-orders?style=BACKOFFICE
+POST http://localhost:3000/gnurun/fulfillment-orders?style=GROUPED
 content-type: application/json
 
 [
