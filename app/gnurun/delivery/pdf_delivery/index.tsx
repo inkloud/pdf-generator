@@ -1,7 +1,8 @@
-import {Document, Page, Text, View} from '@react-pdf/renderer';
+import {Document, Image, Page, Text, View} from '@react-pdf/renderer';
 
 import React from 'react';
-import {DeliveryBox as BoxType, Delivery, DeliveryBox, DeliveryBoxProduct} from '../../../types/delivery';
+import {Delivery, DeliveryBox, DeliveryBoxProduct} from '../../../types/delivery';
+import {formatDate, getLogo} from '../../../utils/formating';
 import {styles} from './style';
 import {Table} from './table';
 
@@ -13,10 +14,11 @@ const checkTotals = function (delivery: Delivery) {
     const totals = {weight: 0, quantity: 0, volume: 0};
     if (delivery.boxes.length > 0) {
         delivery.boxes.forEach((box: DeliveryBox) => {
+            const boxCount = box.box_qty || 1;
             box.products.forEach((product) => {
-                totals.volume += getVolume(product);
-                totals.quantity += product.quantity;
-                totals.weight += product.p_weight_kg;
+                totals.volume += getVolume(product) * boxCount;
+                totals.quantity += product.quantity * boxCount;
+                totals.weight += product.p_weight_kg * boxCount;
             });
         });
         return totals;
@@ -27,54 +29,38 @@ const checkTotals = function (delivery: Delivery) {
 const Header: React.FC<{delivery: Delivery}> = function ({delivery}) {
     return (
         <>
-            <Text style={styles.headerTitle}>Picking List</Text>
-            <View style={styles.headerContainer}>
-                <View style={styles.addressBox}></View>
-                <View style={styles.rightBox}>
-                    <Text>Shipping id: {delivery.id}</Text>
+            <View style={styles.titleContainer}>
+                <Text style={styles.title}>Picking List</Text>
+                <View style={styles.logoRow}>
+                    <Image style={styles.logo} src={getLogo()} />
                 </View>
             </View>
-            <View style={styles.headerContainer}>
-                <View style={styles.addressBox}>
-                    <div style={styles.headerValueContainer}>
-                        <Text style={styles.headerValueTitle}>Sender: </Text>
-                        <Text style={styles.headerValueText}>{delivery.company_name}</Text>
-                    </div>
-                    <div style={styles.headerValueContainer}>
-                        <Text style={styles.headerValueTitle}>Warehouse: </Text>
-                        <Text style={styles.headerValueText}>{delivery.warehouse_id}</Text>
-                    </div>
-                </View>
-                <View style={styles.rightBox}>
-                    <div style={styles.headerValueContainer}>
-                        <Text style={styles.headerValueTitle}>Date: </Text>
-                        <Text style={styles.headerValueText}>{delivery.creation_date}</Text>
-                    </div>
-                    <div style={styles.headerValueContainer}>
-                        <Text style={styles.headerValueTitle}>Doc. number: </Text>
-                        <Text style={styles.headerValueText}>{delivery.id}</Text>
-                    </div>
-                    <div style={styles.headerValueContainer}>
-                        <Text style={styles.headerValueTitle}>Courier name: </Text>
-                        <Text style={styles.headerValueText}>{delivery.courier_name}</Text>
-                    </div>
-                    <div style={styles.headerValueContainer}>
-                        <Text style={styles.headerValueTitle}>Customer reference: </Text>
-                        <Text style={styles.headerValueText}>{delivery.customer_id}</Text>
-                    </div>
+
+            <View style={styles.section}>
+                <View style={styles.infoBox}>
+                    <View style={styles.box}>
+                        <Text><Text style={styles.label}>Delivery ID:</Text> {delivery.id}</Text>
+                        <Text><Text style={styles.label}>Date:</Text> {formatDate(delivery.creation_date)}</Text>
+                        <Text><Text style={styles.label}>Doc. number:</Text> {delivery.id}</Text>
+                    </View>
+                    <View style={[styles.box, styles.rightBox]}>
+                        <Text><Text style={styles.label}>Courier:</Text> {delivery.courier_name}</Text>
+                        <Text><Text style={styles.label}>Customer ref:</Text> {delivery.customer_id}</Text>
+                    </View>
                 </View>
             </View>
-            {/*    <View style={styles.headerContainer}>*/}
-            {/*    <View style={styles.addressBox}>*/}
-            {/*        <Text>{delivery.company_name}</Text>*/}
-            {/*        <Text>{delivery.courier_name}</Text>*/}
-            {/*        <Text>{delivery.courier_tracking}</Text>*/}
-            {/*    </View>*/}
-            {/*    <View style={styles.rightBox}>*/}
-            {/*        <Text>Shipping #{delivery.id}</Text>*/}
-            {/*        <Text>Date: {(new Date(delivery.creation_date).toLocaleDateString())}</Text>*/}
-            {/*    </View>*/}
-            {/*</View>*/}
+
+            <View style={styles.section}>
+                <View style={styles.infoBox}>
+                    <View style={styles.box}>
+                        <Text><Text style={styles.label}>Sender:</Text> {delivery.company_name}</Text>
+                        <Text><Text style={styles.label}>Warehouse:</Text> {delivery.warehouse_id}</Text>
+                    </View>
+                    <View style={[styles.box, styles.rightBox]}>
+                        <Text><Text style={styles.label}>Tracking:</Text> {delivery.courier_tracking}</Text>
+                    </View>
+                </View>
+            </View>
         </>
     );
 };
@@ -83,10 +69,18 @@ const Footer: React.FC<{delivery: Delivery}> = function ({delivery}) {
     const totals = checkTotals(delivery);
     return (
         <>
-            <Text style={styles.totals} fixed>
-                Total weight: {totals.weight} kg; Total net volume: {totals.volume} cm3; Total quantity{' '}
-                {totals.quantity};
-            </Text>
+            <View style={styles.summaryTable}>
+                <View style={styles.tableHeader}>
+                    <Text style={styles.cell}>Total Weight</Text>
+                    <Text style={styles.cell}>Total Volume</Text>
+                    <Text style={styles.cell}>Total Quantity</Text>
+                </View>
+                <View style={styles.tableRow}>
+                    <Text style={styles.cell}>{totals.weight} kg</Text>
+                    <Text style={styles.cell}>{totals.volume} cm3</Text>
+                    <Text style={styles.cell}>{totals.quantity}</Text>
+                </View>
+            </View>
             <Text
                 style={styles.footer}
                 fixed
@@ -96,34 +90,33 @@ const Footer: React.FC<{delivery: Delivery}> = function ({delivery}) {
     );
 };
 
-const BoxTitle: React.FC<{
-    box: BoxType;
-    idx_box: number;
-    total_boxes: number;
-}> = function ({box, idx_box, total_boxes}) {
-    const box_index = box.box_qty === 1 ? `${idx_box + 1}` : `${idx_box + 1}..${idx_box + box.box_qty}`;
-    return `Box ${box_index}/${total_boxes}`;
+const getProductKey = (product: DeliveryBoxProduct) => {
+    if (product.product_id) return `id:${product.product_id}`;
+
+    return [product.p_code, product.sku_code, product.product_sku, product.p_title, product.product_name]
+        .filter(Boolean)
+        .join('|');
 };
 
-const Box: React.FC<{data: BoxType; total_boxes: number; idx_box: number}> = function ({data, total_boxes, idx_box}) {
-    const columns = ['Code', 'Quantity'];
-    const rows = data.products.map((p) => ({Code: p.p_code, Quantity: `${p.quantity}`}));
+const mergeProducts = (boxes: DeliveryBox[]) => {
+    const productsByKey = new Map<string, DeliveryBoxProduct>();
 
-    return (
-        <>
-            <Text style={{fontSize: 20, margin: 12}}>
-                <BoxTitle box={data} idx_box={idx_box} total_boxes={total_boxes} />{' '}
-                <Text
-                    style={{fontSize: 10, margin: 12}}
-                >{`${data.box_width_cm.toString()}cm x ${data.box_length_cm.toString()}cm x ${data.box_height_cm.toString()}cm`}</Text>
-            </Text>
-            <View style={{flexDirection: 'row'}}>
-                <View style={{width: '100%'}}>
-                    <Table products={data.products} />
-                </View>
-            </View>
-        </>
-    );
+    for (const box of boxes) {
+        const boxCount = box.box_qty || 1;
+        for (const product of box.products) {
+            const quantity = product.quantity * boxCount;
+            const key = getProductKey(product);
+            const existing = productsByKey.get(key);
+
+            if (existing) {
+                existing.quantity += quantity;
+            } else {
+                productsByKey.set(key, {...product, quantity});
+            }
+        }
+    }
+
+    return Array.from(productsByKey.values());
 };
 
 export const DeliveryPDF: React.FC<{
@@ -132,24 +125,13 @@ export const DeliveryPDF: React.FC<{
     courier_name: string;
     courier_tracking: string;
 }> = function ({delivery, company_name, courier_name, courier_tracking}) {
-    const total_boxes = delivery.boxes.map((b) => b.box_qty).reduce((acc, item) => acc + item, 0);
-    const {offsets: boxOffsets} = delivery.boxes.reduce(
-        (acc, box) => {
-            acc.offsets.push(acc.runningIndex);
-            acc.runningIndex += box.box_qty;
-            return acc;
-        },
-        {offsets: [] as number[], runningIndex: 0}
-    );
-    const boxes = delivery.boxes.map((box, idx) => (
-        <Box key={box.id} data={box} total_boxes={total_boxes} idx_box={boxOffsets[idx]} />
-    ));
+    const products = mergeProducts(delivery.boxes);
 
     return (
         <Document>
-            <Page size="A4" orientation="landscape" style={styles.page}>
+            <Page size="A4" style={styles.page}>
                 <Header delivery={delivery} />
-                {boxes}
+                <Table products={products} />
                 <Footer delivery={delivery} />
             </Page>
         </Document>

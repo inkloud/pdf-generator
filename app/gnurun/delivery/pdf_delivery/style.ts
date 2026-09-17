@@ -1,7 +1,45 @@
 import {StyleSheet} from '@react-pdf/renderer';
 
 export const styles = StyleSheet.create({
-    page: {padding: 64},
+    page: {
+        padding: 40,
+        fontSize: 11,
+        fontFamily: 'Helvetica'
+    },
+    section: {
+        marginBottom: 16
+    },
+    titleContainer: {
+        alignItems: 'center',
+        marginBottom: 24
+    },
+    logo: {
+        width: 100,
+        height: 35,
+        marginBottom: 8
+    },
+    logoRow: {
+        width: '100%',
+        alignItems: 'flex-start'
+    },
+    title: {
+        fontSize: 18,
+        textAlign: 'center'
+    },
+    infoBox: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginBottom: 8
+    },
+    box: {
+        width: '48%'
+    },
+    rightBox: {
+        textAlign: 'right'
+    },
+    label: {
+        fontWeight: 'bold'
+    },
     footer: {
         position: 'absolute',
         fontSize: 10,
@@ -11,34 +49,29 @@ export const styles = StyleSheet.create({
         textAlign: 'center',
         color: 'grey'
     },
-    totals: {
+    tableHeader: {
+        flexDirection: 'row',
+        borderBottomWidth: 1,
+        borderColor: '#ccc',
+        backgroundColor: '#f0f0f0',
+        paddingVertical: 4
+    },
+    tableRow: {
+        flexDirection: 'row',
+        borderBottomWidth: 1,
+        borderColor: '#eee',
+        paddingVertical: 4
+    },
+    cell: {
+        flex: 1,
+        paddingHorizontal: 4
+    },
+    summaryTable: {
         position: 'absolute',
-        fontSize: 10,
-        bottom: 32,
-        left: 64,
-        textAlign: 'left',
-        color: 'black'
+        bottom: 40,
+        left: 40,
+        right: 40,
+        borderWidth: 1,
+        borderColor: '#ccc'
     },
-    headerTitle: {textAlign: 'center', marginBottom: 24},
-    headerContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginBottom: 24
-    },
-    headerValueContainer: {
-        display: 'flex',
-        flexDirection: 'row',
-        textAlign: 'left',
-        alignItems: 'flex-start',
-        marginBottom: 6
-    },
-    headerValueText: {
-        textAlign: 'left',
-        marginLeft: 10
-    },
-    headerValueTitle: {
-        fontWeight: 'bold',
-    },
-    addressBox: {width: '40%', textAlign: 'left'},
-    rightBox: {width: '40%', textAlign: 'left'}
 });
