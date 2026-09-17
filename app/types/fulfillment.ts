@@ -56,6 +56,7 @@ export interface ProductPosition {
 export interface Product {
     product_id: number;
     product_sku: string;
+    sku_code?: string | null;
     product_name: string;
     product_position: string;
     height: number;
@@ -72,9 +73,15 @@ function _addProducts(products: Product[] | undefined): any {
     if (!products) return [];
 
     return products.map((product) => {
+        // Older fulfillment payloads may omit stock after deriving qty_order.
+        // Keep the PDF quantity usable for both payload shapes.
+        const stock = product.stock ?? product.qty_order ?? 0;
+        const qtyOrder = product.qty_order ?? product.stock ?? 0;
+
         return {
             product_id: product.product_id,
             product_sku: product.product_sku || '',
+            sku_code: product.sku_code ?? null,
             product_name: product.product_name || '',
             product_position: product.product_position || '',
             height: product.height || 0,
@@ -82,8 +89,8 @@ function _addProducts(products: Product[] | undefined): any {
             length: product.length || 0,
             weight: product.weight || 0,
             note: product.note || '',
-            stock: product.stock || 0,
-            qty_order: product.qty_order ?? product.stock ?? 0,
+            stock,
+            qty_order: qtyOrder,
             positions: (product.positions as ProductPosition[]) || []
         };
     });
