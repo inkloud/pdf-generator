@@ -11,6 +11,15 @@ export interface DeliveryBoxProduct {
     p_height_cm: number;
     p_length_cm: number;
     p_width_cm: number;
+    // The delivery API has used both the p_* names above and the product_* names
+    // below. Keep both shapes available to the PDF renderer.
+    code?: string;
+    sku_code?: string;
+    product_sku?: string;
+    description?: string;
+    product_name?: string;
+    in_stock?: number;
+    stock?: number;
 }
 
 export interface DeliveryBox {
