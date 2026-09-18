@@ -45,6 +45,7 @@ content-type: application/json
       {
         "product_id": 3,
         "product_sku": "HW415NN",
+        "sku_code": "HW415NN-WH1",
         "product_name": "Pannelli da 415",
         "product_position": "CC.00.00.04",
         "height": 3,
@@ -52,7 +53,8 @@ content-type: application/json
         "length": 175,
         "weight": 21,
         "note": "",
-        "stock": 6
+        "stock": 6,
+        "qty_order": 6
       }
     ],
     "files": [],
@@ -102,6 +104,7 @@ content-type: application/json
       {
         "product_id": 3,
         "product_sku": "HW415NN",
+        "sku_code": "HW415NN-WH1",
         "product_name": "Pannelli da 415",
         "product_position": "CC.00.00.04",
         "height": 3,
@@ -109,7 +112,8 @@ content-type: application/json
         "length": 175,
         "weight": 21,
         "note": "",
-        "stock": 6
+        "stock": 6,
+        "qty_order": 6
       }
     ],
     "files": [],
@@ -159,6 +163,7 @@ content-type: application/json
       {
         "product_id": 3,
         "product_sku": "HW415NN",
+        "sku_code": "HW415NN-WH1",
         "product_name": "Pannelli da 415",
         "product_position": "CC.00.00.04",
         "height": 3,
@@ -166,7 +171,8 @@ content-type: application/json
         "length": 175,
         "weight": 21,
         "note": "",
-        "stock": 6
+        "stock": 6,
+        "qty_order": 6
       }
     ],
     "files": [],
@@ -216,6 +222,7 @@ content-type: application/json
       {
         "product_id": 4,
         "product_sku": "FG415N1",
+        "sku_code": "FG415N1-WH1",
         "product_name": "Pannelli da 415",
         "product_position": "CC.00.00.04",
         "height": 3,
@@ -223,7 +230,8 @@ content-type: application/json
         "length": 175,
         "weight": 21,
         "note": "",
-        "stock": 2
+        "stock": 2,
+        "qty_order": 2
       }
     ],
     "files": [],

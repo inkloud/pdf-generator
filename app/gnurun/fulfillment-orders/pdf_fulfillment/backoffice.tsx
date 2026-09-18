@@ -134,7 +134,10 @@ const getDistribution = (product: Product) => {
     }
 
     if (quantitiesByPosition.size === 0) {
-        return [{quantity: product.stock, position: product.product_position}];
+        return [{
+            quantity: product.stock ?? product.qty_order ?? 0,
+            position: product.product_position
+        }];
     }
 
     return Array.from(quantitiesByPosition, ([position, quantity]) => ({quantity, position}));
@@ -168,8 +171,8 @@ const mergeOrderProducts = (products: Product[]) => {
 const OrderProducts: React.FC<{ products: Product[] }> = ({products}) => (
     <>
         <View style={styles.tableHeader}>
-            <Text style={[styles.cell, {flex: 1}]}>Code</Text>
-            <Text style={[styles.cell, {flex: 2}]}>Description</Text>
+                <Text style={[styles.cell, {flex: 1}]}>Code</Text>
+            <Text style={[styles.cell, {flex: 2}]}>Sku Code</Text>
             <Text style={[styles.cell, {flex: 1}]}>Qty order</Text>
             <Text style={[styles.cell, {flex: 1}]}>Quantity</Text>
             <Text style={[styles.cell, {flex: 1}]}>Position</Text>
@@ -186,7 +189,7 @@ const OrderProducts: React.FC<{ products: Product[] }> = ({products}) => (
                             <Text>{product.product_sku}</Text>
                         </View>
                         <View style={[styles.cell, {flex: 2}]}>
-                            <Text>{product.product_name}</Text>
+                            <Text>{product.sku_code || ''}</Text>
                         </View>
                         <View style={[styles.cell, {flex: 1}]}>
                             <Text>{product.qty_order}</Text>
@@ -302,7 +305,7 @@ export const GroupedProductPDFBackoffice: React.FC<{
                             <View style={styles.tableHeader}>
                                 <Text style={[styles.cell, {flex: 0.5}]}>No.</Text>
                                 <Text style={[styles.cell, {flex: 1}]}>Code</Text>
-                                <Text style={[styles.cell, {flex: 2}]}>Product</Text>
+                                <Text style={[styles.cell, {flex: 2}]}>Sku Code</Text>
                                 <Text style={[styles.cell, {flex: 2}]}>Position</Text>
                                 <Text style={[styles.cell, {flex: 1.2}]}>Qty</Text>
                                 <Text style={[styles.cell, {flex: 0.8}]}>Total</Text>
@@ -313,7 +316,7 @@ export const GroupedProductPDFBackoffice: React.FC<{
                                     <View key={`${group.key}-${row.product.product_id ?? index}`} style={styles.tableRow}>
                                         <Text style={[styles.cell, {flex: 0.5}]}>{index + 1}</Text>
                                         <Text style={[styles.cell, {flex: 1}]}>{row.product.product_sku}</Text>
-                                        <Text style={[styles.cell, {flex: 2}]}>{row.product.product_name}</Text>
+                                        <Text style={[styles.cell, {flex: 2}]}>{row.product.sku_code || ''}</Text>
                                         <View style={[styles.cell, {flex: 2}]}>
                                             {row.positions.map((position, positionIndex) => (
                                                 <Text key={`pos-${index}-${positionIndex}`}>{position.position}</Text>

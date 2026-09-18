@@ -2,27 +2,28 @@ POST http://localhost:3000/gnurun/fulfillment-order
 content-type: application/json
 
 {
-  "id": 363,
-  "created_at": "2024-10-09T15:36:55",
+  "id": 6774,
+  "created_at": "2026-01-09T02:50:10",
   "updated_at": null,
-  "customer_id": 1,
+  "customer_id": 56,
   "customer": {
-    "customer_id": 1,
-    "company_id": 1,
-    "company_name": "Life365 Italy TEST"
+    "customer_id": 56,
+    "company_id": 142,
+    "company_name": "TEST-USER"
   },
   "current_wh": 1,
+  "warehouse": "Test 1",
   "address": {
-    "business_name": "Vincenzo Tumminello",
-    "reference_name": "Vincenzo Tumminello",
+    "business_name": null,
+    "reference_name": "Anthony Rodelli",
     "address": "",
-    "city": "Patrica",
-    "street": "Ettore Marchiafava 24",
-    "province": "FR",
-    "country": "IT",
-    "zip_code": "03010",
-    "email": 123,
-    "tel": 390775222072
+    "city": "Clinton",
+    "street": ", 11545 Destination Dr Apt 3315, ",
+    "province": "AR",
+    "country": "United States",
+    "zip_code": "72031-8604",
+    "email": "cusa.q7yw1pterfxt9iqm@marketplace.newegg.com",
+    "tel": "720-377-6795"
   },
   "status": "CONFIRMED",
   "extra_data": {
@@ -30,38 +31,36 @@ content-type: application/json
       "courier_name": "",
       "courier_tracking": ""
     },
-    "customer_reference": 123,
-    "reference_name": "Vincenzo Tumminello",
-    "provider": null
+      "customer_reference": "553144651-2500019927",
+      "reference_name": "Anthony Rodelli",
+      "provider": "GNURUN console"
   },
   "products": [
     {
-      "product_id": 2098,
-      "product_sku": "TESTEE008",
-      "product_name": "TESTEE008",
-      "product_position": "BB010102",
-      "height": 5,
-      "width": 30,
-      "length": 30,
-      "weight": 0.9,
-      "note": "",
-      "stock": 10,
+      "product_id": 3292,
+      "product_sku": "TEST-56",
+      "sku_code": "test123456",
+      "product_name": "test",
+      "product_position": "TT030303",
+      "height": 0.1,
+      "width": 0.1,
+      "length": 0.1,
+      "weight": 0.1,
+      "note": null,
+      "stock": 1,
+      "qty_order": 1,
       "positions": [
         {
-          "product_id": 2098,
+          "product_id": 3292,
           "wh_id": 1,
-          "delivery_id": 315,
-          "wh_position": "BB010102",
-          "stock": 5
-        },
-        {
-          "product_id": 2098,
-          "wh_id": 1,
-          "delivery_id": 315,
-          "wh_position": "BB010103",
-          "stock": 5
+          "delivery_id": 1725,
+          "wh_position": "TT030303",
+          "stock": 1
         }
-      ]
+      ],
+      "stocked_product_id": 1226,
+      "picked_qty": 0,
+      "missing_qty": 0
     }],
   "cost": null,
   "note": "",
