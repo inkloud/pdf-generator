@@ -39,7 +39,7 @@ export const Table: React.FC<{products: DeliveryBoxProduct[]}> = function ({prod
     return (
         <View style={styles.table}>
             {/* Header row */}
-            <View style={[styles.tableRow, styles.tableHeaderRow]} wrap={false}>
+            <View style={[styles.tableRow, styles.tableHeaderRow]} wrap={false} fixed>
                 {columns.map((column) => (
                     <View key={column.label} style={[styles.tableCol, {flex: column.flex}]}>
                         <Text style={styles.tableHeaderCell}>{column.label}</Text>
