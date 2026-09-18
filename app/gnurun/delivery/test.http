@@ -12,6 +12,7 @@ content-type: application/json
   "invoice_n": 104,
   "courier_name": "test0115",
   "courier_tracking": "01152025",
+  "company_name": "Life365 Italy",
   "boxes": [
     {
       "id": 452,
@@ -28,12 +29,17 @@ content-type: application/json
           "product_id": 2192,
           "quantity": 30,
           "p_code": "TEST0115",
-          "p_position": "AA1122VV",
+          "p_title": "Test product",
+          "p_position": "",
           "p_unit_type": "PIECE",
           "p_weight_kg": 1,
           "p_height_cm": 14,
           "p_length_cm": 21,
-          "p_width_cm": 11
+          "p_width_cm": 11,
+          "sku_code": "SKU-0115",
+          "product_name": "Test product",
+          "description": "Test product description",
+          "in_stock": 0
         }
       ]
     },
@@ -47,37 +53,24 @@ content-type: application/json
       "box_qty": 1,
       "products": [
         {
-          "id": 1051,
-          "wh_delivery_box_id": 452,
+          "id": 1052,
+          "wh_delivery_box_id": 453,
           "product_id": 2192,
           "quantity": 30,
           "p_code": "TEST0115",
-          "p_position": "AA1122VV",
+          "p_title": "Test product",
+          "p_position": "",
           "p_unit_type": "PIECE",
           "p_weight_kg": 1,
           "p_height_cm": 14,
           "p_length_cm": 21,
-          "p_width_cm": 11
+          "p_width_cm": 11,
+          "sku_code": "SKU-0115",
+          "product_name": "Test product",
+          "description": "Test product description",
+          "in_stock": 0
         }
       ]
     }
-  ],
-  "cost": {
-    "shipping_cost": "0",
-    "inner_cost": [
-      {
-        "id": 23,
-        "descr": "Inbound fee",
-        "qty": 1,
-        "cost": "1"
-      },
-      {
-        "id": 24,
-        "descr": "Check fee",
-        "qty": 20,
-        "cost": "2"
-      }
-    ]
-  },
-  "billing_cicle": null
+  ]
 }
