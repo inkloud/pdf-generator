@@ -2,7 +2,7 @@ import {Document, Image, Page, Text, View} from '@react-pdf/renderer';
 
 import React from 'react';
 import {Delivery, DeliveryBox, DeliveryBoxProduct} from '../../../types/delivery';
-import {formatDate, getLogo} from '../../../utils/formating';
+import {formatDate, getBarcode, getLogo} from '../../../utils/formating';
 import {styles} from './style';
 import {Table} from './table';
 
@@ -30,9 +30,14 @@ const Header: React.FC<{delivery: Delivery}> = function ({delivery}) {
     return (
         <>
             <View style={styles.titleContainer}>
-                <Text style={styles.title}>Picking List</Text>
-                <View style={styles.logoRow}>
+                <Text style={styles.title}>Inbound List</Text>
+                <View style={styles.topHeaderRow}>
                     <Image style={styles.logo} src={getLogo()} />
+
+                    <View style={styles.barcodeContainer}>
+                        <Image style={styles.barcode} src={getBarcode(delivery.id.toString())} />
+                        <Text style={styles.barcodeId}>ID: {delivery.id}</Text>
+                    </View>
                 </View>
             </View>
 

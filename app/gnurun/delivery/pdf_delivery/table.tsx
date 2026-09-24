@@ -25,14 +25,11 @@ const getSkuCode = (product: DeliveryBoxProduct) => product.sku_code || product.
 
 const getDescription = (product: DeliveryBoxProduct) => product.description || product.p_title || product.product_name || '';
 
-const getInStock = (product: DeliveryBoxProduct) => product.in_stock ?? product.stock ?? 0;
-
 export const Table: React.FC<{products: DeliveryBoxProduct[]}> = function ({products}) {
     const columns = [
         {label: 'Code', flex: 1.2},
         {label: 'sku_code', flex: 1.3},
         {label: 'description', flex: 4},
-        {label: 'in stock', flex: 1.2},
         {label: 'quantity', flex: 1.2}
     ];
 
@@ -60,9 +57,6 @@ export const Table: React.FC<{products: DeliveryBoxProduct[]}> = function ({prod
                         <Text style={styles.tableCell}>{getDescription(product)}</Text>
                     </View>
                     <View style={[styles.tableCol, {flex: columns[3].flex}]}>
-                        <Text style={styles.tableCell}>{getInStock(product)}</Text>
-                    </View>
-                    <View style={[styles.tableCol, {flex: columns[4].flex}]}>
                         <Text style={styles.tableCell}>{product.quantity}</Text>
                     </View>
                 </View>

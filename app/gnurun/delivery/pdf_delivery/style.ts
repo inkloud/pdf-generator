@@ -18,9 +18,21 @@ export const styles = StyleSheet.create({
         height: 35,
         marginBottom: 8
     },
-    logoRow: {
+    topHeaderRow: {
         width: '100%',
-        alignItems: 'flex-start'
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+    barcodeContainer: {
+        alignItems: 'center'
+    },
+    barcode: {
+        width: 100,
+        height: 40
+    },
+    barcodeId: {
+        fontSize: 10
     },
     title: {
         fontSize: 18,
