@@ -26,6 +26,9 @@ const checkTotals = function (delivery: Delivery) {
         return totals;
     }
 };
+
+const toCubeMeters = (volumeCm3: number) => volumeCm3 / 1_000_000;
+
 const Header: React.FC<{delivery: Delivery}> = function ({delivery}) {
     return (
         <>
@@ -72,6 +75,7 @@ const Header: React.FC<{delivery: Delivery}> = function ({delivery}) {
 
 const Footer: React.FC<{delivery: Delivery}> = function ({delivery}) {
     const totals = checkTotals(delivery);
+    const cubeMeters = toCubeMeters(totals.volume);
     return (
         <>
             <View style={styles.summaryTable}>
@@ -82,7 +86,7 @@ const Footer: React.FC<{delivery: Delivery}> = function ({delivery}) {
                 </View>
                 <View style={styles.tableRow}>
                     <Text style={styles.cell}>{totals.weight} kg</Text>
-                    <Text style={styles.cell}>{totals.volume} cm3</Text>
+                    <Text style={styles.cell}>{cubeMeters.toFixed(6)} m3</Text>
                     <Text style={styles.cell}>{totals.quantity}</Text>
                 </View>
             </View>
